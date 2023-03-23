@@ -1,3 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+@font-face {
+  font-family: "georgia";
+  src: url(/egorca6-JSFE2023Q1/shelter/fonts/fonts/georgia/georgia-regular.ttf)
+    format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "arial";
+  src: url(/egorca6-JSFE2023Q1/shelter/fonts/fonts/arial/arial-narrow.ttf)
+    format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
 body {
-  background-color: #5b483a;
+  background: #ffffff;
+}
+header {
+  position: absolute;
+  width: 1200px;
+  height: 60px;
+  left: calc(50% - 1200px / 2);
+  top: calc(50% - 60px / 2 - 1838px);
+}
+.logo {
+  font-family: "georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 110%;
+  color: #f1cdb3;
+  /* or 35px */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.06em;
+}
+.subtitle {
+  position: absolute;
+  width: 179px;
+  height: 15px;
+  left: 4px;
+  top: calc(50% - 15px / 2 + 22.5px);
+  font-family: "arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.1em;
+
+  /* color-light-xl */
+
+  color: #ffffff;
+}
+
+.start_screen {
+  position: absolute;
+  height: 908px;
+  left: 0%;
+  right: 0%;
+  top: 0px;
+}
+.wrapper {
+  height: 908px;
+
+  left: 0%;
+  right: 0%;
+  top: 0px;
+  background: url(/egorca6-JSFE2023Q1/shelter/assets/images/start-screen.jpg)
+      no-repeat center,
+    radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%), #211f20;
+  background-size: cover;
+}
+.start_screen_content {
+  position: absolute;
+  width: 1200px;
+  height: 728px;
+  left: 40px;
+  top: 180px;
+}
+.main {
+  position: relative;
+  width: 1280px;
+  height: 3796px;
+  margin: auto;
+}
+img {
+  position: absolute;
+  width: 698px;
+  height: 728px;
+  left: calc(50% - 698px / 2 + 251px);
+  bottom: 0px;
+}
+
+.about {
+  position: absolute;
+  height: 588px;
+  left: 0%;
+  right: 0%;
+  top: 908px;
+  background-color: black;
 }
