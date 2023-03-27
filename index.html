@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="/egorca6-JSFE2023Q1/shelter/pages/main/style.css"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -17,9 +20,9 @@
     <header>
       <div class="wrapper">
         <div class="wrapper_logo">
-          <h1><a href="#!" class="logo_link">Cozy House</a></h1>
+          <h1><a href="#no_scroll" class="logo_link">Cozy House</a></h1>
           <div class="subtitle">
-            <a href="#!" class="sub_link">Shelter for pets in Boston</a>
+            <a href="#no_scroll" class="sub_link">Shelter for pets in Boston</a>
           </div>
         </div>
 
@@ -29,13 +32,17 @@
               <a inert href="#!" class="header_link">About the shelter</a>
             </li>
             <li class="header_item">
-              <a href="#!" class="header_link">Our pets</a>
+              <a
+                href="/egorca6-JSFE2023Q1/shelter/pages/pets/index.html"
+                class="header_link"
+                >Our pets</a
+              >
             </li>
             <li class="header_item">
-              <a href="#!" class="header_link">Help the shelter</a>
+              <a href="#help" class="header_link">Help the shelter</a>
             </li>
             <li class="header_item">
-              <a href="#!" class="header_link">Contacts</a>
+              <a href="#footer" class="header_link">Contacts</a>
             </li>
           </ul>
         </nav>
@@ -59,7 +66,13 @@
               anybody else in the world, you will see!
             </p>
 
-            <button class="button_make" type="submit">Make a friend</button>
+            <button
+              class="button_make"
+              type="submit"
+              onclick="window.location.href = '#make';"
+            >
+              Make a friend
+            </button>
           </div>
 
           <img
@@ -72,6 +85,7 @@
       <!-- Home Screen end -->
 
       <!-- About start -->
+
       <section class="about">
         <div class="about_wrapper">
           <img
@@ -105,7 +119,7 @@
       <!-- About end -->
 
       <!-- Pets start -->
-
+      <a id="make"></a>
       <section class="pets">
         <div class="pets_wrapper">
           <div class="pets_our">
@@ -128,7 +142,7 @@
               <div class="card">
                 <img
                   class="card_pets"
-                  src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-katrine.png"
+                  src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-katrine2.svg"
                   alt="pet katrine"
                 />
                 <h4 class="h4_card">Katrine</h4>
@@ -161,14 +175,19 @@
               />
             </button>
           </div>
-
-          <button class="button_get" type="submit">Get to know the rest</button>
+          <button
+            class="button_get"
+            type="submit"
+            onclick="window.location.href = '/egorca6-JSFE2023Q1/shelter/pages/pets/index.html';"
+          >
+            Get to know the rest
+          </button>
         </div>
       </section>
       <!-- Pets end -->
 
       <!-- Help start -->
-
+      <a id="help"></a>
       <section class="help">
         <div class="help_wrapper">
           <div class="help_text">
@@ -284,7 +303,11 @@
                 src="/egorca6-JSFE2023Q1/shelter/assets/icons/credit-card.png"
                 alt="card"
               />
-              <h4>8380 2880 8028 8791 7435</h4>
+              <h4>
+                <a class="a_simple" href="#no_scroll"
+                  >8380 2880 8028 8791 7435</a
+                >
+              </h4>
             </div>
             <p class="donation_infomation">
               Legal information and lorem ipsum dolor sit amet, consectetur
@@ -299,31 +322,32 @@
       <!-- Donation end -->
 
       <!-- footer start -->
+      <a id="footer"></a>
       <footer>
         <div class="footer_wrapper">
           <div class="footer_contacts">
             <h3 class="footer_h3">For questions and suggestions</h3>
             <div class="footer_mail">
               <div class="footer_contacts_wrap">
-                <a class="footer_icon_mail" href="#!"
+                <a class="footer_icon_mail" href="mailto:"
                   ><img
                     src="/egorca6-JSFE2023Q1/shelter/assets/icons/icon-email.png"
                     alt="icon mail"
                   />
                 </a>
-                <a class="footer_h4" href="#!">email@shelter.com</a>
+                <a class="footer_h4" href="mailto:">email@shelter.com</a>
               </div>
             </div>
 
             <div class="footer_mail">
               <div class="footer_contacts_wrap">
-                <a class="footer_icon_mail" href="#!"
+                <a class="footer_icon_mail" href="tel:64815"
                   ><img
                     src="/egorca6-JSFE2023Q1/shelter/assets/icons/icon-phone.png"
                     alt="icon phone"
                   />
                 </a>
-                <a class="footer_h4" href="#!">+13 674 567 75 54</a>
+                <a class="footer_h4" href="tel:64815">+13 674 567 75 54</a>
               </div>
             </div>
           </div>
@@ -333,13 +357,19 @@
 
             <div class="footer_boston">
               <div class="footer_contacts_wrap">
-                <a class="footer_icon_mail" href="#!"
+                <a
+                  class="footer_icon_mail"
+                  href="https://goo.gl/maps/FjMdTNW8fQ7uX38g7"
+                  target="_blank"
                   ><img
                     src="/egorca6-JSFE2023Q1/shelter/assets/icons/icon-marker.png"
                     alt="icon marker"
                   />
                 </a>
-                <a class="footer_h4" href="#!"
+                <a
+                  class="footer_h4"
+                  href="https://goo.gl/maps/FjMdTNW8fQ7uX38g7"
+                  target="_blank"
                   >1 Central Street, Boston <br />
                   (entrance from the store)</a
                 >
@@ -348,13 +378,21 @@
 
             <div class="footer_boston">
               <div class="footer_contacts_wrap">
-                <a class="footer_icon_mail" href="#!"
+                <a
+                  class="footer_icon_mail"
+                  href="https://maps.google.com?saddr=Current+Location&daddr=43.12345,-76.12345"
+                  target="_blank"
                   ><img
                     src="/egorca6-JSFE2023Q1/shelter/assets/icons/icon-marker.png"
                     alt="icon marker"
                   />
                 </a>
-                <a class="footer_h4" href="#!">18 South Park, London </a>
+                <a
+                  class="footer_h4"
+                  href="https://maps.google.com?saddr=Current+Location&daddr=43.12345,-76.12345"
+                  target="_blank"
+                  >18 South Park, London
+                </a>
               </div>
             </div>
           </div>

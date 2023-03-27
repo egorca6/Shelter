@@ -29,14 +29,29 @@
   font-style: italic;
   font-weight: normal;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  /* background: #ffffff; */
+  /* background: #f6f6f6; */
   font-family: "georgia";
   font-style: normal;
   color: #545454;
-  min-height: 100vh;
 }
+.a_simple {
+  text-decoration: none;
+}
+h4 .a_simple {
+  font-family: "Georgia";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.06em;
+  color: #545454;
+}
+
 /* Header styles start */ /* Header styles start */ /* Header styles start */
 header {
   position: absolute;
@@ -101,6 +116,7 @@ header {
   line-height: 160%;
   color: #cdcdcd;
   text-decoration: none;
+  transition: color 0.5s ease-in-out;
 }
 .header_item:first-child .header_link:first-child {
   color: #fafafa;
@@ -129,6 +145,7 @@ ul {
 
 .start_screen {
   height: 908px;
+  min-width: 1280px;
   left: 0%;
   right: 0%;
   top: 0px;
@@ -162,7 +179,6 @@ ul {
   color: #ffffff;
 }
 .content_text {
-  /* padding-bottom: 42px; */
   font-family: "Arial";
   font-style: normal;
   font-weight: 400;
@@ -184,6 +200,7 @@ ul {
   color: #292929;
   letter-spacing: 0.06em;
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
 .button_make:hover {
   background: #fddcc4;
@@ -198,6 +215,7 @@ ul {
 /* About start */ /* About start */ /* About start */
 .about {
   height: 588px;
+  min-width: 1280px;
   background: #ffffff;
 }
 .about_img {
@@ -244,6 +262,7 @@ h3 {
 /* Pets Start */ /* Pets Start*/
 .pets {
   background: #f6f6f6;
+  min-width: 1280px;
   height: 877px;
 }
 .pets_wrapper {
@@ -277,8 +296,6 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-
-  /* padding-right: 10px; */
 }
 .button_arrow {
   width: 52px;
@@ -286,6 +303,7 @@ h3 {
   border: 2px solid #f1cdb3;
   border-radius: 100px;
   background: #f6f6f6;
+  transition: background-color 0.5s ease-in-out;
 }
 .button_arrow:hover {
   background: #fddcc4;
@@ -317,12 +335,21 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: background-color 0.5s ease-in-out;
 }
 .card_pets {
   width: 270px;
   height: 270px;
   padding-bottom: 30px;
 }
+.card:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+}
+.card:hover .learn_more {
+  background: #f1cdb3;
+}
+
 .h4_card {
   font-family: "Georgia";
   font-style: normal;
@@ -347,6 +374,7 @@ h3 {
   border-radius: 100px;
   background: #fafafa;
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .button_get {
@@ -361,6 +389,7 @@ h3 {
   background: #f1cdb3;
   border-radius: 100px;
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .button_get:hover {
@@ -374,6 +403,7 @@ h3 {
 /* Help start */
 .help {
   background: #ffffff;
+  min-width: 1280px;
   height: 611px;
 }
 .help_wrapper {
@@ -386,7 +416,6 @@ h3 {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* padding-bottom: 180px;  Только что добавил! */
 }
 .help_text {
   display: flex;
@@ -444,6 +473,7 @@ h4 {
 .donation {
   background: #f6f6f6;
   max-height: 462px;
+  min-width: 1280px;
   padding-top: 80px;
   padding-bottom: 100px;
 }
@@ -451,7 +481,6 @@ h4 {
   margin: 0 auto;
   width: 915px;
   height: 282px;
-  /* padding-top: 180px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -508,8 +537,7 @@ h5 {
 /* footer start  */ /* footer start  */
 footer {
   height: 350px;
-  max-width: 100%;
-
+  min-width: 1280px;
   background-image: url(/egorca6-JSFE2023Q1/shelter/assets/images/noise_transparent@2x.png),
     radial-gradient(100% 900% at 0% 0%, #5b483a 0%, #262425 100%),
     linear-gradient(0deg, #211f20, #211f20);
