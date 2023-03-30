@@ -148,7 +148,6 @@ ul {
 
 .start_screen {
   height: 908px;
-  /* min-width: 1280px; */
   max-width: 100vw;
   background-image: url(/egorca6-JSFE2023Q1/shelter/assets/images/noise_transparent@2x.png),
     radial-gradient(100% 900% at 0% 0%, #5b483a 0%, #262425 100%),
@@ -159,7 +158,6 @@ ul {
   margin: 0 auto;
   padding-top: 180px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
 }
 .content {
@@ -207,22 +205,25 @@ ul {
 .button_make:hover {
   background: #fddcc4;
 }
-
-.img_puppy {
-  max-width: 698px;
+.not_only_img {
   max-height: 728px;
+}
+.img_puppy {
+  width: 100%;
+  height: 100%;
 }
 /* Home screen styles end */ /* Home  screen styles end */ /* Home  screen styles end */
 
 /* About start */ /* About start */ /* About start */
 .about {
   height: 588px;
-  min-width: 1280px;
   background: #ffffff;
 }
+.about_img_wrap {
+  max-width: 300px;
+}
 .about_img {
-  width: 300px;
-  height: 408px;
+  width: 100%;
 }
 .about_wrapper {
   margin: 0 auto;
@@ -264,7 +265,7 @@ h3 {
 /* Pets Start */ /* Pets Start*/
 .pets {
   background: #f6f6f6;
-  min-width: 1280px;
+  /* min-width: 1280px; */
   height: 877px;
 }
 .pets_wrapper {
@@ -279,13 +280,14 @@ h3 {
   justify-content: space-between;
 }
 .pets_our {
-  width: 400px;
-  height: 90px;
+  max-width: 400px;
+  max-height: 90px;
   display: flex;
   text-align: center;
 }
 .slider {
-  width: 1200px;
+  max-width: 1280px;
+  gap: 53px;
   height: 435px;
   display: flex;
   flex-wrap: wrap;
@@ -293,8 +295,9 @@ h3 {
   justify-content: space-between;
 }
 .card_wrapper {
-  width: 990px;
+  max-width: 990px;
   height: 435px;
+  gap: 90px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -330,18 +333,16 @@ h3 {
   transform: rotate(-180deg);
 }
 .card {
-  max-width: 270px;
-  max-height: 435px;
   background: #fafafa;
   border-radius: 9px;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   transition: background-color 0.5s ease-in-out;
 }
 .card_pets {
-  width: 270px;
-  height: 270px;
+  width: 100%;
   padding-bottom: 30px;
 }
 .card:hover {
@@ -405,12 +406,12 @@ h3 {
 /* Help start */
 .help {
   background: #ffffff;
-  min-width: 1280px;
+  /* min-width: 1280px; */
   height: 611px;
 }
 .help_wrapper {
   margin: 0 auto;
-  width: 1200px;
+  max-width: 1200px;
   height: 431px;
   padding-top: 80px;
   display: flex;
@@ -423,10 +424,7 @@ h3 {
   display: flex;
   text-align: center;
 }
-.help_content {
-  width: 1026px;
-  height: 281px;
-}
+
 .help_icon {
   width: 60px;
   height: 60px;
@@ -442,26 +440,15 @@ h4 {
   color: #545454;
 }
 .help_content {
-  width: 1026px;
+  max-width: 1026px;
   height: 281px;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  column-gap: 119.3px;
+  justify-content: center;
+  align-content: space-between;
 }
-.help_content_one {
-  width: 1026px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.help_content_two {
-  width: 858px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+
 .pet_food {
   display: flex;
   flex-wrap: wrap;
@@ -620,6 +607,7 @@ footer {
   .wrapper {
     max-width: 708px;
   }
+
   .img_puppy {
     max-width: 569px;
     max-height: 593px;
