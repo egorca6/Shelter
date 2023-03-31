@@ -124,16 +124,26 @@ ul {
   align-items: center;
 }
 
+.burger_wrap {
+  display: none;
+  width: 30px;
+  height: 22px;
+}
+.burger {
+  display: none;
+  height: 2px;
+  width: 100%;
+  background-color: #000000;
+  margin-bottom: 9px;
+}
+
 /* Pets Start */ /* Pets Start*/
 
 .pets {
-  /* left: 0%;
-  right: 0%;
-  top: 0px; */
   background: #f6f6f6;
   height: 1342px;
   padding-top: 208px;
-  /* min-width: 1280px; */
+
   margin-bottom: -88px;
 }
 .pets_wrapper {
@@ -228,8 +238,6 @@ h3 {
 
 .card_pets {
   width: 100%;
-  /* width: 270px;
-  height: 270px; */
   padding-bottom: 30px;
 }
 .h4_card {
@@ -378,12 +386,6 @@ footer {
     height: 1603px;
     padding-left: 0px;
     justify-content: flex-start;
-    /* padding-left: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;*/
   }
   .pets_our {
     padding-bottom: 30px;
@@ -396,10 +398,6 @@ footer {
     width: calc(580% * 100 / 708);
     height: 1365px;
     padding-bottom: 40px;
-    /* display: flex;
-    flex-wrap: wrap;
-    row-gap: 30px;
-    justify-content: space-between; */
   }
   footer {
     height: 639px;
@@ -422,5 +420,83 @@ footer {
   }
   .footer_location {
     padding-top: 33px;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  /* Header start  */
+  .header_nav {
+    display: none;
+  }
+  .burger_wrap {
+    display: block;
+  }
+  .burger {
+    display: block;
+  }
+
+  .wrapper {
+    max-width: 280px;
+  }
+  /* Header end  */
+  .card:nth-last-child(-n + 5) {
+    display: none;
+  }
+  .pets {
+    height: 1649px;
+    padding-top: 160px;
+  }
+  .pets_wrapper {
+    max-width: 300px;
+    height: 1565px;
+    justify-content: space-between;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  .slider {
+    width: calc(270% * 100 / 300);
+    height: 1365px;
+    padding-bottom: 25px;
+  }
+  .navigetion {
+    width: 300px;
+  }
+
+  /* Footet start  */
+  footer {
+    margin-top: 48px;
+    height: 809px;
+  }
+  .footer_wrapper {
+    max-width: 300px;
+    height: 779px;
+  }
+  .footer_h3 {
+    font-size: 25px;
+    width: 270px;
+    text-align: center;
+    align-self: center;
+  }
+  .footer_wrap_img {
+    max-height: 269px;
+  }
+  .footer_img {
+    max-width: 260px;
+    padding-top: 30px;
+  }
+
+  .footer_contacts {
+    height: 208px;
+  }
+  .footer_location {
+    height: 222px;
+  }
+  .footer_mail {
+    max-width: 251px;
+    align-self: center;
+  }
+  .footer_contacts_wrap {
+    align-self: center;
   }
 }
