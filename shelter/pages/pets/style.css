@@ -422,9 +422,7 @@ footer {
     padding-top: 33px;
   }
 }
-
-@media only screen and (max-width: 660px) {
-  /* Header start  */
+@media only screen and (max-width: 767.5px) {
   .header_nav {
     display: none;
   }
@@ -434,6 +432,9 @@ footer {
   .burger {
     display: block;
   }
+}
+@media only screen and (max-width: 660px) {
+  /* Header start  */
 
   .wrapper {
     max-width: 280px;
