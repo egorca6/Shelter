@@ -10,3 +10,15 @@ console.log(
 console.log(
   "[+] Верстка обеих страниц валидная: для проверки валидности вёрстки используйте сервис https://validator.w3.org/ (8)"
 );
+
+document
+  .querySelector(".burger_wrap")
+  .addEventListener("click", () =>
+    document.querySelector(".wrapper").classList.toggle("open")
+  );
+
+document
+  .querySelector(".burger_wrap")
+  .addEventListener("click", () =>
+    document.querySelector("body").classList.toggle("noScroll")
+  );
