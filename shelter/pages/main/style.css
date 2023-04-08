@@ -788,7 +788,7 @@ footer {
     justify-content: center;
     align-content: space-between;
   }
-  /*  { */
+
   .header_nav {
     position: absolute;
     right: -320px;
@@ -801,18 +801,22 @@ footer {
     align-items: center;
     padding-top: 250px;
     transition: transform 0.25s;
-
-    /* z-index: 100; */
-    /* flex-direction: column;
-    text-align: center; */
-    /* display: none; */
+  }
+  .on {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #000;
+    opacity: 0.5;
+    z-index: 0;
   }
   .wrapper.open .header_nav {
     transform: translateX(-100%);
   }
   .header_link {
     display: block;
-    /* padding: 10px; */
     font-size: 32px;
   }
   .header_item {
