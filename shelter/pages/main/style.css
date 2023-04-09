@@ -329,11 +329,70 @@ h3 {
   justify-content: space-between;
 }
 .card_wrapper {
+  /* infinity*/
   width: 82.5%;
   height: 435px;
   display: flex;
+  /* flex-wrap: wrap; */
+  /* column-gap: 80px; */
   justify-content: space-between;
+  overflow: hidden;
 }
+.card {
+  /* infinity*/
+  width: 270px;
+  height: 435px;
+  background: #fafafa;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.5s ease-in-out;
+}
+.card_pets {
+  /* infinity*/
+  width: 270px;
+  padding-bottom: 30px;
+}
+.carousel {
+  /* infinity*/
+  position: relative;
+  left: -1030px;
+  display: flex;
+  column-gap: 80px;
+  /* justify-content: space-between; */
+}
+@keyframes move-right {
+  /* infinity*/
+  from {
+    left: -1030px;
+  }
+  to {
+    left: -2060px;
+  }
+}
+
+.transition-right {
+  /* infinity*/
+  animation-name: move-right;
+  animation-duration: 1s;
+}
+@keyframes move-left {
+  /* infinity*/
+  from {
+    left: -1030px;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+.transition-left {
+  /* infinity*/
+  animation-name: move-left;
+  animation-duration: 1s;
+}
+
 .button_arrow {
   max-width: 52px;
   max-height: 52px;
@@ -365,18 +424,7 @@ h3 {
   padding: 23px 19px;
   transform: rotate(-180deg);
 }
-.card {
-  background: #fafafa;
-  border-radius: 9px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: background-color 0.5s ease-in-out;
-}
-.card_pets {
-  width: 100%;
-  padding-bottom: 30px;
-}
+
 .card:hover {
   cursor: pointer;
   background-color: #ffffff;

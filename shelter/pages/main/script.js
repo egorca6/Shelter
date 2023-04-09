@@ -58,3 +58,79 @@ headerLink.forEach((el) =>
     document.querySelector("body").classList.remove("noScroll")
   )
 );
+// Бургер конец
+
+// Слайдер Начало
+
+const ARROW_LEFT = document.querySelector(".arrow_left");
+const ARROW_RIGTH = document.querySelector(".arrow_rigth");
+const CAROUSEL = document.querySelector(".carousel");
+let left1 = document.querySelector(
+  "body > div > main > section.pets > div > div.slider > div > div > div:nth-child(1)"
+);
+let left2 = document.querySelector(
+  "body > div > main > section.pets > div > div.slider > div > div > div:nth-child(2)"
+);
+let left3 = document.querySelector(
+  "body > div > main > section.pets > div > div.slider > div > div > div:nth-child(3)"
+);
+let center1 = document.querySelector(
+  "body > div > main > section.pets > div > div.slider > div > div > div:nth-child(4)"
+);
+let center2 = document.querySelector(
+  "body > div > main > section.pets > div > div.slider > div > div > div:nth-child(5)"
+);
+let center3 = document.querySelector(
+  "body > div > main > section.pets > div > div.slider > div > div > div:nth-child(6)"
+);
+// const leftItems = left1 + left2 + left3;
+// let centerItems = center1 + center2 + center3;
+
+const moveLeft = () => {
+  CAROUSEL.classList.add("transition-left");
+  ARROW_LEFT.removeEventListener("click", moveLeft);
+  ARROW_RIGTH.removeEventListener("click", moveRigth);
+};
+
+const moveRigth = () => {
+  CAROUSEL.classList.add("transition-right");
+  ARROW_RIGTH.removeEventListener("click", moveRigth);
+  ARROW_LEFT.removeEventListener("click", moveLeft);
+};
+
+ARROW_LEFT.addEventListener("click", moveLeft);
+ARROW_RIGTH.addEventListener("click", moveRigth);
+
+CAROUSEL.addEventListener("animationend", (animationEvent) => {
+  if (animationEvent.animationName === "move-left") {
+    CAROUSEL.classList.remove("transition-left");
+    center1.innerHTML = left1.innerHTML;
+    center2.innerHTML = left2.innerHTML;
+    center3.innerHTML = left3.innerHTML;
+    // console.log(left3);
+    const card1 = document.createElement("div");
+    card1.classList.add("card");
+    card1.innerText = "ПРивет";
+
+    const card2 = document.createElement("div");
+    card2.classList.add("card");
+    card2.innerText = "ПРивет222";
+
+    const card3 = document.createElement("div");
+    card3.classList.add("card");
+    card3.innerText = "ПРивет333";
+    left1.innerHTML = "";
+    left2.innerHTML = "";
+    left3.innerHTML = "";
+    left1.appendChild(card1);
+    left2.appendChild(card2);
+    left3.appendChild(card3);
+  } else {
+    CAROUSEL.classList.remove("transition-right");
+  }
+
+  ARROW_LEFT.addEventListener("click", moveLeft);
+  ARROW_RIGTH.addEventListener("click", moveRigth);
+});
+
+// Слайдер Конец
