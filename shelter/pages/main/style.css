@@ -356,19 +356,41 @@ h3 {
 }
 .carousel {
   /* infinity*/
+  /* max-width: 100%; */
+  width: 990px;
   position: relative;
-  left: -1030px;
+  left: -1043px;
   display: flex;
   column-gap: 80px;
-  /* justify-content: space-between; */
 }
+
 @keyframes move-right {
   /* infinity*/
   from {
-    left: -1030px;
+    left: -1043px;
   }
   to {
-    left: -2060px;
+    left: -2086px;
+  }
+}
+@keyframes move-right768 {
+  /* infinity*/
+  from {
+    left: -930px;
+  }
+  to {
+    /* left: -1860px; */
+    left: -1550px;
+  }
+}
+@keyframes move-right320 {
+  /* infinity*/
+  from {
+    left: -930px;
+  }
+  to {
+    /* left: -1860px; */
+    left: -1240px;
   }
 }
 
@@ -380,10 +402,28 @@ h3 {
 @keyframes move-left {
   /* infinity*/
   from {
-    left: -1030px;
+    left: -1043px;
   }
   to {
     left: 0px;
+  }
+}
+@keyframes move-left768 {
+  /* infinity*/
+  from {
+    left: -930px;
+  }
+  to {
+    left: -620px;
+  }
+}
+@keyframes move-left320 {
+  /* infinity*/
+  from {
+    left: -930px;
+  }
+  to {
+    left: -620px;
   }
 }
 
@@ -697,7 +737,7 @@ footer {
 }
 /* footer end */ /* footer end */
 
-@media only screen and (max-width: 1005px) {
+@media only screen and (max-width: 1260px) {
   .wrapper {
     max-width: 708px;
   }
@@ -747,7 +787,7 @@ footer {
   /* About end */
   /* Pets Start */
   .card:last-child {
-    display: none;
+    /* display: none; */
   }
   .pets_wrapper {
     max-width: 708px;
@@ -755,6 +795,21 @@ footer {
   .slider {
     width: 100%;
   }
+  .carousel {
+    column-gap: 40px;
+    width: 580px;
+    left: -930px;
+  }
+  .transition-right {
+    animation-name: move-right768;
+    animation-duration: 1s;
+  }
+  .transition-left {
+    /* infinity*/
+    animation-name: move-left768;
+    animation-duration: 1s;
+  }
+
   .card_wrapper {
     width: calc(580% * 100 / 708);
   }
@@ -881,7 +936,7 @@ footer {
     display: block;
   }
 }
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 713px) {
   .wrapper {
     max-width: 280px;
   }
@@ -941,10 +996,18 @@ footer {
   }
   /* Pets start  */
 
-  .card:nth-last-child(-n + 2) {
+  /* .card:nth-last-child(-n + 2) {
     display: none;
+  } */
+  .transition-right {
+    animation-name: move-right320;
+    animation-duration: 1s;
   }
-
+  .transition-left {
+    /* infinity*/
+    animation-name: move-left320;
+    animation-duration: 1s;
+  }
   .pets {
     height: 791px;
   }
