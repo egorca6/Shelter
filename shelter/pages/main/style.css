@@ -414,7 +414,8 @@ h3 {
     left: -930px;
   }
   to {
-    left: -620px;
+    /* left: -620px; */
+    left: -310px;
   }
 }
 @keyframes move-left320 {

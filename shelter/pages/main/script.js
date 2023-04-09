@@ -61,6 +61,40 @@ headerLink.forEach((el) =>
 // Бургер конец
 
 // Слайдер Начало
+const pets = [
+  {
+    name: "Katrine",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-katrine2.svg",
+  },
+  {
+    name: "Jennifer",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-jennifer.png",
+  },
+  {
+    name: "Woody",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-woody.png",
+  },
+  {
+    name: "Sophia",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-sophia.png",
+  },
+  {
+    name: "Timmy",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-timmy.png",
+  },
+  {
+    name: "Charly",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-charly.png",
+  },
+  {
+    name: "Scarlett",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-scarlet.png",
+  },
+  {
+    name: "Freddie",
+    image: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-freddie.png",
+  },
+];
 
 const ARROW_LEFT = document.querySelector(".arrow_left");
 const ARROW_RIGTH = document.querySelector(".arrow_rigth");
@@ -109,6 +143,28 @@ const createCard = () => {
   card.classList.add("card");
   return card;
 };
+function Random() {
+  let randon_arr;
+  do {
+    console.log("ghbdtn");
+    for (let i = 0; i < pets.length; i++) {
+      let j = Math.floor(Math.random() * (i + 1));
+      randon_arr = [pets[i], pets[j]] = [pets[j], pets[i]];
+    }
+  } while (
+    center1.innerHTML == left1.innerHTML &&
+    center1.innerHTML == left2.innerHTML &&
+    center1.innerHTML == left3.innerHTML &&
+    center2.innerHTML == left1.innerHTML &&
+    center2.innerHTML == left2.innerHTML &&
+    center2.innerHTML == left3.innerHTML &&
+    center3.innerHTML == left1.innerHTML &&
+    center3.innerHTML == left2.innerHTML &&
+    center3.innerHTML == left3.innerHTML
+  );
+  console.log(pets);
+  return randon_arr;
+}
 
 ARROW_LEFT.addEventListener("click", moveLeft);
 ARROW_RIGTH.addEventListener("click", moveRigth);
@@ -116,36 +172,56 @@ ARROW_RIGTH.addEventListener("click", moveRigth);
 CAROUSEL.addEventListener("animationend", (animationEvent) => {
   if (animationEvent.animationName === "move-left") {
     CAROUSEL.classList.remove("transition-left");
+
     center1.innerHTML = left1.innerHTML;
     center2.innerHTML = left2.innerHTML;
     center3.innerHTML = left3.innerHTML;
+    Random();
+    // do {
+    //   console.log("ghbdtn");
+    //   for (let i = 0; i < pets.length; i++) {
+    //     let j = Math.floor(Math.random() * (i + 1));
+    //     [pets[i], pets[j]] = [pets[j], pets[i]];
+    //   }
+    // } while (
+    //   center1.innerHTML == left1.innerHTML &&
+    //   center1.innerHTML == left2.innerHTML &&
+    //   center1.innerHTML == left3.innerHTML &&
+    //   center2.innerHTML == left1.innerHTML &&
+    //   center2.innerHTML == left2.innerHTML &&
+    //   center2.innerHTML == left3.innerHTML &&
+    //   center3.innerHTML == left1.innerHTML &&
+    //   center3.innerHTML == left2.innerHTML &&
+    //   center3.innerHTML == left3.innerHTML
+    // );
 
     const card1 = createCard();
     card1.innerHTML = `<img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-freddie.png"
+      src="${pets[7].image}" 
       alt="pet Woody"
     />
-    <h4 class="h4_card">Freddie</h4>
+    <h4 class="h4_card">${pets[7].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>`;
 
     const card2 = createCard();
     card2.innerHTML = `<img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-scarlet.png"
+      src="${pets[6].image}"
       alt="pet Woody"
     />
-    <h4 class="h4_card">Scarlett</h4>
+    <h4 class="h4_card">${pets[6].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>`;
 
     const card3 = createCard();
     card3.innerHTML = `<img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-charly.png"
+      src="${pets[5].image}"
       alt="pet Woody"
     />
-    <h4 class="h4_card">Charly</h4>
+    <h4 class="h4_card">${pets[5].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>`;
+
     left1.innerHTML = "";
     left2.innerHTML = "";
     left3.innerHTML = "";
@@ -157,22 +233,24 @@ CAROUSEL.addEventListener("animationend", (animationEvent) => {
     CAROUSEL.classList.remove("transition-left");
     center1.innerHTML = left2.innerHTML;
     center2.innerHTML = left3.innerHTML;
+    Random();
+
     const card1 = createCard();
     card1.innerHTML = `<img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-freddie.png"
+      src="${pets[7].image}"
       alt="pet Woody"
     />
-    <h4 class="h4_card">Freddie</h4>
+    <h4 class="h4_card">${pets[7].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>`;
 
     const card2 = createCard();
     card2.innerHTML = `<img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-scarlet.png"
+      src="${pets[6].image}"
       alt="pet Woody"
     />
-    <h4 class="h4_card">Scarlett</h4>
+    <h4 class="h4_card">${pets[6].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>`;
     left2.innerHTML = "";
     left3.innerHTML = "";
@@ -182,22 +260,23 @@ CAROUSEL.addEventListener("animationend", (animationEvent) => {
     CAROUSEL.classList.remove("transition-right");
     center1.innerHTML = center3.innerHTML;
     center2.innerHTML = right1.innerHTML;
+    Random();
     const card1 = createCard();
     card1.innerHTML = `<img
     class="card_pets"
-    src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-freddie.png"
+    src="${pets[2].image}"
     alt="pet Woody"
   />
-  <h4 class="h4_card">Freddie</h4>
+  <h4 class="h4_card">${pets[2].name}</h4>
   <button class="learn_more" type="submit">Learn more</button>`;
 
     const card2 = createCard();
     card2.innerHTML = `<img
     class="card_pets"
-    src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-katrine2.svg"
+    src="${pets[3].image}"
     alt="pet katrine"
   />
-  <h4 class="h4_card" id="pet1">Katrine</h4>
+  <h4 class="h4_card" id="pet1">${pets[3].name}</h4>
   <button class="learn_more" type="submit">Learn more</button>`;
     center3.innerHTML = "";
     right1.innerHTML = "";
@@ -206,14 +285,14 @@ CAROUSEL.addEventListener("animationend", (animationEvent) => {
   } else if (animationEvent.animationName === "move-left320") {
     CAROUSEL.classList.remove("transition-left");
     center1.innerHTML = left3.innerHTML;
-
+    Random();
     const card1 = createCard();
     card1.innerHTML = `<img
     class="card_pets"
-    src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-jennifer.png"
+    src="${pets[6].image}"
     alt="pet Jennifer"
   />
-  <h4 class="h4_card" id="pet2">Jennifer</h4>
+  <h4 class="h4_card" id="pet2">${pets[6].name}</h4>
   <button class="learn_more" type="submit">Learn more</button>`;
 
     left3.innerHTML = "";
@@ -221,13 +300,14 @@ CAROUSEL.addEventListener("animationend", (animationEvent) => {
   } else if (animationEvent.animationName === "move-right320") {
     CAROUSEL.classList.remove("transition-right");
     center1.innerHTML = center2.innerHTML;
+    Random();
     const card1 = createCard();
     card1.innerHTML = `<img
     class="card_pets"
-    src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-charly.png"
+    src="${pets[6].image}"
     alt="pet Woody"
   />
-  <h4 class="h4_card" id="pet6">Charly</h4>
+  <h4 class="h4_card" id="pet6">${pets[6].name}</h4>
   <button class="learn_more" type="submit">Learn more</button>`;
     center2.innerHTML = "";
     center2.prepend(card1);
@@ -236,34 +316,34 @@ CAROUSEL.addEventListener("animationend", (animationEvent) => {
     center1.innerHTML = right1.innerHTML;
     center2.innerHTML = right2.innerHTML;
     center3.innerHTML = right3.innerHTML;
-
+    Random();
     const card1 = createCard();
     card1.innerHTML = `<div class="card">
     <img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-jennifer.png"
+      src="${pets[2].image}"
       alt="pet Jennifer"
     />
-    <h4 class="h4_card">Jennifer</h4>
+    <h4 class="h4_card">${pets[2].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>
   </div>`;
 
     const card2 = createCard();
     card2.innerHTML = `<img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-woody.png"
+      src="${pets[3].image}"
       alt="pet Woody"
     />
-    <h4 class="h4_card">Woody</h4>
+    <h4 class="h4_card">${pets[3].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>`;
 
     const card3 = createCard();
     card3.innerHTML = `<img
       class="card_pets"
-      src="/egorca6-JSFE2023Q1/shelter/assets/images/pets-sophia.png"
+      src="${pets[4].image}"
       alt="pet Woody"
     />
-    <h4 class="h4_card">Sophia</h4>
+    <h4 class="h4_card">${pets[4].name}</h4>
     <button class="learn_more" type="submit">Learn more</button>`;
     right1.innerHTML = "";
     right2.innerHTML = "";
