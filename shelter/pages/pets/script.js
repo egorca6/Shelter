@@ -140,24 +140,22 @@ const ARROW_RIGHT_ALL = document.querySelector(
 const CURRENT_PAGE = document.querySelector(
   "body > div > main > section > div > div.navigetion > button:nth-child(3)"
 );
-CARD1_IMG.src = `${ALL_PETS[0].image}`;
-CARD1_NAME.textContent = `${ALL_PETS[0].name}`;
-CARD2_IMG.src = `${ALL_PETS[1].image}`;
-CARD2_NAME.textContent = `${ALL_PETS[1].name}`;
-CARD3_IMG.src = `${ALL_PETS[2].image}`;
-CARD3_NAME.textContent = `${ALL_PETS[2].name}`;
-CARD4_IMG.src = `${ALL_PETS[3].image}`;
-CARD4_NAME.textContent = `${ALL_PETS[3].name}`;
-CARD5_IMG.src = `${ALL_PETS[4].image}`;
-CARD5_NAME.textContent = `${ALL_PETS[4].name}`;
-CARD6_IMG.src = `${ALL_PETS[5].image}`;
-CARD6_NAME.textContent = `${ALL_PETS[5].name}`;
-CARD7_IMG.src = `${ALL_PETS[6].image}`;
-CARD7_NAME.textContent = `${ALL_PETS[6].name}`;
-CARD8_IMG.src = `${ALL_PETS[7].image}`;
-CARD8_NAME.textContent = `${ALL_PETS[7].name}`;
-
-console.log(CURRENT_PAGE.textContent);
+CARD1_IMG.src = ALL_PETS[0].image;
+CARD1_NAME.textContent = ALL_PETS[0].name;
+CARD2_IMG.src = ALL_PETS[1].image;
+CARD2_NAME.textContent = ALL_PETS[1].name;
+CARD3_IMG.src = ALL_PETS[2].image;
+CARD3_NAME.textContent = ALL_PETS[2].name;
+CARD4_IMG.src = ALL_PETS[3].image;
+CARD4_NAME.textContent = ALL_PETS[3].name;
+CARD5_IMG.src = ALL_PETS[4].image;
+CARD5_NAME.textContent = ALL_PETS[4].name;
+CARD6_IMG.src = ALL_PETS[5].image;
+CARD6_NAME.textContent = ALL_PETS[5].name;
+CARD7_IMG.src = ALL_PETS[6].image;
+CARD7_NAME.textContent = ALL_PETS[6].name;
+CARD8_IMG.src = ALL_PETS[7].image;
+CARD8_NAME.textContent = ALL_PETS[7].name;
 
 let maxCards;
 
@@ -177,34 +175,43 @@ let maxPages = 48 / maxCards;
 console.log("maxCards = " + maxCards);
 console.log("maxPages = " + maxPages);
 
-const moveRigth = () => {
+let count = 1;
+// count = CURRENT_PAGE.textContent;
+console.log("Страница  " + CURRENT_PAGE.textContent);
+console.log("count = " + count);
+let moveRigth = () => {
   ARROW_LEFT.className = "button_arrow";
   ARROW_LEFT_ALL.className = "button_arrow";
   // а так?
 
-  let count = ++CURRENT_PAGE.textContent;
+  // ++CURRENT_PAGE.textContent;
+  ++count;
+  CURRENT_PAGE.textContent = count;
   let startIndex = (count - 1) * maxCards;
   console.log("startIndex " + startIndex);
   console.log("count =  " + count);
-  CARD1_IMG.src = `${ALL_PETS[startIndex].image}`;
-  CARD1_NAME.textContent = `${ALL_PETS[startIndex].name}`;
-  CARD2_IMG.src = `${ALL_PETS[startIndex + 1].image}`;
-  CARD2_NAME.textContent = `${ALL_PETS[startIndex + 1].name}`;
-  CARD3_IMG.src = `${ALL_PETS[startIndex + 2].image}`;
-  CARD3_NAME.textContent = `${ALL_PETS[startIndex + 2].name}`;
-  CARD4_IMG.src = `${ALL_PETS[startIndex + 3].image}`;
-  CARD4_NAME.textContent = `${ALL_PETS[startIndex + 3].name}`;
-  CARD5_IMG.src = `${ALL_PETS[startIndex + 4].image}`;
-  CARD5_NAME.textContent = `${ALL_PETS[startIndex + 4].name}`;
-  CARD6_IMG.src = `${ALL_PETS[startIndex + 5].image}`;
-  CARD6_NAME.textContent = `${ALL_PETS[startIndex + 5].name}`;
-  CARD7_IMG.src = `${ALL_PETS[startIndex - 2].image}`;
-  CARD7_NAME.textContent = `${ALL_PETS[startIndex - 2].name}`;
-  CARD8_IMG.src = `${ALL_PETS[startIndex - 3].image}`;
-  CARD8_NAME.textContent = `${ALL_PETS[startIndex - 3].name}`;
+
+  document.querySelector("#pet1_img").src = ALL_PETS[startIndex].image;
+  CARD1_NAME.textContent = ALL_PETS[startIndex].name;
+  CARD2_IMG.src = ALL_PETS[startIndex + 1].image;
+  CARD2_NAME.textContent = ALL_PETS[startIndex + 1].name;
+  CARD3_IMG.src = ALL_PETS[startIndex + 2].image;
+  CARD3_NAME.textContent = ALL_PETS[startIndex + 2].name;
+  CARD4_IMG.src = ALL_PETS[startIndex + 3].image;
+  CARD4_NAME.textContent = ALL_PETS[startIndex + 3].name;
+  CARD5_IMG.src = ALL_PETS[startIndex + 4].image;
+  CARD5_NAME.textContent = ALL_PETS[startIndex + 4].name;
+  CARD6_IMG.src = ALL_PETS[startIndex + 5].image;
+  CARD6_NAME.textContent = ALL_PETS[startIndex + 5].name;
+  CARD7_IMG.src = ALL_PETS[startIndex + 6].image;
+  CARD7_NAME.textContent = ALL_PETS[startIndex + 6].name;
+  CARD8_IMG.src = ALL_PETS[startIndex + 7].image;
+  CARD8_NAME.textContent = ALL_PETS[startIndex + 7].name;
+  console.log(CARD1_IMG);
   if (count > maxPages - 1) {
     ARROW_RIGHT.className = "button_arrow_left";
     ARROW_RIGHT_ALL.className = "button_arrow_left";
+    ARROW_RIGHT.removeEventListener("click", moveRigth);
   } else {
     ARROW_RIGHT.addEventListener("click", moveRigth);
     ARROW_LEFT.addEventListener("click", moveLeft);
@@ -217,7 +224,6 @@ const moveLeft = () => {
   count = --CURRENT_PAGE.textContent;
 
   let startIndex = (count - 1) * maxCards;
-
   CARD1_IMG.src = `${ALL_PETS[startIndex].image}`;
   CARD1_NAME.textContent = `${ALL_PETS[startIndex].name}`;
   CARD2_IMG.src = `${ALL_PETS[startIndex + 1].image}`;
@@ -234,16 +240,11 @@ const moveLeft = () => {
   CARD7_NAME.textContent = `${ALL_PETS[startIndex + 6].name}`;
   CARD8_IMG.src = `${ALL_PETS[startIndex + 7].image}`;
   CARD8_NAME.textContent = `${ALL_PETS[startIndex + 7].name}`;
-  // console.log(count);
   while (count < 2) {
     ARROW_LEFT.className = "button_arrow_left";
-    // ARROW_LEFT.removeEventListener("click", moveLeft);
-    ARROW_RIGHT.addEventListener("click", moveRigth);
-    break;
-  }
-  while (count == 1) {
-    ARROW_LEFT.className = "button_arrow_left";
     ARROW_LEFT_ALL.className = "button_arrow_left";
+    ARROW_LEFT.removeEventListener("click", moveLeft);
+    ARROW_RIGHT.addEventListener("click", moveRigth);
     break;
   }
 };
@@ -271,11 +272,11 @@ const moveRigthAll = () => {
   CARD7_NAME.textContent = `${ALL_PETS[startIndex - 2].name}`;
   CARD8_IMG.src = `${ALL_PETS[startIndex - 3].image}`;
   CARD8_NAME.textContent = `${ALL_PETS[startIndex - 3].name}`;
-  //
+
   ARROW_RIGHT.className = "button_arrow_left";
   ARROW_RIGHT_ALL.className = "button_arrow_left";
   ARROW_RIGHT.removeEventListener("click", moveRigthAll);
-  // ARROW_RIGHT.removeEventListener("click", moveRigth);
+  ARROW_LEFT.addEventListener("click", moveLeft);
 };
 
 const moveLeftAll = () => {
@@ -303,7 +304,8 @@ const moveLeftAll = () => {
   CARD8_NAME.textContent = `${ALL_PETS[startIndex + 7].name}`;
   ARROW_LEFT.className = "button_arrow_left";
   ARROW_LEFT_ALL.className = "button_arrow_left";
-  // ARROW_LEFT.removeEventListener("click", moveLeft);
+
+  ARROW_RIGHT.addEventListener("click", moveRigth);
   ARROW_LEFT.removeEventListener("click", moveLeftAll);
 };
 
