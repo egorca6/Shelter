@@ -177,23 +177,6 @@ CAROUSEL.addEventListener("animationend", (animationEvent) => {
     center2.innerHTML = left2.innerHTML;
     center3.innerHTML = left3.innerHTML;
     Random();
-    // do {
-    //   console.log("ghbdtn");
-    //   for (let i = 0; i < pets.length; i++) {
-    //     let j = Math.floor(Math.random() * (i + 1));
-    //     [pets[i], pets[j]] = [pets[j], pets[i]];
-    //   }
-    // } while (
-    //   center1.innerHTML == left1.innerHTML &&
-    //   center1.innerHTML == left2.innerHTML &&
-    //   center1.innerHTML == left3.innerHTML &&
-    //   center2.innerHTML == left1.innerHTML &&
-    //   center2.innerHTML == left2.innerHTML &&
-    //   center2.innerHTML == left3.innerHTML &&
-    //   center3.innerHTML == left1.innerHTML &&
-    //   center3.innerHTML == left2.innerHTML &&
-    //   center3.innerHTML == left3.innerHTML
-    // );
 
     const card1 = createCard();
     card1.innerHTML = `<img

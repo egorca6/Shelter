@@ -258,11 +258,11 @@ h3 {
   cursor: pointer;
   border: none;
 }
-.button_arrow:first-child:hover {
+/* .button_arrow:first-child:hover {
   border: 2px solid #cdcdcd;
   border-radius: 100px;
   background: #f6f6f6;
-}
+} */
 
 .card_pets {
   width: 100%;
