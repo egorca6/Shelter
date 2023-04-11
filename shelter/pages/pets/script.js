@@ -179,34 +179,39 @@ let count = 1;
 // count = CURRENT_PAGE.textContent;
 console.log("Страница  " + CURRENT_PAGE.textContent);
 console.log("count = " + count);
+
+listItems = document.querySelectorAll(".card");
+
 let moveRigth = () => {
   ARROW_LEFT.className = "button_arrow";
   ARROW_LEFT_ALL.className = "button_arrow";
-  // а так?
 
-  // ++CURRENT_PAGE.textContent;
   ++count;
   CURRENT_PAGE.textContent = count;
   let startIndex = (count - 1) * maxCards;
   console.log("startIndex " + startIndex);
   console.log("count =  " + count);
 
-  document.querySelector("#pet1_img").src = ALL_PETS[startIndex].image;
-  CARD1_NAME.textContent = ALL_PETS[startIndex].name;
-  CARD2_IMG.src = ALL_PETS[startIndex + 1].image;
-  CARD2_NAME.textContent = ALL_PETS[startIndex + 1].name;
-  CARD3_IMG.src = ALL_PETS[startIndex + 2].image;
-  CARD3_NAME.textContent = ALL_PETS[startIndex + 2].name;
-  CARD4_IMG.src = ALL_PETS[startIndex + 3].image;
-  CARD4_NAME.textContent = ALL_PETS[startIndex + 3].name;
-  CARD5_IMG.src = ALL_PETS[startIndex + 4].image;
-  CARD5_NAME.textContent = ALL_PETS[startIndex + 4].name;
-  CARD6_IMG.src = ALL_PETS[startIndex + 5].image;
-  CARD6_NAME.textContent = ALL_PETS[startIndex + 5].name;
-  CARD7_IMG.src = ALL_PETS[startIndex + 6].image;
-  CARD7_NAME.textContent = ALL_PETS[startIndex + 6].name;
-  CARD8_IMG.src = ALL_PETS[startIndex + 7].image;
-  CARD8_NAME.textContent = ALL_PETS[startIndex + 7].name;
+  listItems.forEach((e, i) => {
+    e.querySelector("img").src = arr[i].img;
+    e.querySelector(".slider__title").textContent = arr[i].name;
+  });
+  // document.querySelector("#pet1_img").src = ALL_PETS[startIndex].image;
+  // CARD1_NAME.textContent = ALL_PETS[startIndex].name;
+  // CARD2_IMG.src = ALL_PETS[startIndex + 1].image;
+  // CARD2_NAME.textContent = ALL_PETS[startIndex + 1].name;
+  // CARD3_IMG.src = ALL_PETS[startIndex + 2].image;
+  // CARD3_NAME.textContent = ALL_PETS[startIndex + 2].name;
+  // CARD4_IMG.src = ALL_PETS[startIndex + 3].image;
+  // CARD4_NAME.textContent = ALL_PETS[startIndex + 3].name;
+  // CARD5_IMG.src = ALL_PETS[startIndex + 4].image;
+  // CARD5_NAME.textContent = ALL_PETS[startIndex + 4].name;
+  // CARD6_IMG.src = ALL_PETS[startIndex + 5].image;
+  // CARD6_NAME.textContent = ALL_PETS[startIndex + 5].name;
+  // CARD7_IMG.src = ALL_PETS[startIndex + 6].image;
+  // CARD7_NAME.textContent = ALL_PETS[startIndex + 6].name;
+  // CARD8_IMG.src = ALL_PETS[startIndex + 7].image;
+  // CARD8_NAME.textContent = ALL_PETS[startIndex + 7].name;
   console.log(CARD1_IMG);
   if (count > maxPages - 1) {
     ARROW_RIGHT.className = "button_arrow_left";
