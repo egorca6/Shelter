@@ -1,3 +1,102 @@
+let petsInfo = [
+  {
+    name: "Jennifer",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-jennifer.png",
+    type: "Dog",
+    breed: "Labrador",
+    description:
+      "Jennifer is a sweet 2 months old Labrador that is patiently waiting to find a new forever home. This girl really enjoys being able to go outside to run and play, but won't hesitate to play up a storm in the house if she has all of her favorite toys.",
+    age: "2 months",
+    inoculations: ["none"],
+    diseases: ["none"],
+    parasites: ["none"],
+  },
+  {
+    name: "Sophia",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-sophia.png",
+    type: "Dog",
+    breed: "Shih tzu",
+    description:
+      "Sophia here and I'm looking for my forever home to live out the best years of my life. I am full of energy. Everyday I'm learning new things, like how to walk on a leash, go potty outside, bark and play with toys and I still need some practice.",
+    age: "1 month",
+    inoculations: ["parvovirus"],
+    diseases: ["none"],
+    parasites: ["none"],
+  },
+  {
+    name: "Woody",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-woody.png",
+    type: "Dog",
+    breed: "Golden Retriever",
+    description:
+      "Woody is a handsome 3 1/2 year old boy. Woody does know basic commands and is a smart pup. Since he is on the stronger side, he will learn a lot from your training. Woody will be happier when he finds a new family that can spend a lot of time with him.",
+    age: "3 years 6 months",
+    inoculations: ["adenovirus", "distemper"],
+    diseases: ["right back leg mobility reduced"],
+    parasites: ["none"],
+  },
+  {
+    name: "Scarlett",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-scarlet.png",
+    type: "Dog",
+    breed: "Jack Russell Terrier",
+    description:
+      "Scarlett is a happy, playful girl who will make you laugh and smile. She forms a bond quickly and will make a loyal companion and a wonderful family dog or a good companion for a single individual too since she likes to hang out and be with her human.",
+    age: "3 months",
+    inoculations: ["parainfluenza"],
+    diseases: ["none"],
+    parasites: ["none"],
+  },
+  {
+    name: "Katrine",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-katrine2.svg",
+    type: "Cat",
+    breed: "British Shorthair",
+    description:
+      "Katrine is a beautiful girl. She is as soft as the finest velvet with a thick lush fur. Will love you until the last breath she takes as long as you are the one. She is picky about her affection. She loves cuddles and to stretch into your hands for a deeper relaxations.",
+    age: "6 months",
+    inoculations: ["panleukopenia"],
+    diseases: ["none"],
+    parasites: ["none"],
+  },
+  {
+    name: "Timmy",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-timmy.png",
+    type: "Cat",
+    breed: "British Shorthair",
+    description:
+      "Timmy is an adorable grey british shorthair male. He loves to play and snuggle. He is neutered and up to date on age appropriate vaccinations. He can be chatty and enjoys being held. Timmy has a lot to say and wants a person to share his thoughts with.",
+    age: "2 years 3 months",
+    inoculations: ["calicivirus", "viral rhinotracheitis"],
+    diseases: ["kidney stones"],
+    parasites: ["none"],
+  },
+  {
+    name: "Freddie",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-freddie.png",
+    type: "Cat",
+    breed: "British Shorthair",
+    description:
+      "Freddie is a little shy at first, but very sweet when he warms up. He likes playing with shoe strings and bottle caps. He is quick to learn the rhythms of his human’s daily life. Freddie has bounced around a lot in his life, and is looking to find his forever home.",
+    age: "2 months",
+    inoculations: ["rabies"],
+    diseases: ["none"],
+    parasites: ["none"],
+  },
+  {
+    name: "Charly",
+    img: "/egorca6-JSFE2023Q1/shelter/assets/images/pets-charly.png",
+    type: "Dog",
+    breed: "Jack Russell Terrier",
+    description:
+      "This cute boy, Charly, is three years old and he likes adults and kids. He isn’t fond of many other dogs, so he might do best in a single dog home. Charly has lots of energy, and loves to run and play. We think a fenced yard would make him very happy.",
+    age: "8 years",
+    inoculations: ["bordetella bronchiseptica", "leptospirosis"],
+    diseases: ["deafness", "blindness"],
+    parasites: ["lice", "fleas"],
+  },
+];
+
 const burger = document.querySelector(".burger_wrap");
 const headerLink = document.querySelectorAll(".header_link");
 const burgerMenu = document.querySelector(".header_nav");
@@ -88,8 +187,6 @@ function Random(arr) {
   }
   return random_arr;
 }
-
-// Random(pets);
 
 let pets2 = pets.map((e) => e);
 Random(pets2);
@@ -311,3 +408,62 @@ ARROW_RIGHT_ALL.addEventListener("click", moveRigthAll);
 ARROW_LEFT.addEventListener("click", moveLeft);
 ARROW_LEFT_ALL.addEventListener("click", moveLeftAll);
 // Пагинация  Конец
+// ПОпап
+// Попап начало
+let cards = document.querySelectorAll(".card");
+
+let pop = document.querySelector(".pop ");
+let pop_wrapper = document.querySelector(".pop_wrapper");
+let button_pop = document.querySelector(".pop_button");
+let name_pet = document.querySelectorAll(".h4_card");
+
+let black = document.querySelector(
+  "body > div > main > section.pets > div.blackout"
+);
+
+const get_modal = (item) => {
+  let result = {};
+  petsInfo.map((pet, i, arr) => {
+    if (item.querySelector(".h4_card").innerText == pet.name) {
+      console.log(arr[i]);
+      result = arr[i];
+    }
+  });
+  pop.querySelector(".pop_img").src = result.img;
+  pop.querySelector(".pop_title").textContent = result.name;
+  pop.querySelector(
+    ".pop_subtitle"
+  ).textContent = `${result.type} - ${result.breed}`;
+  pop.querySelector(".pop_text").textContent = result.description;
+  pop.querySelector(".pop_age").textContent = result.age;
+  pop.querySelector(".inoculations").textContent = result.inoculations;
+  pop.querySelector(".diseases").textContent = result.diseases;
+  pop.querySelector(".parasites").textContent = result.parasites;
+};
+
+cards.forEach((item) => {
+  item.addEventListener("click", (event) => {
+    pop.classList.add("active");
+    black.classList.toggle("on");
+    document.body.style.overflow = "hidden";
+    console.log("Имя пета = " + item.querySelector(".h4_card").innerText);
+    console.log(item.querySelector(".h4_card").innerText == petsInfo[0].name);
+    get_modal(item);
+  });
+});
+
+button_pop.addEventListener("click", () => {
+  pop.classList.remove("active");
+  black.classList.remove("on");
+  document.body.style.overflow = "";
+});
+document.addEventListener("click", (event) => {
+  if (
+    event.target.classList.contains("pop") &&
+    event.target.classList.contains("active")
+  ) {
+    pop.classList.remove("active");
+    black.classList.remove("on");
+    document.body.style.overflow = "";
+  }
+});
