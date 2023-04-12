@@ -136,28 +136,53 @@ const createCard = () => {
   card.classList.add("card");
   return card;
 };
+
 function Random() {
   let randon_arr;
-  do {
-    console.log("ghbdtn");
-    for (let i = 0; i < pets.length; i++) {
-      let j = Math.floor(Math.random() * (i + 1));
-      randon_arr = [pets[i], pets[j]] = [pets[j], pets[i]];
-    }
-  } while (
-    center1.innerHTML == left1.innerHTML &&
-    center1.innerHTML == left2.innerHTML &&
-    center1.innerHTML == left3.innerHTML &&
-    center2.innerHTML == left1.innerHTML &&
-    center2.innerHTML == left2.innerHTML &&
-    center2.innerHTML == left3.innerHTML &&
-    center3.innerHTML == left1.innerHTML &&
-    center3.innerHTML == left2.innerHTML &&
-    center3.innerHTML == left3.innerHTML
-  );
+  // do {
+  for (let i = 0; i < pets.length; i++) {
+    let j = Math.floor(Math.random() * (i + 1));
+    randon_arr = [pets[i], pets[j]] = [pets[j], pets[i]];
+  }
+  // }
+  // while (
+  //   center1.innerHTML == left1.innerHTML &&
+  //   center1.innerHTML == left2.innerHTML &&
+  //   center1.innerHTML == left3.innerHTML &&
+  //   center2.innerHTML == left1.innerHTML &&
+  //   center2.innerHTML == left2.innerHTML &&
+  //   center2.innerHTML == left3.innerHTML &&
+  //   center3.innerHTML == left1.innerHTML &&
+  //   center3.innerHTML == left2.innerHTML &&
+  //   center3.innerHTML == left3.innerHTML
+  // );
   console.log(pets);
   return randon_arr;
 }
+
+// Random(); // новое
+Random();
+center1.innerHTML = `<img
+class="card_pets"
+src="${pets[1].image}" 
+alt="pet Woody"
+/>
+<h4 class="h4_card">${pets[1].name}</h4>
+<button class="learn_more" type="submit">Learn more</button>`; // новое
+center2.innerHTML = `<img
+class="card_pets"
+src="${pets[2].image}" 
+alt="pet Woody"
+/>
+<h4 class="h4_card">${pets[2].name}</h4>
+<button class="learn_more" type="submit">Learn more</button>`; // новое
+center3.innerHTML = `<img
+class="card_pets"
+src="${pets[3].image}" 
+alt="pet Woody"
+/>
+<h4 class="h4_card">${pets[3].name}</h4>
+<button class="learn_more" type="submit">Learn more</button>`; // новое
 
 ARROW_LEFT.addEventListener("click", moveLeft);
 ARROW_RIGTH.addEventListener("click", moveRigth);
