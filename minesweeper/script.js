@@ -225,8 +225,6 @@ function startGame(width, height, bombsCount) {
   function clickEvent(event) {
     if (gameOver || event.target.tagName !== 'BUTTON') return;
     if (event.target.tagName === 'BUTTON') {
-      // console.log('firstClick начало - ', firstClick);
-      // console.log('height, width', height, width);
       cells = [...wrapperField.children];
       const index = cells.indexOf(event.target);
       const column = index % width;
@@ -235,7 +233,7 @@ function startGame(width, height, bombsCount) {
         bombs = [...Array(buttonCount).keys()].sort(() => Math.random()
             - 0.5).slice(0, bombsCount);
       }
-      console.log(isBomb(row, column));
+      // console.log(isBomb(row, column));
       firstClick = false;
       // console.log('index, column, row', index, column, row);
       // console.log('!isValid? =  ', !isValid(row, column));
@@ -246,14 +244,13 @@ function startGame(width, height, bombsCount) {
   }
 
   function contextMenuEvent(event) {
-    // console.log(event.target.tagName === 'BUTTON');
     if (event && event.target && event.target.tagName === 'BUTTON') {
       event.preventDefault();
       cells = [...wrapperField.children];
       const index = cells.indexOf(event.target);
       const cell = cells[index];
       cell.classList.toggle('flag');
-      if (cell.classList.contains('flag') && mines.innerHTML > 0) {
+      if (cell.classList.contains('flag')) {
         flagsCount -= 1;
         mines.innerHTML = flagsCount;
         cell.disabled = true;
