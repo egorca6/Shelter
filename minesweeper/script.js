@@ -79,7 +79,6 @@ newGame.innerHTML = 'New Game';
 const time = document.createElement('div');
 time.classList.add('time');
 wrapperTop.append(time);
-let results = [];
 let gameOver = false;
 let gameState = {};
 
@@ -127,30 +126,44 @@ function startGame(width, height, bombsCount) {
     return count;
   }
 
+  function showResultsOnLoad() {
+    const myResult = JSON.parse(localStorage.getItem('result'));
+    if (myResult) {
+      result.innerHTML = '';
+      myResult.forEach((res) => {
+        const resultElement = document.createElement('div');
+        resultElement.textContent = res;
+        result.append(resultElement);
+      });
+    }
+  }
+
   function showResult(row, column) {
     gameOver = true;
+    let results = JSON.parse(localStorage.getItem('result')) || [];
     if (isBomb(row, column)) {
       results.push(`lose за ходов = ${clickCount}`);
       if (results.length > 10) {
         results.shift();
       }
-      localStorage.setItem('result', JSON.stringify(results));
     } else {
       results.push(`win за ходов = ${clickCount}`);
       if (results.length > 10) {
         results.shift();
       }
-      localStorage.setItem('result', JSON.stringify(results));
     }
-    const myResult = JSON.parse(localStorage.getItem('result'));
+    localStorage.setItem('result', JSON.stringify(results));
     result.innerHTML = '';
-    myResult.forEach((res) => {
+    results.forEach((res) => {
       const resultElement = document.createElement('div');
         resultElement.textContent = res;
         result.append(resultElement);
+        showResultsOnLoad();
       wrapperField.removeEventListener('contextmenu', contextMenuEvent);
     });
   }
+
+  showResultsOnLoad();
 
   function open(row, column) {
     if (!isValid(row, column)) return;
