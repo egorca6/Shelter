@@ -231,10 +231,11 @@ function startGame(width, height, bombsCount) {
       const index = cells.indexOf(event.target);
       const column = index % width;
       const row = Math.floor(index / width);
-      while (firstClick === true && getCount(row, column) !== 0) {
+      while (firstClick === true && getCount(row, column) !== 0 && isBomb(row, column)) {
         bombs = [...Array(buttonCount).keys()].sort(() => Math.random()
             - 0.5).slice(0, bombsCount);
       }
+      console.log(isBomb(row, column));
       firstClick = false;
       // console.log('index, column, row', index, column, row);
       // console.log('!isValid? =  ', !isValid(row, column));
