@@ -229,7 +229,7 @@ function startGame(width, height, bombsCount) {
       const index = cells.indexOf(event.target);
       const column = index % width;
       const row = Math.floor(index / width);
-      while (firstClick === true && getCount(row, column) !== 0 && isBomb(row, column)) {
+      while (firstClick === true && (getCount(row, column) !== 0) && isBomb(row, column)) {
         bombs = [...Array(buttonCount).keys()].sort(() => Math.random()
             - 0.5).slice(0, bombsCount);
       }
@@ -338,7 +338,6 @@ function startGame(width, height, bombsCount) {
     gameState.flagsCount = flagsCount;
     gameState.clickCount = clickCount;
     gameState.time = time.innerHTML;
-    gameState.results = results;
     gameState.bombs = bombs;
     gameState.level = level.className;
     gameState.wrapperField = wrapperField.className;
@@ -360,7 +359,6 @@ function startGame(width, height, bombsCount) {
       clickCount = gameState.clickCount;
       mines.innerHTML = flagsCount;
       time.innerHTML = gameState.time;
-      results = gameState.results;
       bombs = gameState.bombs;
       level.className = gameState.level;
       wrapperField.className = gameState.wrapperField;
