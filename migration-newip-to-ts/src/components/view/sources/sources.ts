@@ -1,5 +1,7 @@
+import { ISource } from '../../../types/index';
+
 class Sources {
-    draw(data: { name: string; id: string }[]) {
+    draw(data: ISource[]) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
         const sourcesContainer = document.querySelector('.sources');
