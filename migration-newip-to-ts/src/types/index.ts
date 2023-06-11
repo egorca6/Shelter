@@ -4,6 +4,7 @@ export interface ISource {
 }
 
 export interface INew {
+    length: number;
     author: string;
     content: string;
     description: string;

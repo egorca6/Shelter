@@ -1,7 +1,7 @@
 class Sources {
     draw(data: { name: string; id: string }[]) {
         const fragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement | null;
+        const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
         const sourcesContainer = document.querySelector('.sources');
 
         if (!sourceItemTemp || !sourcesContainer) {
@@ -10,7 +10,6 @@ class Sources {
 
         data.forEach((item) => {
             const sourceClone = sourceItemTemp.content.cloneNode(true) as DocumentFragment | null;
-
             if (!sourceClone) {
                 return;
             }
