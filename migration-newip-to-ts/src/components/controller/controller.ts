@@ -1,4 +1,4 @@
-import { ISource, INew } from '../../types/index';
+import { INew, ISource } from '../../types/index';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
@@ -11,7 +11,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: (data?: ISource[]) => void) {
+    getNews(e: Event, callback: (data?: INew[]) => void) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
