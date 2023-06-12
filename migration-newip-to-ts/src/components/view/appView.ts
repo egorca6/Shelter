@@ -6,14 +6,18 @@ export class AppView {
     private news = new News();
     private sources = new Sources();
 
-    drawNews(data: Articles): void {
-        const values: INew[] = data?.articles || [];
-        this.news.draw(values);
+    drawNews(data: Articles | INew[] | undefined): void {
+        if (data) {
+            const values: INew[] = Array.isArray(data) ? data : data.articles;
+            this.news.draw(values);
+        }
     }
 
-    drawSources(data: { sources?: ISource[] }) {
-        const values = data?.sources ?? [];
-        this.sources.draw(values);
+    drawSources(data: ISource[] | { sources?: ISource[] } | undefined): void {
+        if (data) {
+            const values: ISource[] = Array.isArray(data) ? data : data.sources || [];
+            this.sources.draw(values);
+        }
     }
 }
 

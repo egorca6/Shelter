@@ -30,11 +30,11 @@ export type Options =
       }>
     | undefined;
 
-export type Articles = {
+export interface Articles {
     status: string;
     totalResults?: number;
     articles: INew[];
-};
+}
 
 export type SourcesResp = {
     status: string;
