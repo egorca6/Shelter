@@ -32,3 +32,10 @@
     font-weight: 400;
     white-space: nowrap;
 }
+
+@media only screen and (max-width: 713px) {
+    .sources {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

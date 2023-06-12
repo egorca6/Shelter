@@ -1,16 +1,42 @@
 export interface ISource {
     id: string;
     name: string;
+    description?: string;
+    url?: string;
+    category?: string;
+    language?: string;
+    country?: string;
 }
 
 export interface INew {
-    length: number;
     author: string;
     content: string;
     description: string;
     publishedAt: string;
-    source: ISource[];
+    source: {
+        id: string;
+        name: string;
+    };
     title: string;
     url: string;
     urlToImage: string;
 }
+
+export type Options =
+    | Partial<{
+          sources?: string;
+          category?: string;
+          language?: string;
+      }>
+    | undefined;
+
+export type Articles = {
+    status: string;
+    totalResults?: number;
+    articles: INew[];
+};
+
+export type SourcesResp = {
+    status: string;
+    sources: ISource[];
+};

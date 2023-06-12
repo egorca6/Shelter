@@ -1,4 +1,4 @@
-import { INew, ISource } from '../../../types/index';
+import { INew } from '../../../types/index';
 import './news.css';
 
 class News<T extends INew> {
@@ -28,7 +28,7 @@ class News<T extends INew> {
                 }
                 const metaAuthor: HTMLElement | null = newsClone.querySelector('.news__meta-author');
                 if (metaAuthor) {
-                    metaAuthor.textContent = item.author || (item.source as ISource[])[0].name;
+                    metaAuthor.textContent = item.author || item.source.name;
                 }
                 const metaDate: HTMLElement | null = newsClone.querySelector('.news__meta-date');
                 if (metaDate) {
@@ -40,7 +40,7 @@ class News<T extends INew> {
                 }
                 const descriptionSource: HTMLElement | null = newsClone.querySelector('.news__description-source');
                 if (descriptionSource) {
-                    descriptionSource.textContent = (item.source as ISource[])[0].name;
+                    descriptionSource.textContent = item.source.name;
                 }
                 const descriptionContent: HTMLElement | null = newsClone.querySelector('.news__description-content');
                 if (descriptionContent) {
