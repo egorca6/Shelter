@@ -1,5 +1,141 @@
-div {
-  width: 100px;
-  height: 100px;
-  background-color: aquamarine;
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.container {
+    display: flex;
+    width: 100vw;
+}
+
+.section {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* flex-grow: 1; */
+    background-color: lightblue;
+    padding: 20px;
+}
+
+.level-container {
+    max-width: 500px;
+    /* flex-grow: 0.2; */
+    background-color: lightgreen;
+    height: 100vh;
+}
+
+.table-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 150px;
+    width: 350px;
+    background-color: yellow;
+    margin-bottom: 10px;
+    transform: perspective(600px) rotateX(20deg);
+    opacity: 1;
+}
+
+.help {
+    background: none;
+    cursor: pointer;
+    border-bottom: black 1px solid;
+}
+
+@keyframes dance {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1) translate(5px, -5px);
+    }
+}
+
+plate {
+    background-color: white;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2), inset 0px 2px 10px rgba(0, 0, 0, 0.2);
+    animation: strobeStart 0.5s ease-out, strobe 1s infinite;
+    animation: dance 1s infinite;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.buttonWrapper {
+    display: flex;
+}
+
+.prevLvl,
+.nextLvl,
+.navbar-menu {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    background: none;
+    cursor: pointer;
+}
+
+.lvl-discription {
+    display: block;
+    width: 400px;
+    padding-left: 50px;
+}
+
+/* .table-container::before,
+.table-container::after {
+    content: '';
+    background-color: white;
+    border-radius: 50%;
+}
+
+.table-container::before {
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2), inset 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.table-container::after {
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2), inset 0px 2px 10px rgba(0, 0, 0, 0.2);
+} */
+
+.input-container {
+    display: flex;
+    height: 250px;
+    width: 550px;
+    background-color: gold;
+    margin-bottom: 10px;
+}
+.input-wrapper {
+    width: 50%;
+}
+
+.viewer-wrapper {
+    width: 50%;
+    background-color: rgb(192, 198, 198);
+}
+
+.footer {
+    background-color: lightgray;
+    height: 150px;
+    width: 100vw;
+}
+
+h2 {
+    font-size: 20px;
 }
