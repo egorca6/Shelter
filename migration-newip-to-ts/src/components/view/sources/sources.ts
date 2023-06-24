@@ -12,16 +12,18 @@ class Sources {
         }
 
         data.forEach((item) => {
-            const sourceClone = sourceItemTemp.content.cloneNode(true) as DocumentFragment | null;
+            const sourceClone = sourceItemTemp.content.cloneNode(true);
             if (!sourceClone) {
                 return;
             }
-            const itemName = sourceClone.querySelector('.source__item-name');
-            const itemElement = sourceClone.querySelector('.source__item');
-            if (itemName && itemElement) {
-                itemName.textContent = item.name;
-                itemElement.setAttribute('data-source-id', item.id);
-                fragment.append(sourceClone);
+            if (sourceClone instanceof DocumentFragment) {
+                const itemName = sourceClone.querySelector('.source__item-name');
+                const itemElement = sourceClone.querySelector('.source__item');
+                if (itemName && itemElement) {
+                    itemName.textContent = item.name;
+                    itemElement.setAttribute('data-source-id', item.id);
+                    fragment.append(sourceClone);
+                }
             }
         });
         sourcesContainer.append(fragment);

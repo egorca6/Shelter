@@ -21,8 +21,9 @@ class Loader {
     }
 
     errorHandler(res: Response) {
+        const ERROR_STATUS = [401, 404];
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (ERROR_STATUS.includes(res.status))
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
@@ -31,22 +32,16 @@ class Loader {
     }
 
     makeUrl(options: IOptions, endpoint: string) {
-        const urlOptions = { ...this.options, ...options };
-        let url = `${this.baseLink}${endpoint}?`;
-
-        Object.keys(urlOptions).forEach((key) => {
-            url += `${key}=${urlOptions[key]}&`;
-        });
-
-        return url.slice(0, -1);
+        const urlOptions = new URLSearchParams({ ...this.options, ...options }).toString();
+        return `${this.baseLink}${endpoint}?${urlOptions}`;
     }
 
     load(method: string, endpoint: string, callback: (data: string) => void, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
-            .then((data) => callback(data))
-            .catch((err) => console.error(err));
+            .then((data: string) => callback(data))
+            .catch((err: string) => console.error(err));
     }
 }
 

@@ -40,3 +40,5 @@ export type SourcesResp = {
     status: string;
     sources: ISource[];
 };
+
+export type Callback<T> = (data?: T[]) => void;

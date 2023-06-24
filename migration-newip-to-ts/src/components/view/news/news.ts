@@ -1,7 +1,7 @@
 import { INew } from '../../../types/index';
 import './news.css';
 
-class News<T extends INew> {
+class News {
     private newsContainer: HTMLElement | null;
     private newsItemTemp: HTMLTemplateElement | null;
 
@@ -10,15 +10,13 @@ class News<T extends INew> {
         this.newsItemTemp = document.querySelector('#newsItemTemp');
     }
 
-    public draw(data: T[]): void {
-        const news: T[] = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
+    public draw(data: INew[]): void {
+        const news: INew[] = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();
-        news.forEach((item: T, idx: number) => {
-            const newsClone: DocumentFragment | null = this.newsItemTemp?.content.cloneNode(
-                true
-            ) as DocumentFragment | null;
-            if (newsClone) {
+        news.forEach((item: INew, idx: number) => {
+            const newsClone = this.newsItemTemp?.content.cloneNode(true);
+            if (newsClone && newsClone instanceof DocumentFragment) {
                 if (idx % 2 && newsClone.querySelector('.news__item')) {
                     newsClone.querySelector('.news__item')?.classList.add('alt');
                 }
