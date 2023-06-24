@@ -1,4 +1,8 @@
 import './style.css';
+// import '../libs/highlight/styles/agate.min.css';
+// import 'cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js';
+// const hljs = require('highlight.js/lib/core');
+// hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
 
 const container = document.createElement('main');
 container.classList.add('container');
@@ -28,7 +32,7 @@ inputContainer.classList.add('input-container');
 const inputWrapper = document.createElement('div');
 inputWrapper.classList.add('input-wrapper');
 
-const viewerWrapper = document.createElement('pre');
+const viewerWrapper = document.createElement('div');
 viewerWrapper.classList.add('viewer-wrapper');
 
 const input = document.createElement('input');
@@ -105,8 +109,16 @@ document.body.appendChild(container);
 document.body.appendChild(footer);
 
 function updateViewerContent() {
-    viewerWrapper.textContent = tableContainer.innerHTML;
+    viewerWrapper.innerHTML = `        <pre>
+    <code>
+        &lt;plate/&gt;
+        &lt;plate/&gt;
+        123
+        1235
+        &lt;plate/&gt;
+    </code>
+</pre>`;
 }
 
 updateViewerContent();
-console.log(viewerWrapper.innerHTML);
+console.log(viewerWrapper.textContent);

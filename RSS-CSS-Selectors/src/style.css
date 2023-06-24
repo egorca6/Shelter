@@ -118,7 +118,7 @@ plate {
     display: flex;
     height: 250px;
     width: 550px;
-    background-color: gold;
+    /* background-color: gold; */
     margin-bottom: 10px;
 }
 .input-wrapper {
@@ -127,7 +127,7 @@ plate {
 
 .viewer-wrapper {
     width: 50%;
-    background-color: rgb(192, 198, 198);
+    /* background-color: rgb(192, 198, 198); */
 }
 
 .footer {
