@@ -1,6 +1,10 @@
+import { Callback, INew, ISource } from '../../types/index';
+
 interface IOptions {
     [key: string]: string;
 }
+
+const ERROR_STATUS = [401, 404];
 
 class Loader {
     private baseLink: string;
@@ -21,7 +25,6 @@ class Loader {
     }
 
     errorHandler(res: Response) {
-        const ERROR_STATUS = [401, 404];
         if (!res.ok) {
             if (ERROR_STATUS.includes(res.status))
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -36,12 +39,12 @@ class Loader {
         return `${this.baseLink}${endpoint}?${urlOptions}`;
     }
 
-    load(method: string, endpoint: string, callback: (data: string) => void, options = {}) {
+    load(method: string, endpoint: string, callback: Callback<INew> | Callback<ISource>, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
-            .then((data: string) => callback(data))
-            .catch((err: string) => console.error(err));
+            .then((data: INew[] & ISource[]) => callback(data))
+            .catch((err: Error) => console.error(err));
     }
 }
 
