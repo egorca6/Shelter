@@ -1,9 +1,4 @@
 import './style.css';
-// import '../libs/highlight/styles/agate.min.css';
-// import 'cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js';
-// const hljs = require('highlight.js/lib/core');
-// hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
-
 const container = document.createElement('main');
 container.classList.add('container');
 
@@ -37,7 +32,6 @@ viewerWrapper.classList.add('viewer-wrapper');
 
 const input = document.createElement('input');
 input.setAttribute('placeholder', 'Type here');
-// inputContainer.classList.add('input-container');
 
 const enter = document.createElement('button');
 enter.classList.add('enter');
@@ -56,7 +50,6 @@ lvlInfo.classList.add('lvlInfo');
 lvlInfo.textContent = `Level 1 of 32`;
 
 const prevLvl = document.createElement('button');
-// prevLvl.innerHTML = `&lt;`;
 prevLvl.textContent = `<`;
 prevLvl.classList.add('prevLvl');
 
@@ -110,15 +103,60 @@ document.body.appendChild(footer);
 
 function updateViewerContent() {
     viewerWrapper.innerHTML = `        <pre>
-    <code>
-        &lt;plate/&gt;
-        &lt;plate/&gt;
-        123
-        1235
-        &lt;plate/&gt;
-    </code>
-</pre>`;
+        <code>
+            &lt;plate/&gt;
+            &lt;plate/&gt;
+        </code>
+    </pre>`;
+    // const pre = document.createElement('pre');
+    // const code = document.createElement('code');
+    // const plate1 = document.createElement('div');
+    // plate1.classList.add('div1');
+    // const plate2 = document.createElement('div');
+    // plate2.classList.add('div1');
+    // plate1.textContent = '<plate/>';
+    // plate2.textContent = '<plate/>';
+    // viewerWrapper.appendChild(pre);
+    // pre.appendChild(code);
+    // code.appendChild(plate1);
+    // code.appendChild(plate2);
 }
 
 updateViewerContent();
-console.log(viewerWrapper.textContent);
+
+const plateElements = document.querySelectorAll('plate');
+const hljsSection = document.getElementsByClassName('hljs-section');
+const modal = document.createElement('div');
+
+function highlightAndShowHTMLCode(event: Event) {
+    const target = event.target;
+
+    if (target instanceof HTMLElement && target.matches('plate')) {
+        target.classList.add('light-on');
+        // console.log(target == plateElements[0]);
+        // console.log(target.outerHTML.replace(`class="light-on"`, ''));
+        modal.classList.add('modal');
+        modal.textContent = target.outerHTML.replace(`class="light-on"`, '');
+
+        document.body.appendChild(modal);
+        // новое
+        if (target == plateElements[0]) {
+            hljsSection[0].classList.add('light-on-text');
+        } else {
+            hljsSection[1].classList.add('light-on-text');
+        }
+    }
+}
+
+plateElements.forEach((plateElement) => {
+    plateElement.addEventListener('mouseover', highlightAndShowHTMLCode);
+});
+
+plateElements.forEach((plateElement) => {
+    plateElement.addEventListener('mouseout', () => {
+        plateElement.classList.remove('light-on');
+        hljsSection[0].classList.remove('light-on-text');
+        hljsSection[1].classList.remove('light-on-text');
+        modal.classList.remove('modal');
+    });
+});
