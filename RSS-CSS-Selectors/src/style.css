@@ -10,6 +10,7 @@
 .container {
     display: flex;
     width: 100vw;
+    background: #2e2a23;
 }
 
 .section {
@@ -19,7 +20,6 @@
     justify-content: space-around;
     align-items: center;
     /* flex-grow: 1; */
-    background-color: lightblue;
     padding: 20px;
 }
 
@@ -107,16 +107,19 @@ plate {
 
 .input-container {
     display: flex;
-    height: 250px;
+    /* height: 350px; */
     width: 550px;
     margin-bottom: 10px;
 }
 .input-wrapper {
     width: 50%;
+    background: #efefef;
+    height: 410px;
 }
 
 .viewer-wrapper {
     width: 50%;
+    background: #2b2b2b;
 }
 
 .footer {
@@ -144,4 +147,75 @@ h2 {
     background-color: white;
     padding: 10px;
     border: 1px solid black;
+}
+
+.input-wrapper-header {
+    display: flex;
+    height: 30px;
+    justify-content: space-around;
+    column-gap: 100px;
+    align-items: center;
+    background-color: #49463f;
+}
+
+.input-wrapper-main,
+.viewer-wrapper-main {
+    display: flex;
+    /* justify-content: space-between; */
+}
+.viewer-wrapper-main {
+    flex-wrap: wrap;
+}
+
+.lineNumbers {
+    width: 30px;
+    background: #c4c3c362;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.lineNumbers-viewer {
+    width: 30px;
+    color: rgb(142, 141, 141);
+    /* background: #c4c3c362; */
+    text-align: center;
+    padding-top: 10px;
+}
+
+.enter,
+input {
+    height: 30px;
+    cursor: pointer;
+    padding-left: 5px;
+    background: #efefef;
+}
+
+.highlight {
+    color: wheat;
+    height: 50px;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-string,
+.hljs-keyword {
+    color: white;
+}
+
+.div-viewer {
+    height: 50px;
+    color: rgb(185, 178, 168);
+    /* padding-top: 5px; */
+}
+
+.hljs {
+    position: relative;
+    right: 130px;
+    padding: 0;
+}
+
+.div-viewer:last-child {
+    position: relative;
+    top: -30px;
+    right: 120px;
 }
