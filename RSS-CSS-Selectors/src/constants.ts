@@ -1,4 +1,6 @@
-// import { updateViewerContent } from './levels';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/a11y-dark.css';
+
 export function buildHtml() {
     const container = document.createElement('main');
     container.classList.add('container');
@@ -75,7 +77,13 @@ export function buildHtml() {
     viewerWrapper.classList.add('viewer-wrapper');
 
     const input = document.createElement('input');
-    input.setAttribute('placeholder', 'Type here');
+    input.setAttribute('placeholder', 'Type in a CSS selector');
+    input.autofocus = true;
+
+    const inputText = document.createElement('div');
+    inputText.classList.add('input-text');
+    inputText.innerHTML = `{ <br> /* Styles would go here. */ <br>} <br> <br> /* <br>Type a number to skip to a level. 
+    <br>Ex -> "5" for level 5 <br> */`;
 
     const enter = document.createElement('button');
     enter.classList.add('enter');
@@ -91,7 +99,7 @@ export function buildHtml() {
 
     const lvlInfo = document.createElement('div');
     lvlInfo.classList.add('lvlInfo');
-    lvlInfo.textContent = `Level 1 of 32`;
+    lvlInfo.textContent = `Level 1 of 11`;
 
     const prevLvl = document.createElement('button');
     prevLvl.textContent = `<`;
@@ -100,14 +108,6 @@ export function buildHtml() {
     const nextLvl = document.createElement('button');
     nextLvl.textContent = `>`;
     nextLvl.classList.add('nextLvl');
-
-    const divViewerOpen = document.createElement('pre');
-    divViewerOpen.classList.add('div-viewer');
-    divViewerOpen.textContent = `<div class="table" `;
-
-    const divViewerClose = document.createElement('pre');
-    divViewerClose.classList.add('div-viewer');
-    divViewerClose.textContent = `</div>`;
 
     const buttonMenu = document.createElement('button');
     buttonMenu.innerHTML = `&#8801;`;
@@ -139,21 +139,31 @@ export function buildHtml() {
     inputHeaderMain.appendChild(lineNumbers);
     inputHeaderMain.appendChild(input);
     inputHeaderMain.appendChild(enter);
+    inputHeaderMain.appendChild(inputText);
     viewerWrapper.appendChild(inputHeaderViewer);
     inputHeaderViewer.appendChild(viewerHeaderName);
     viewerWrapper.appendChild(viewerMain);
     viewerMain.appendChild(lineNumbersForViewer);
-    viewerMain.appendChild(divViewerOpen);
-    viewerMain.appendChild(highlight);
-    //
-    // updateViewerContent();
-    highlight.innerHTML = `        <pre>
-    <code>
-        &lt;plate /&gt;
-        &lt;plate /&gt;
-    </code>
-</pre>`;
-    //
+
+    const codeContainer = document.createElement('div');
+    const preElement = document.createElement('pre');
+    const codeElement = document.createElement('code');
+    codeElement.classList.add('hljs', 'language-xml');
+    codeElement.textContent = `
+    <div class="table" 
+
+        <plate />
+        <plate />
+
+    </div>
+`;
+
+    preElement.appendChild(codeElement);
+    codeContainer.appendChild(preElement);
+
+    viewerMain.appendChild(codeContainer);
+    hljs.highlightElement(codeElement);
+
     container.appendChild(section);
     container.appendChild(levelContainer);
     levelContainer.appendChild(navbar);
@@ -163,7 +173,6 @@ export function buildHtml() {
     buttonWrapper.appendChild(nextLvl);
     buttonWrapper.appendChild(buttonMenu);
     levelContainer.appendChild(lvlDiscription);
-    highlight.appendChild(divViewerClose);
 
     document.body.appendChild(container);
     document.body.appendChild(footer);

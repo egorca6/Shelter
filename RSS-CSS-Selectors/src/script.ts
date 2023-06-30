@@ -1,11 +1,13 @@
 import './style.css';
 import { buildHtml } from './constants';
+import { doNextLvl, doPrevLvl } from './levels';
 // import * as constants from 'constants';
 buildHtml();
-
+sessionStorage.setItem('result', '1');
 const plateElements = document.querySelectorAll('plate');
 const hljsSection = document.getElementsByClassName('hljs-section');
 const modal = document.createElement('div');
+const help = document.querySelector('.help');
 
 function highlightAndShowHTMLCode(event: Event) {
     const target = event.target;
@@ -40,3 +42,35 @@ plateElements.forEach((plateElement) => {
         modal.classList.remove('modal');
     });
 });
+
+const input = document.querySelector('input');
+input?.addEventListener('keydown', function (event) {
+    if (input.value.toLowerCase().trim() === 'plate' && event.key === 'Enter') {
+        alert('WIN');
+    } else if (input.value.toLowerCase().trim() !== 'plate' && event.key === 'Enter') {
+        alert('Wrong');
+    }
+});
+
+const enter = document.querySelector('.enter');
+enter?.addEventListener('click', function () {
+    if (input?.value.toLowerCase().trim() === 'plate') {
+        alert('WIN');
+    } else {
+        alert('Wrong');
+    }
+});
+
+help?.addEventListener('click', function () {
+    alert('plate');
+});
+
+const nextLvl = document.querySelector('.nextLvl');
+const prevLvl = document.querySelector('.prevLvl');
+nextLvl?.addEventListener('click', doNextLvl);
+prevLvl?.addEventListener('click', doPrevLvl);
+
+const highlight = document.querySelector('.highlight');
+console.log(highlight);
+
+console.log(highlight?.innerHTML);
