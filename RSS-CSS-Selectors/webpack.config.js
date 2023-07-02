@@ -14,6 +14,24 @@ const baseConfig = {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             },
+            {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'assets/img',
+                            publicPath: 'assets/img',
+                        },
+                    },
+                ],
+            },
+            // {
+            //     test: /\.(gif|svg|jpg|png)$/,
+            //     loader: 'file-loader',
+            // },
         ],
     },
     resolve: {

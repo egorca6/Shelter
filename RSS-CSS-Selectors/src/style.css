@@ -63,6 +63,8 @@ plate {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
     margin-right: 10px;
     margin-left: 10px;
     background-color: white;
@@ -79,13 +81,16 @@ plate {
 plate:hover {
     box-shadow: 0px 0px 36px rgba(85, 79, 79, 0.695);
 }
-coconut:hover {
-    box-shadow: 0px 0px 36px rgba(85, 79, 79, 0.695);
+coconut:hover,
+apple:hover,
+tomato:hover,
+potato:hover {
+    box-shadow: 0px 0px 5px rgba(85, 79, 79, 0.695);
 }
 coconut {
     margin-right: 10px;
     margin-left: 10px;
-    background-color: rgb(145, 124, 124);
+    background: url('./img/coconut.png') center/cover no-repeat;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -93,7 +98,7 @@ coconut {
 apple {
     margin-right: 10px;
     margin-left: 10px;
-    background-color: rgb(60, 161, 60);
+    background: url('./img/apple.png') center/cover no-repeat;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -102,19 +107,23 @@ apple {
 tomato {
     margin-right: 10px;
     margin-left: 10px;
-    background-color: rgb(163, 29, 29);
+    background: url('./img/tomato.png') center/cover no-repeat;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
 }
 
 potato {
     margin-right: 10px;
     margin-left: 10px;
-    background-color: brown;
-    border-radius: 50%;
+    background: url('./img/potato3.png') center/cover no-repeat;
     width: 50px;
     height: 50px;
+}
+
+.big {
+    width: 90px;
+    height: 90px;
 }
 /* .light-on {
     box-shadow: 0px 0px 36px rgba(85, 79, 79, 0.695);

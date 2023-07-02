@@ -21,8 +21,13 @@ export function buildHtml() {
     const tableContainer = document.createElement('div');
     tableContainer.classList.add('table-container');
 
-    const plate = document.createElement('plate');
     const plate1 = document.createElement('plate');
+    const plate2 = document.createElement('plate');
+    const plate3 = document.createElement('plate');
+    const coconut1 = document.createElement('coconut');
+    const coconut2 = document.createElement('coconut');
+    const apple1 = document.createElement('apple');
+    const potato1 = document.createElement('potato');
 
     const inputContainer = document.createElement('div');
     inputContainer.classList.add('input-container');
@@ -61,7 +66,7 @@ export function buildHtml() {
     for (let i = 1; i <= 20; i += 1) {
         const lineNumber = document.createElement('div');
         lineNumber.textContent = i.toString();
-        lineNumbers.appendChild(lineNumber);
+        lineNumbers.append(lineNumber);
     }
 
     const lineNumbersForViewer = document.createElement('div');
@@ -70,7 +75,7 @@ export function buildHtml() {
     for (let i = 1; i <= 20; i += 1) {
         const lineNumber = document.createElement('div');
         lineNumber.textContent = i.toString();
-        lineNumbersForViewer.appendChild(lineNumber);
+        lineNumbersForViewer.append(lineNumber);
     }
 
     const viewerWrapper = document.createElement('div');
@@ -99,7 +104,7 @@ export function buildHtml() {
 
     const lvlInfo = document.createElement('div');
     lvlInfo.classList.add('lvlInfo');
-    lvlInfo.textContent = `Level 1 of 11`;
+    lvlInfo.textContent = `Level 1 of 10`;
 
     const prevLvl = document.createElement('button');
     prevLvl.textContent = `<`;
@@ -114,36 +119,40 @@ export function buildHtml() {
     buttonMenu.classList.add('navbar-menu');
 
     const lvlDiscription = document.createElement('span');
-    lvlDiscription.innerHTML = `Type Selector<br>
-  Select elements by their type<br><br>
-  A<br><br>
-  Selects all elements of type A. Type refers to<br>
-  the type of tag, so &lt;div&gt;, &lt;p&gt; and &lt;ul&gt; are<br>
-  all different element types.<br><br>
+    lvlDiscription.innerHTML = `Comma Combinator<br>
+    Combine, selectors, with... commas!<br><br>
+  A, B<br><br>
+  This selects all Type A<br>
+  and B elements. You can combine any selectors<br>
+  this way, and you can specify more than two.<br><br>
   Examples<br>
-  div selects all &lt;div&gt; elements.<br>
-  p selects all &lt;p&gt; elements.`;
+  div, .fun selects all &lt;div&gt;  elements as well as<br>
+  all elements with class="fun"`;
     lvlDiscription.classList.add('lvl-discription');
 
-    section.appendChild(heading);
-    section.appendChild(help);
-    section.appendChild(tableContainer);
-    tableContainer.appendChild(plate);
-    tableContainer.appendChild(plate1);
-    section.appendChild(inputContainer);
-    inputContainer.appendChild(inputWrapper);
-    inputContainer.appendChild(viewerWrapper);
-    inputWrapper.appendChild(inputHeader);
-    inputHeader.appendChild(inputHeaderName);
-    inputWrapper.appendChild(inputHeaderMain);
-    inputHeaderMain.appendChild(lineNumbers);
-    inputHeaderMain.appendChild(input);
-    inputHeaderMain.appendChild(enter);
-    inputHeaderMain.appendChild(inputText);
-    viewerWrapper.appendChild(inputHeaderViewer);
-    inputHeaderViewer.appendChild(viewerHeaderName);
-    viewerWrapper.appendChild(viewerMain);
-    viewerMain.appendChild(lineNumbersForViewer);
+    section.append(heading);
+    section.append(help);
+    section.append(tableContainer);
+    tableContainer.append(plate1, apple1, plate2, plate3, coconut2);
+    plate1.append(coconut1);
+    plate2.append(potato1);
+    coconut1.classList.add('dance');
+    coconut2.classList.add('dance');
+    apple1.classList.add('dance');
+    section.append(inputContainer);
+    inputContainer.append(inputWrapper);
+    inputContainer.append(viewerWrapper);
+    inputWrapper.append(inputHeader);
+    inputHeader.append(inputHeaderName);
+    inputWrapper.append(inputHeaderMain);
+    inputHeaderMain.append(lineNumbers);
+    inputHeaderMain.append(input);
+    inputHeaderMain.append(enter);
+    inputHeaderMain.append(inputText);
+    viewerWrapper.append(inputHeaderViewer);
+    inputHeaderViewer.append(viewerHeaderName);
+    viewerWrapper.append(viewerMain);
+    viewerMain.append(lineNumbersForViewer);
 
     const codeContainer = document.createElement('div');
     const preElement = document.createElement('pre');
@@ -152,28 +161,35 @@ export function buildHtml() {
     codeElement.textContent = `
     <div class="table" 
 
+        <plate>
+            <coconut />
+        <plate />
+        <apple />
+        <plate>
+            <potato />
         <plate />
         <plate />
+        <coconut />
 
     </div>
 `;
 
-    preElement.appendChild(codeElement);
-    codeContainer.appendChild(preElement);
+    preElement.append(codeElement);
+    codeContainer.append(preElement);
 
-    viewerMain.appendChild(codeContainer);
+    viewerMain.append(codeContainer);
     hljs.highlightElement(codeElement);
 
-    container.appendChild(section);
-    container.appendChild(levelContainer);
-    levelContainer.appendChild(navbar);
-    navbar.appendChild(lvlInfo);
-    navbar.appendChild(buttonWrapper);
-    buttonWrapper.appendChild(prevLvl);
-    buttonWrapper.appendChild(nextLvl);
-    buttonWrapper.appendChild(buttonMenu);
-    levelContainer.appendChild(lvlDiscription);
+    container.append(section);
+    container.append(levelContainer);
+    levelContainer.append(navbar);
+    navbar.append(lvlInfo);
+    navbar.append(buttonWrapper);
+    buttonWrapper.append(prevLvl);
+    buttonWrapper.append(nextLvl);
+    buttonWrapper.append(buttonMenu);
+    levelContainer.append(lvlDiscription);
 
-    document.body.appendChild(container);
-    document.body.appendChild(footer);
+    document.body.append(container);
+    document.body.append(footer);
 }
