@@ -284,7 +284,9 @@ input {
     background-color: #efefef;
     outline: none;
 }
-
+.help:focus {
+    outline: none;
+}
 @keyframes input {
     50% {
         background-color: rgb(154, 248, 248);

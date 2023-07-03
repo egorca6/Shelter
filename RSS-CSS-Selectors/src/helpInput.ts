@@ -1,5 +1,5 @@
 export function typeAnswer() {
-    console.log('HELP');
+    // console.log('HELP');
     const input = document.querySelector('input');
     const level = sessionStorage.getItem('currentLevel');
 
@@ -30,5 +30,8 @@ export function typeAnswer() {
                 clearInterval(intervalId);
             }
         }, 100);
+        if (input) {
+            input.focus();
+        }
     }
 }

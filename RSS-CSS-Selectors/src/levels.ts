@@ -1,5 +1,4 @@
 import hljs from 'highlight.js';
-import { highlightLevel } from './highlight';
 
 export function updateLevel(level: number) {
     const input = document.querySelector('input');
@@ -21,9 +20,9 @@ export function updateLevel(level: number) {
     const potato1 = document.createElement('potato');
     const potato2 = document.createElement('potato');
     const potato3 = document.createElement('potato');
-    // coconut2.className = 'coconut';
-    // const test = document.createElement('div');
-    // test.className = 'coconut';
+    if (input) {
+        input.focus();
+    }
     if (lvlInfo) {
         lvlInfo.textContent = `Level ${level} of 10`;
     }
@@ -443,7 +442,6 @@ export function doNextLvl() {
         const nextLevel = currentLevel + 1;
         updateLevel(nextLevel);
         sessionStorage.setItem('currentLevel', nextLevel.toString());
-        highlightLevel(nextLevel);
     }
 }
 
@@ -459,6 +457,5 @@ export function doPrevLvl() {
         const prevLevel = currentLevel - 1;
         updateLevel(prevLevel);
         sessionStorage.setItem('currentLevel', prevLevel.toString());
-        highlightLevel(prevLevel);
     }
 }

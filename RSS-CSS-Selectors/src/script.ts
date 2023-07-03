@@ -4,9 +4,7 @@ import { doNextLvl, doPrevLvl, initLevel } from './levels';
 import { typeAnswer } from './helpInput';
 
 buildHtml();
-sessionStorage.setItem('result', '1');
-// const plateElements = document.querySelectorAll('plate');
-// const hljsSection = document.getElementsByClassName('hljs-section');
+
 const modal = document.createElement('div');
 const help = document.querySelector('.help');
 
@@ -29,21 +27,10 @@ function highlightAndShowHTMLCode(event: Event) {
         modal.style.top = modalTop + 'px';
         modal.style.left = modalLeft + 'px';
         console.log(target);
-
-        // if (target == plateElements[0]) {
-        //     hljsSection[0].classList.add('light-on-text');
-        // } else {
-        //     hljsSection[1].classList.add('light-on-text');
-        // }
     }
 }
 
-const level = sessionStorage.getItem('currentLevel');
-
 const table = document.querySelector('body > main > section > div.table-container');
-// plateElements.forEach((plateElement) => {
-//     plateElement.addEventListener('mouseover', highlightAndShowHTMLCode);
-// });
 
 table?.addEventListener('mouseover', highlightAndShowHTMLCode);
 
@@ -54,21 +41,21 @@ table?.addEventListener('mouseout', (event) => {
         if (modal && modal.parentNode === document.body) {
             document.body.removeChild(modal);
         }
-        // document.body.removeChild(modal);
     }
 });
 
 const input = document.querySelector('input');
 
-// const answer = ['plate', 'apple'];
 function win(event: KeyboardEvent) {
+    const level = sessionStorage.getItem('currentLevel');
+    console.log('input?.value =', input?.value);
+    console.log('level =', level);
     const result = input?.value !== undefined ? input.value.toLowerCase().trim() : '';
     switch (level) {
         case '1':
-            console.log('event.code = ', event.code);
             if (input && (result === 'coconut, apple' || result === 'apple, coconut') && event.key === 'Enter') {
                 alert('WIN');
-            } else if (input && result !== 'plate' && event.key === 'Enter') {
+            } else if (input && result !== 'coconut, apple' && event.key === 'Enter') {
                 alert('Wrong');
             }
             break;
@@ -147,71 +134,96 @@ input?.addEventListener('keydown', win);
 const enter = document.querySelector('.enter');
 
 enter?.addEventListener('click', function () {
-    if (input?.value.toLowerCase().trim() === 'plate') {
-        alert('WIN');
-    } else {
-        alert('Wrong');
+    const result = input?.value !== undefined ? input.value.toLowerCase().trim() : '';
+    const level = sessionStorage.getItem('currentLevel');
+    console.log('input?.value =', input?.value);
+    console.log('level =', level);
+    switch (level) {
+        case '1':
+            if (result === 'coconut, apple' || result === 'apple, coconut') {
+                alert('WIN');
+            } else {
+                alert('Wrong');
+            }
+            break;
+
+        case '2':
+            if (result === 'plate coconut') {
+                alert('WIN');
+            } else if (result !== 'plate coconut') {
+                alert('Wrong');
+            }
+            break;
+        case '3':
+            if (/apple\s*\+\s*plate/i.test(result)) {
+                alert('WIN');
+            } else if (!/apple\s*\+\s*plate/i.test(result)) {
+                alert('Wrong');
+            }
+            break;
+        case '4':
+            if (/potato\s*~\s*\*/i.test(result)) {
+                alert('WIN');
+            } else if (!/potato\s*~\s*\*/i.test(result)) {
+                alert('Wrong');
+            }
+            break;
+        case '5':
+            if (/plate\s*>\s*\*/i.test(result)) {
+                alert('WIN');
+            } else if (!/plate\s*>\s*\*/i.test(result)) {
+                alert('Wrong');
+            }
+            break;
+        case '6':
+            if (result === ':not(plate)') {
+                alert('WIN');
+            } else if (result !== ':not(plate)') {
+                alert('Wrong');
+            }
+            break;
+        case '7':
+            if (/potato\s*:\s*first-of-type/i.test(result)) {
+                alert('WIN');
+            } else if (!/potato\s*:\s*first-of-type/i.test(result)) {
+                alert('Wrong');
+            }
+            break;
+        case '8':
+            if (/plate\s*:\s*empty/i.test(result)) {
+                alert('WIN');
+            } else if (!/plate\s*:\s*empty/i.test(result)) {
+                alert('Wrong');
+            }
+            break;
+        case '9':
+            if (result === 'potato:first-child') {
+                alert('WIN');
+            } else if (result !== 'potato:first-child') {
+                alert('Wrong');
+            }
+            break;
+        case '10':
+            if (result === 'plate:only-child') {
+                alert('WIN');
+            } else if (result !== 'plate:only-child') {
+                alert('Wrong');
+            }
+            break;
     }
 });
 help?.addEventListener('click', typeAnswer);
-
-// help?.addEventListener('click', function () {
-//     switch (level) {
-//         case '1': {
-//             const text = 'Текст, который медленно будет вводиться';
-//             let index = 0;
-//             const intervalId = setInterval(function () {
-//                 if (input && index < text.length) {
-//                     input.value += text.charAt(index);
-//                     index++;
-//                 } else {
-//                     clearInterval(intervalId);
-//                 }
-//             }, 100);
-
-//             break;
-//         }
-//         case '2':
-//     }
-// });
-
-// export function typeAnswer() {
-//     console.log('HELP');
-
-//     switch (level) {
-//         case '1': {
-//             const text = 'Текст, который медленно будет вводиться';
-//             let index = 0;
-//             const intervalId = setInterval(function () {
-//                 if (input && index < text.length) {
-//                     input.value += text.charAt(index);
-//                     index++;
-//                 } else {
-//                     clearInterval(intervalId);
-//                 }
-//             }, 100);
-
-//             break;
-//         }
-//         case '2':
-//     }
-// }
 
 const nextLvl = document.querySelector('.nextLvl');
 const prevLvl = document.querySelector('.prevLvl');
 const buttonMenu = document.querySelector('.navbar-menu');
 const listLvl = document.querySelector('.close');
-// const lvl1 = document.querySelector('body > main > aside > div.close.open > button');
-// const levelContainer = document.querySelector('.level-container');
 const lvlDiscription = document.querySelector('body > main > aside > div.lvl-discription');
 
 nextLvl?.addEventListener('click', doNextLvl);
 prevLvl?.addEventListener('click', doPrevLvl);
-// lvl1?.addEventListener('click', doPrevLvl);
-// lvl1?.addEventListener('click', () => console.log('ghbdtn'));
 
 buttonMenu?.addEventListener('click', () => {
-    // Переключите класс для элемента навигации
     listLvl?.classList.toggle('open');
     lvlDiscription?.classList.toggle('hide');
     if (lvlDiscription?.classList.contains('lvl-discription')) {
@@ -221,4 +233,3 @@ buttonMenu?.addEventListener('click', () => {
     }
 });
 initLevel();
-// const highlight = document.querySelector('.highlight');
