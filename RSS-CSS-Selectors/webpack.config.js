@@ -22,8 +22,8 @@ const baseConfig = {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            outputPath: 'assets/img',
-                            publicPath: 'assets/img',
+                            outputPath: 'img',
+                            publicPath: 'img',
                         },
                     },
                 ],
