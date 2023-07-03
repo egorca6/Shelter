@@ -2,6 +2,8 @@ import hljs from 'highlight.js';
 import { highlightLevel } from './highlight';
 
 export function updateLevel(level: number) {
+    const input = document.querySelector('input');
+    const heading = document.querySelector('.h2');
     const codeElement = document.querySelector('code');
     const lvlDiscription = document.querySelector('.lvl-discription');
     const lvlInfo = document.querySelector('.lvlInfo');
@@ -28,6 +30,9 @@ export function updateLevel(level: number) {
     if (codeElement) {
         switch (level) {
             case 1:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table">
                 
@@ -53,9 +58,16 @@ export function updateLevel(level: number) {
                     coconut2.classList.add('dance');
                     apple1.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = 'Select the coconut and apple';
+                }
+
                 break;
 
             case 2:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table">
                 
@@ -73,8 +85,16 @@ export function updateLevel(level: number) {
                     plate2.append(coconut2);
                     coconut2.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = 'Select the coconut in the plate';
+                }
                 break;
+
             case 3:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table"> 
                     
@@ -99,8 +119,15 @@ export function updateLevel(level: number) {
                     plate1.classList.add('dance');
                     plate2.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select every plates that's next to a apple`;
+                }
                 break;
             case 4:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table"> 
                         
@@ -125,6 +152,9 @@ export function updateLevel(level: number) {
                 break;
 
             case 5:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table"> 
 
@@ -151,6 +181,9 @@ export function updateLevel(level: number) {
                 break;
 
             case 6:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table"> 
 
@@ -182,6 +215,9 @@ export function updateLevel(level: number) {
                 break;
 
             case 7:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table"> 
     
@@ -203,6 +239,9 @@ export function updateLevel(level: number) {
                 }
                 break;
             case 8:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table"> 
         
@@ -228,6 +267,9 @@ export function updateLevel(level: number) {
                 }
                 break;
             case 9:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table">
             
@@ -255,6 +297,9 @@ export function updateLevel(level: number) {
                 }
                 break;
             case 10:
+                if (input) {
+                    input.value = '';
+                }
                 codeElement.textContent = `
     <div class="table">
             

@@ -12,7 +12,8 @@ export function buildHtml() {
     section.classList.add('section');
 
     const heading = document.createElement('h2');
-    heading.textContent = 'Select the plates';
+    heading.classList.add('h2');
+    heading.textContent = 'Select the coconut and apple';
 
     const help = document.createElement('button');
     help.classList.add('help');

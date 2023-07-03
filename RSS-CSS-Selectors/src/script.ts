@@ -1,6 +1,7 @@
 import './style.css';
 import { buildHtml } from './constants';
 import { doNextLvl, doPrevLvl, initLevel } from './levels';
+import { typeAnswer } from './helpInput';
 
 buildHtml();
 sessionStorage.setItem('result', '1');
@@ -129,9 +130,9 @@ function win(event: KeyboardEvent) {
             }
             break;
         case '10':
-            if (input && result === 'plate :only-child' && event.key === 'Enter') {
+            if (input && result === 'plate:only-child' && event.key === 'Enter') {
                 alert('WIN');
-            } else if (input && result !== 'plate :only-child' && event.key === 'Enter') {
+            } else if (input && result !== 'plate:only-child' && event.key === 'Enter') {
                 alert('Wrong');
             }
             break;
@@ -152,10 +153,49 @@ enter?.addEventListener('click', function () {
         alert('Wrong');
     }
 });
+help?.addEventListener('click', typeAnswer);
 
-help?.addEventListener('click', function () {
-    alert('plate');
-});
+// help?.addEventListener('click', function () {
+//     switch (level) {
+//         case '1': {
+//             const text = 'Текст, который медленно будет вводиться';
+//             let index = 0;
+//             const intervalId = setInterval(function () {
+//                 if (input && index < text.length) {
+//                     input.value += text.charAt(index);
+//                     index++;
+//                 } else {
+//                     clearInterval(intervalId);
+//                 }
+//             }, 100);
+
+//             break;
+//         }
+//         case '2':
+//     }
+// });
+
+// export function typeAnswer() {
+//     console.log('HELP');
+
+//     switch (level) {
+//         case '1': {
+//             const text = 'Текст, который медленно будет вводиться';
+//             let index = 0;
+//             const intervalId = setInterval(function () {
+//                 if (input && index < text.length) {
+//                     input.value += text.charAt(index);
+//                     index++;
+//                 } else {
+//                     clearInterval(intervalId);
+//                 }
+//             }, 100);
+
+//             break;
+//         }
+//         case '2':
+//     }
+// }
 
 const nextLvl = document.querySelector('.nextLvl');
 const prevLvl = document.querySelector('.prevLvl');
