@@ -21,6 +21,13 @@ export function buildHtml() {
     const tableContainer = document.createElement('div');
     tableContainer.classList.add('table-container');
 
+    const codeContainer = document.createElement('div');
+    const preElement = document.createElement('pre');
+    const codeElement = document.createElement('code');
+    // const preElement2 = document.createElement('pre');
+    // const codeElement2 = document.createElement('code');
+    // codeElement2.classList.add('hljs', 'language-css');
+
     const plate1 = document.createElement('plate');
     const plate2 = document.createElement('plate');
     const plate3 = document.createElement('plate');
@@ -84,6 +91,7 @@ export function buildHtml() {
     const input = document.createElement('input');
     input.setAttribute('placeholder', 'Type in a CSS selector');
     input.autofocus = true;
+    // input.classList.add('hljs', 'language-css');
 
     const inputText = document.createElement('div');
     inputText.classList.add('input-text');
@@ -118,7 +126,41 @@ export function buildHtml() {
     buttonMenu.innerHTML = `&#8801;`;
     buttonMenu.classList.add('navbar-menu');
 
-    const lvlDiscription = document.createElement('span');
+    const listLvl = document.createElement('div');
+    listLvl.classList.add('close');
+    const lvl1 = document.createElement('div');
+    lvl1.classList.add('1');
+    lvl1.textContent = '1  A, B';
+    const lvl2 = document.createElement('div');
+    lvl2.classList.add('2');
+    lvl2.textContent = '2  A B';
+    const lvl3 = document.createElement('div');
+    lvl3.classList.add('3');
+    lvl3.textContent = '3  A + B';
+    const lvl4 = document.createElement('div');
+    lvl4.classList.add('4');
+    lvl4.textContent = '4  You can do it...';
+    const lvl5 = document.createElement('div');
+    lvl5.classList.add('5');
+    lvl5.textContent = '5  You can do it...';
+    const lvl6 = document.createElement('div');
+    lvl6.classList.add('6');
+    lvl6.textContent = '6  :not(X)';
+    const lvl7 = document.createElement('div');
+    lvl7.textContent = '7  :first-of-type';
+    lvl7.classList.add('7');
+    const lvl8 = document.createElement('div');
+    lvl8.classList.add('8');
+    lvl8.textContent = '8  :empty';
+    const lvl9 = document.createElement('div');
+    lvl9.textContent = '9  :first-child';
+    lvl9.classList.add('9');
+    const lvl10 = document.createElement('div');
+    lvl10.classList.add('10');
+    lvl10.textContent = '10  :last-of-type';
+    listLvl.append(lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8, lvl9, lvl10);
+
+    const lvlDiscription = document.createElement('div');
     lvlDiscription.innerHTML = `Comma Combinator<br>
     Combine, selectors, with... commas!<br><br>
   A, B<br><br>
@@ -146,6 +188,9 @@ export function buildHtml() {
     inputHeader.append(inputHeaderName);
     inputWrapper.append(inputHeaderMain);
     inputHeaderMain.append(lineNumbers);
+    // inputHeaderMain.append(preElement2);
+    // preElement2.append(codeElement2);
+    // inputHeaderMain.append(input);
     inputHeaderMain.append(input);
     inputHeaderMain.append(enter);
     inputHeaderMain.append(inputText);
@@ -154,12 +199,9 @@ export function buildHtml() {
     viewerWrapper.append(viewerMain);
     viewerMain.append(lineNumbersForViewer);
 
-    const codeContainer = document.createElement('div');
-    const preElement = document.createElement('pre');
-    const codeElement = document.createElement('code');
     codeElement.classList.add('hljs', 'language-xml');
     codeElement.textContent = `
-    <div class="table" 
+    <div class="table">
 
         <plate>
             <coconut />
@@ -178,7 +220,6 @@ export function buildHtml() {
     codeContainer.append(preElement);
 
     viewerMain.append(codeContainer);
-    hljs.highlightElement(codeElement);
 
     container.append(section);
     container.append(levelContainer);
@@ -189,7 +230,9 @@ export function buildHtml() {
     buttonWrapper.append(nextLvl);
     buttonWrapper.append(buttonMenu);
     levelContainer.append(lvlDiscription);
+    levelContainer.append(listLvl);
 
     document.body.append(container);
     document.body.append(footer);
+    hljs.highlightElement(codeElement);
 }

@@ -1,6 +1,7 @@
 import hljs from 'highlight.js';
+import { highlightLevel } from './highlight';
 
-function updateLevel(level: number) {
+export function updateLevel(level: number) {
     const codeElement = document.querySelector('code');
     const lvlDiscription = document.querySelector('.lvl-discription');
     const lvlInfo = document.querySelector('.lvlInfo');
@@ -28,7 +29,7 @@ function updateLevel(level: number) {
         switch (level) {
             case 1:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table">
                 
         <plate>
             <coconut />
@@ -56,12 +57,12 @@ function updateLevel(level: number) {
 
             case 2:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table">
                 
         <plate />
         <coconut />
         <plate>
-            <apple />
+            <coconut />
         <plate />
                 
     </div>
@@ -75,7 +76,7 @@ function updateLevel(level: number) {
                 break;
             case 3:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table"> 
                     
         <apple />
         <plate />
@@ -101,7 +102,7 @@ function updateLevel(level: number) {
                 break;
             case 4:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table"> 
                         
         <potato />
         <plate>
@@ -125,7 +126,7 @@ function updateLevel(level: number) {
 
             case 5:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table"> 
 
         <plate>
             <potato />
@@ -151,7 +152,7 @@ function updateLevel(level: number) {
 
             case 6:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table"> 
 
         <tomato />
         <plate>
@@ -182,7 +183,7 @@ function updateLevel(level: number) {
 
             case 7:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table"> 
     
         <tomato />
         <potato />
@@ -203,7 +204,7 @@ function updateLevel(level: number) {
                 break;
             case 8:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table"> 
         
         <plate />
         <plate>
@@ -228,7 +229,7 @@ function updateLevel(level: number) {
                 break;
             case 9:
                 codeElement.textContent = `
-    <div class="table" 
+    <div class="table">
             
         <plate />
         <plate>
@@ -255,21 +256,30 @@ function updateLevel(level: number) {
                 break;
             case 10:
                 codeElement.textContent = `
-    <div class="table" 
-                
-        <apple class="big" />
-        <potato />
-        <apple />
-        <coconut class="big" />
-        <potato />
+    <div class="table">
             
+        <plate />
+        <plate>
+            <potato />
+            <potato />
+        <plate  />
+        <plate />
+        <plate>
+            <potato />
+        <tomato  />
+        <apple />
+                
     </div>
-                    `;
+                        `;
                 if (tableContainer) {
                     tableContainer.innerHTML = '';
-                    tableContainer.append(apple1, potato1, apple2, coconut1, potato2);
-                    apple1.classList.add('dance', 'big');
-                    coconut1.classList.add('dance', 'big');
+                    tableContainer.append(plate1, plate2, plate3, plate4, apple1);
+                    plate1.append(coconut1);
+                    plate2.append(potato1);
+                    plate2.append(potato2);
+                    plate3.append(potato3);
+                    coconut1.classList.add('dance');
+                    potato3.classList.add('dance');
                 }
                 break;
         }
@@ -302,14 +312,14 @@ are inside of any &lt;p&gt;`;
                     break;
                 case 3:
                     lvlDiscription.innerHTML = `Adjacent Sibling Selector<br>
-    Select an element that directly follows another element<br><br>
+    Select an element that directly follows <br> another element<br><br>
     A + B<br><br>
     This selects all B elements that directly follow A<br>
     Elements that follow one another are called<br>
     siblings. They're on the same level, or depth.<br><br>
     Examples<br>
     p + .intro selects every element with
-    class="intro" that directly follows a &lt;p&gt`;
+    class="intro" <br> that directly follows a &lt;p&gt`;
                     break;
                 case 4:
                     lvlDiscription.innerHTML = `You can do it...<br>
@@ -325,9 +335,9 @@ are inside of any &lt;p&gt;`;
 
                 case 6:
                     lvlDiscription.innerHTML = `Negation Pseudo-class<br>
-            Select all elements that don't match the negation selector<br><br>
+            Select all elements that don't match <br> the negation selector<br><br>
             :not(X)<br><br>
-        You can use this to select all elements that do not match selector "X"<br><br>
+        You can use this to select all elements that do <br> not match selector "X"<br><br>
         Examples<br>
         :not(apple)  selects all elements that do <br> not have 
         <apple />`;
@@ -364,32 +374,46 @@ are inside of any &lt;p&gt;`;
             `;
                     break;
                 case 10:
-                    lvlDiscription.innerHTML = `Last of Type Selector<br>
-            Select the last element of a specific type<br>
-            :last-of-type<br><br>
-            Selects each last element of that type within<br>
-            another element. Remember type refers the kind<br>
-            of tag, so  &lt;p&gt; and &lt;span&gt; are different types <br><br>
+                    lvlDiscription.innerHTML = `Only Child Pseudo-selector<br>
+            Select an element that are the only<br>
+            element inside of another one.<br><br>
+            :only-child<br><br>
+            You can select any element that is the only<br>
+            aelement inside of another one.<br><br>
             Examples<br>
-            div:last-of-type  selects the last &lt;div&gt; in<br>
-            every element.
+            div:only-child  selects the  &lt;div&gt;<br>
+            elements that are the only child of some <br>
+            other element.
             `;
                     break;
             }
         }
     }
+    sessionStorage.setItem('currentLevel', level.toString());
 }
 
 export function doNextLvl() {
     const currentLevel = parseInt(sessionStorage.getItem('currentLevel') ?? '1');
-    const nextLevel = currentLevel + 1;
-    updateLevel(nextLevel);
-    sessionStorage.setItem('currentLevel', nextLevel.toString());
+    if (currentLevel < 10) {
+        const nextLevel = currentLevel + 1;
+        updateLevel(nextLevel);
+        sessionStorage.setItem('currentLevel', nextLevel.toString());
+        highlightLevel(nextLevel);
+    }
+}
+
+export function initLevel() {
+    const savedLevel = sessionStorage.getItem('currentLevel');
+    const level = savedLevel ? parseInt(savedLevel) : 1;
+    updateLevel(level);
 }
 
 export function doPrevLvl() {
     const currentLevel = parseInt(sessionStorage.getItem('currentLevel') ?? '1');
-    const prevLevel = currentLevel - 1;
-    updateLevel(prevLevel);
-    sessionStorage.setItem('currentLevel', prevLevel.toString());
+    if (currentLevel > 1) {
+        const prevLevel = currentLevel - 1;
+        updateLevel(prevLevel);
+        sessionStorage.setItem('currentLevel', prevLevel.toString());
+        highlightLevel(prevLevel);
+    }
 }
