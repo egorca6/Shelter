@@ -301,16 +301,18 @@ export function updateLevel(level: number) {
                 }
                 codeElement.textContent = `
     <div class="table">
-            
+        
+        <plate> 
+            <coconut />
         <plate />
         <plate>
             <potato />
             <potato />
         <plate  />
-        <plate />
         <plate>
             <potato />
         <tomato  />
+        <plate  /
         <apple />
                 
     </div>
@@ -434,6 +436,10 @@ are inside of any &lt;p&gt;`;
         }
     }
     sessionStorage.setItem('currentLevel', level.toString());
+
+    // const listLvl = document.querySelector('.close');
+
+    // listLvl?.classList.add('open');
 }
 
 export function doNextLvl() {
@@ -448,6 +454,8 @@ export function doNextLvl() {
 export function initLevel() {
     const savedLevel = sessionStorage.getItem('currentLevel');
     const level = savedLevel ? parseInt(savedLevel) : 1;
+    const divLvl = document.querySelectorAll('.div-lvl');
+    divLvl[level - 1].classList.add('highlight');
     updateLevel(level);
 }
 

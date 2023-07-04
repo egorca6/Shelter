@@ -5,8 +5,8 @@ export function buildHtml() {
     const container = document.createElement('main');
     container.classList.add('container');
 
-    const footer = document.createElement('footer');
-    footer.classList.add('footer');
+    // const footer = document.createElement('footer');
+    // footer.classList.add('footer');
 
     const section = document.createElement('section');
     section.classList.add('section');
@@ -18,7 +18,6 @@ export function buildHtml() {
     const help = document.createElement('button');
     help.classList.add('help');
     help.textContent = `Help, I'm stack`;
-
     const tableContainer = document.createElement('div');
     tableContainer.classList.add('table-container');
 
@@ -92,7 +91,6 @@ export function buildHtml() {
     const input = document.createElement('input');
     input.setAttribute('placeholder', 'Type in a CSS selector');
     input.autofocus = true;
-    // input.classList.add('hljs', 'language-css');
 
     const inputText = document.createElement('div');
     inputText.classList.add('input-text');
@@ -130,47 +128,47 @@ export function buildHtml() {
     const listLvl = document.createElement('div');
     listLvl.classList.add('close');
     const lvl1 = document.createElement('div');
-    lvl1.classList.add('1');
+    lvl1.classList.add('div-lvl');
     lvl1.textContent = '1  A, B';
     const lvl2 = document.createElement('div');
-    lvl2.classList.add('2');
+    lvl2.classList.add('div-lvl');
     lvl2.textContent = '2  A B';
     const lvl3 = document.createElement('div');
-    lvl3.classList.add('3');
+    lvl3.classList.add('div-lvl');
     lvl3.textContent = '3  A + B';
     const lvl4 = document.createElement('div');
-    lvl4.classList.add('4');
+    lvl4.classList.add('div-lvl');
     lvl4.textContent = '4  You can do it...';
     const lvl5 = document.createElement('div');
-    lvl5.classList.add('5');
+    lvl5.classList.add('div-lvl');
     lvl5.textContent = '5  You can do it...';
     const lvl6 = document.createElement('div');
-    lvl6.classList.add('6');
+    lvl6.classList.add('div-lvl');
     lvl6.textContent = '6  :not(X)';
     const lvl7 = document.createElement('div');
     lvl7.textContent = '7  :first-of-type';
-    lvl7.classList.add('7');
+    lvl7.classList.add('div-lvl');
     const lvl8 = document.createElement('div');
-    lvl8.classList.add('8');
+    lvl8.classList.add('div-lvl');
     lvl8.textContent = '8  :empty';
     const lvl9 = document.createElement('div');
     lvl9.textContent = '9  :first-child';
-    lvl9.classList.add('9');
+    lvl9.classList.add('div-lvl');
     const lvl10 = document.createElement('div');
-    lvl10.classList.add('10');
+    lvl10.classList.add('div-lvl');
     lvl10.textContent = '10  :last-of-type';
     listLvl.append(lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8, lvl9, lvl10);
 
     const lvlDiscription = document.createElement('div');
     lvlDiscription.innerHTML = `Comma Combinator<br>
-    Combine, selectors, with... commas!<br><br>
-  A, B<br><br>
-  This selects all Type A<br>
-  and B elements. You can combine any selectors<br>
-  this way, and you can specify more than two.<br><br>
-  Examples<br>
-  div, .fun selects all &lt;div&gt;  elements as well as<br>
-  all elements with class="fun"`;
+        Combine, selectors, with... commas!<br><br>
+      A, B<br><br>
+      This selects all Type A<br>
+      and B elements. You can combine any selectors<br>
+      this way, and you can specify more than two.<br><br>
+      Examples<br>
+      div, .fun selects all &lt;div&gt;  elements as well as<br>
+      all elements with class="fun"`;
     lvlDiscription.classList.add('lvl-discription');
 
     section.append(heading);
@@ -234,6 +232,6 @@ export function buildHtml() {
     levelContainer.append(listLvl);
 
     document.body.append(container);
-    document.body.append(footer);
+    // document.body.append(footer);
     hljs.highlightElement(codeElement);
 }

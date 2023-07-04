@@ -52,12 +52,17 @@ body {
 }
 
 .highlight {
-    background-color: yellow;
+    background-color: rgb(84, 84, 84);
 }
 .navbar-open {
     /* background: white; */
     display: none;
 }
+
+/* .hljs-tag:hover,
+.hljs-name:hover {
+    background-color: white;
+} */
 
 .hide {
     /* background: white; */
@@ -221,6 +226,25 @@ potato {
     width: 100vw;
 } */
 
+.active {
+    animation: floating 1s ease-in-out forwards;
+}
+
+@keyframes floating {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+}
+
 h2 {
     font-size: 20px;
 }
@@ -323,10 +347,4 @@ input {
     /* position: relative;
     right: 130px;
     padding: 0; */
-}
-
-.div-viewer:last-child {
-    /* position: relative;
-    bottom: 280px;
-    left: 30px; */
 }
