@@ -7,3 +7,16 @@ export function winAnimation(callback: () => void) {
         callback();
     }, 1000);
 }
+
+export function loseAnimation() {
+    const inputHeaderMain = document.querySelector('.input-wrapper-main');
+
+    if (inputHeaderMain) {
+        inputHeaderMain.classList.add('lose');
+    }
+    setTimeout(() => {
+        if (inputHeaderMain) {
+            inputHeaderMain.classList.remove('lose');
+        }
+    }, 500);
+}

@@ -2,7 +2,7 @@ import './style.css';
 import { buildHtml } from './constants';
 import { doNextLvl, doPrevLvl, initLevel, updateLevel } from './levels';
 import { typeAnswer } from './helpInput';
-import { winAnimation } from './animation';
+import { loseAnimation, winAnimation } from './animation';
 
 buildHtml();
 
@@ -27,7 +27,6 @@ function highlightAndShowHTMLCode(event: Event) {
 
         modal.style.top = modalTop + 'px';
         modal.style.left = modalLeft + 'px';
-        console.log(target);
     }
 }
 
@@ -49,11 +48,7 @@ const input = document.querySelector('input');
 
 function win(event: KeyboardEvent) {
     const level = sessionStorage.getItem('currentLevel');
-    const up = document.querySelectorAll('.dance');
-    console.log('up', up);
 
-    console.log('input?.value =', input?.value);
-    console.log('level =', level);
     const result = input?.value !== undefined ? input.value.toLowerCase().trim() : '';
     switch (level) {
         case '1':
@@ -62,7 +57,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && result !== 'coconut, apple' && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
 
@@ -72,7 +67,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && result !== 'plate coconut' && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '3':
@@ -81,7 +76,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && !/apple\s*\+\s*plate/i.test(result) && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '4':
@@ -90,7 +85,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && !/potato\s*~\s*\*/i.test(result) && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '5':
@@ -99,7 +94,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && !/plate\s*>\s*\*/i.test(result) && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '6':
@@ -108,7 +103,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && result !== ':not(plate)' && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '7':
@@ -117,7 +112,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && !/potato\s*:\s*first-of-type/i.test(result) && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '8':
@@ -126,7 +121,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && !/plate\s*:\s*empty/i.test(result) && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '9':
@@ -135,7 +130,7 @@ function win(event: KeyboardEvent) {
                     doNextLvl();
                 });
             } else if (input && result !== 'potato:first-child' && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '10':
@@ -150,7 +145,7 @@ function win(event: KeyboardEvent) {
                     }
                 }, 1000);
             } else if (input && result !== 'plate:only-child' && event.key === 'Enter') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
     }
@@ -166,82 +161,108 @@ const enter = document.querySelector('.enter');
 enter?.addEventListener('click', function () {
     const result = input?.value !== undefined ? input.value.toLowerCase().trim() : '';
     const level = sessionStorage.getItem('currentLevel');
-    console.log('input?.value =', input?.value);
-    console.log('level =', level);
+
     switch (level) {
         case '1':
             if (result === 'coconut, apple' || result === 'apple, coconut') {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
 
         case '2':
             if (result === 'plate coconut') {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (result !== 'plate coconut') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '3':
             if (/apple\s*\+\s*plate/i.test(result)) {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (!/apple\s*\+\s*plate/i.test(result)) {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '4':
             if (/potato\s*~\s*\*/i.test(result)) {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (!/potato\s*~\s*\*/i.test(result)) {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '5':
             if (/plate\s*>\s*\*/i.test(result)) {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (!/plate\s*>\s*\*/i.test(result)) {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '6':
             if (result === ':not(plate)') {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (result !== ':not(plate)') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '7':
             if (/potato\s*:\s*first-of-type/i.test(result)) {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (!/potato\s*:\s*first-of-type/i.test(result)) {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '8':
             if (/plate\s*:\s*empty/i.test(result)) {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (!/plate\s*:\s*empty/i.test(result)) {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '9':
             if (result === 'potato:first-child') {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
             } else if (result !== 'potato:first-child') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
         case '10':
             if (result === 'plate:only-child') {
-                alert('WIN');
+                winAnimation(() => {
+                    doNextLvl();
+                });
+                setTimeout(() => {
+                    if (table) {
+                        table.textContent = '';
+                        table.textContent = 'Congratulations, you won!';
+                    }
+                }, 1000);
             } else if (result !== 'plate:only-child') {
-                alert('Wrong');
+                loseAnimation();
             }
             break;
     }
 });
+
 help?.addEventListener('click', typeAnswer);
 
 const nextLvl = document.querySelector('.nextLvl');
@@ -273,7 +294,6 @@ divLvl.forEach((div) => {
         div.classList.add('highlight');
         if (div.textContent) {
             const currentLvl = parseInt(div.textContent.slice(0, 2));
-            console.log('div =', currentLvl);
             sessionStorage.setItem('currentLevel', currentLvl.toString());
             updateLevel(currentLvl);
         }
