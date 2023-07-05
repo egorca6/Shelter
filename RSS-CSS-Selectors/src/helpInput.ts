@@ -1,5 +1,5 @@
 export function typeAnswer() {
-    // console.log('HELP');
+    const divLvl = document.querySelectorAll('.div-lvl');
     const input = document.querySelector('input');
     const level = sessionStorage.getItem('currentLevel');
 
@@ -32,6 +32,38 @@ export function typeAnswer() {
         }, 100);
         if (input) {
             input.focus();
+        }
+        switch (level) {
+            case '1':
+                divLvl[0].classList.add('help');
+                break;
+            case '2':
+                divLvl[1].classList.add('help');
+                break;
+            case '3':
+                divLvl[2].classList.add('help');
+                break;
+            case '4':
+                divLvl[3].classList.add('help');
+                break;
+            case '5':
+                divLvl[4].classList.add('help');
+                break;
+            case '6':
+                divLvl[5].classList.add('help');
+                break;
+            case '7':
+                divLvl[6].classList.add('help');
+                break;
+            case '8':
+                divLvl[7].classList.add('help');
+                break;
+            case '9':
+                divLvl[8].classList.add('help');
+                break;
+            case '10':
+                divLvl[9].classList.add('help');
+                break;
         }
     }
 }

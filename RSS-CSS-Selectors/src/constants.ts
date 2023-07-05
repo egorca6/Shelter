@@ -24,9 +24,6 @@ export function buildHtml() {
     const codeContainer = document.createElement('div');
     const preElement = document.createElement('pre');
     const codeElement = document.createElement('code');
-    // const preElement2 = document.createElement('pre');
-    // const codeElement2 = document.createElement('code');
-    // codeElement2.classList.add('hljs', 'language-css');
 
     const plate1 = document.createElement('plate');
     const plate2 = document.createElement('plate');
@@ -90,6 +87,7 @@ export function buildHtml() {
 
     const input = document.createElement('input');
     input.setAttribute('placeholder', 'Type in a CSS selector');
+    // input.classList.add('hljs', 'language-css');
     input.autofocus = true;
 
     const inputText = document.createElement('div');
@@ -157,7 +155,10 @@ export function buildHtml() {
     const lvl10 = document.createElement('div');
     lvl10.classList.add('div-lvl');
     lvl10.textContent = '10  :last-of-type';
-    listLvl.append(lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8, lvl9, lvl10);
+    const reset = document.createElement('button');
+    reset.classList.add('reset');
+    reset.textContent = 'Reset';
+    listLvl.append(lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7, lvl8, lvl9, lvl10, reset);
 
     const lvlDiscription = document.createElement('div');
     lvlDiscription.innerHTML = `Comma Combinator<br>
@@ -187,9 +188,15 @@ export function buildHtml() {
     inputHeader.append(inputHeaderName);
     inputWrapper.append(inputHeaderMain);
     inputHeaderMain.append(lineNumbers);
+
+    // const preElement2 = document.createElement('pre');
+    // const codeElement2 = document.createElement('code');
+    // codeElement2.classList.add('hljs', 'language-css');
+    // codeElement2.textContent = `#div + .div`;
     // inputHeaderMain.append(preElement2);
     // preElement2.append(codeElement2);
-    // inputHeaderMain.append(input);
+
+    inputHeaderMain.append(input);
     inputHeaderMain.append(input);
     inputHeaderMain.append(enter);
     inputHeaderMain.append(inputText);
@@ -213,7 +220,7 @@ export function buildHtml() {
         <coconut />
 
     </div>
-`;
+    `;
 
     preElement.append(codeElement);
     codeContainer.append(preElement);

@@ -1,4 +1,5 @@
 import hljs from 'highlight.js';
+import { highlightLvl } from './highlight';
 
 export function updateLevel(level: number) {
     const input = document.querySelector('input');
@@ -34,7 +35,7 @@ export function updateLevel(level: number) {
                 }
                 codeElement.textContent = `
     <div class="table">
-                
+
         <plate>
             <coconut />
         <plate />
@@ -44,7 +45,7 @@ export function updateLevel(level: number) {
         <plate />
         <plate />
         <coconut />
-                
+
     </div>
 `;
 
@@ -60,7 +61,7 @@ export function updateLevel(level: number) {
                 if (heading) {
                     heading.textContent = 'Select the coconut and apple';
                 }
-
+                highlightLvl(level);
                 break;
 
             case 2:
@@ -88,6 +89,7 @@ export function updateLevel(level: number) {
                     heading.textContent = '';
                     heading.textContent = 'Select the coconut in the plate';
                 }
+                highlightLvl(level);
                 break;
 
             case 3:
@@ -122,6 +124,7 @@ export function updateLevel(level: number) {
                     heading.textContent = '';
                     heading.textContent = `Select every plates that's next to a apple`;
                 }
+                highlightLvl(level);
                 break;
             case 4:
                 if (input) {
@@ -148,6 +151,11 @@ export function updateLevel(level: number) {
                     plate2.classList.add('dance');
                     apple2.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select all elements after potato`;
+                }
+                highlightLvl(level);
                 break;
 
             case 5:
@@ -177,6 +185,11 @@ export function updateLevel(level: number) {
                     potato1.classList.add('dance');
                     apple2.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select all elements on the plates`;
+                }
+                highlightLvl(level);
                 break;
 
             case 6:
@@ -211,6 +224,11 @@ export function updateLevel(level: number) {
                     apple1.classList.add('dance');
                     potato1.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select everything except the plates`;
+                }
+                highlightLvl(level);
                 break;
 
             case 7:
@@ -236,7 +254,13 @@ export function updateLevel(level: number) {
                     plate1.append(potato3);
                     potato1.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select first potato`;
+                }
+                highlightLvl(level);
                 break;
+
             case 8:
                 if (input) {
                     input.value = '';
@@ -264,7 +288,13 @@ export function updateLevel(level: number) {
                     plate1.classList.add('dance');
                     plate3.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select the empty plate`;
+                }
+                highlightLvl(level);
                 break;
+
             case 9:
                 if (input) {
                     input.value = '';
@@ -294,6 +324,11 @@ export function updateLevel(level: number) {
                     potato1.classList.add('dance');
                     potato3.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select the top potatoes`;
+                }
+                highlightLvl(level);
                 break;
             case 10:
                 if (input) {
@@ -327,6 +362,11 @@ export function updateLevel(level: number) {
                     coconut1.classList.add('dance');
                     potato3.classList.add('dance');
                 }
+                if (heading) {
+                    heading.textContent = '';
+                    heading.textContent = `Select the coconut and the potato on the plates`;
+                }
+                highlightLvl(level);
                 break;
         }
 

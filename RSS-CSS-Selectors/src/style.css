@@ -51,9 +51,6 @@ body {
     display: block;
 }
 
-.highlight {
-    background-color: rgb(84, 84, 84);
-}
 .navbar-open {
     /* background: white; */
     display: none;
@@ -343,7 +340,7 @@ input {
 }
 
 input {
-    animation: input 0.5s infinite;
+    /* animation: input 0.5s infinite; */
 }
 .input-text {
     position: relative;
@@ -367,9 +364,32 @@ input {
 }
 
 .highlight {
-    color: wheat;
-    /* height: 50px; */
-    /* position: relative;
-    right: 130px;
-    padding: 0; */
+    background-color: rgb(84, 84, 84);
+}
+
+.reset {
+    width: 100px;
+    height: 50px;
+    font-size: 24px;
+    background: #49463f;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #888;
+    border-bottom: #49463f;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.div-lvl::before {
+    content: '\2714';
+    color: gray;
+    margin-right: 5px;
+}
+
+.div-lvl.pass::before {
+    color: green;
+}
+
+.div-lvl.help::before {
+    color: red;
 }

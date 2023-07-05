@@ -3,11 +3,13 @@ import { buildHtml } from './constants';
 import { doNextLvl, doPrevLvl, initLevel, updateLevel } from './levels';
 import { typeAnswer } from './helpInput';
 import { loseAnimation, winAnimation } from './animation';
+import 'highlight.js/styles/a11y-dark.css';
 
 buildHtml();
 
 const modal = document.createElement('div');
 const help = document.querySelector('.help');
+const divLvl = document.querySelectorAll('.div-lvl');
 
 function highlightAndShowHTMLCode(event: Event) {
     const target = event.target;
@@ -28,6 +30,16 @@ function highlightAndShowHTMLCode(event: Event) {
         modal.style.top = modalTop + 'px';
         modal.style.left = modalLeft + 'px';
     }
+    // const spanTags = document.querySelectorAll('.hljs-tag');
+    // if (
+    //     target instanceof HTMLElement &&
+    //     !target.classList.contains('table-container') &&
+    //     target.classList.contains('dance')
+    // ) {
+    //     spanTags[1].classList.add('highlight');
+    //     console.log('YPAAA');
+    //     console.log(spanTags[1]);
+    // }
 }
 
 const table = document.querySelector('body > main > section > div.table-container');
@@ -56,6 +68,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[0].classList.remove('highlight');
+                divLvl[1].classList.add('highlight');
+                divLvl[0].classList.add('pass');
             } else if (input && result !== 'coconut, apple' && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -66,6 +81,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[1].classList.remove('highlight');
+                divLvl[2].classList.add('highlight');
+                divLvl[1].classList.add('pass');
             } else if (input && result !== 'plate coconut' && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -75,6 +93,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[2].classList.remove('highlight');
+                divLvl[3].classList.add('highlight');
+                divLvl[2].classList.add('pass');
             } else if (input && !/apple\s*\+\s*plate/i.test(result) && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -84,6 +105,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[3].classList.remove('highlight');
+                divLvl[4].classList.add('highlight');
+                divLvl[3].classList.add('pass');
             } else if (input && !/potato\s*~\s*\*/i.test(result) && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -93,6 +117,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[4].classList.remove('highlight');
+                divLvl[5].classList.add('highlight');
+                divLvl[4].classList.add('pass');
             } else if (input && !/plate\s*>\s*\*/i.test(result) && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -102,6 +129,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[5].classList.remove('highlight');
+                divLvl[6].classList.add('highlight');
+                divLvl[5].classList.add('pass');
             } else if (input && result !== ':not(plate)' && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -111,6 +141,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[6].classList.remove('highlight');
+                divLvl[7].classList.add('highlight');
+                divLvl[6].classList.add('pass');
             } else if (input && !/potato\s*:\s*first-of-type/i.test(result) && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -120,6 +153,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[7].classList.remove('highlight');
+                divLvl[8].classList.add('highlight');
+                divLvl[7].classList.add('pass');
             } else if (input && !/plate\s*:\s*empty/i.test(result) && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -129,6 +165,9 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[8].classList.remove('highlight');
+                divLvl[9].classList.add('highlight');
+                divLvl[8].classList.add('pass');
             } else if (input && result !== 'potato:first-child' && event.key === 'Enter') {
                 loseAnimation();
             }
@@ -138,6 +177,7 @@ function win(event: KeyboardEvent) {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[9].classList.add('pass');
                 setTimeout(() => {
                     if (table) {
                         table.textContent = '';
@@ -152,10 +192,6 @@ function win(event: KeyboardEvent) {
 }
 input?.addEventListener('keydown', win);
 
-// input?.addEventListener('input', function () {
-//     hljs.highlightElement(input);
-// });
-
 const enter = document.querySelector('.enter');
 
 enter?.addEventListener('click', function () {
@@ -168,6 +204,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[0].classList.add('pass');
             } else {
                 loseAnimation();
             }
@@ -178,6 +215,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[1].classList.add('pass');
             } else if (result !== 'plate coconut') {
                 loseAnimation();
             }
@@ -187,6 +225,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[2].classList.add('pass');
             } else if (!/apple\s*\+\s*plate/i.test(result)) {
                 loseAnimation();
             }
@@ -196,6 +235,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[3].classList.add('pass');
             } else if (!/potato\s*~\s*\*/i.test(result)) {
                 loseAnimation();
             }
@@ -205,6 +245,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[4].classList.add('pass');
             } else if (!/plate\s*>\s*\*/i.test(result)) {
                 loseAnimation();
             }
@@ -214,6 +255,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[5].classList.add('pass');
             } else if (result !== ':not(plate)') {
                 loseAnimation();
             }
@@ -223,6 +265,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[6].classList.add('pass');
             } else if (!/potato\s*:\s*first-of-type/i.test(result)) {
                 loseAnimation();
             }
@@ -232,6 +275,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[7].classList.add('pass');
             } else if (!/plate\s*:\s*empty/i.test(result)) {
                 loseAnimation();
             }
@@ -241,6 +285,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[8].classList.add('pass');
             } else if (result !== 'potato:first-child') {
                 loseAnimation();
             }
@@ -250,6 +295,7 @@ enter?.addEventListener('click', function () {
                 winAnimation(() => {
                     doNextLvl();
                 });
+                divLvl[9].classList.add('pass');
                 setTimeout(() => {
                     if (table) {
                         table.textContent = '';
@@ -266,6 +312,7 @@ enter?.addEventListener('click', function () {
 help?.addEventListener('click', typeAnswer);
 
 const nextLvl = document.querySelector('.nextLvl');
+const reset = document.querySelector('.reset');
 const prevLvl = document.querySelector('.prevLvl');
 const buttonMenu = document.querySelector('.navbar-menu');
 const listLvl = document.querySelector('.close');
@@ -284,8 +331,6 @@ buttonMenu?.addEventListener('click', () => {
     }
 });
 
-const divLvl = document.querySelectorAll('.div-lvl');
-
 divLvl.forEach((div) => {
     div.addEventListener('click', function () {
         divLvl.forEach((div) => {
@@ -299,5 +344,14 @@ divLvl.forEach((div) => {
         }
     });
 });
-
 initLevel();
+
+reset?.addEventListener('click', () => {
+    divLvl.forEach((div) => {
+        div.classList.remove('highlight');
+        div.classList.remove('pass');
+        div.classList.remove('help');
+    });
+
+    updateLevel(1);
+});
