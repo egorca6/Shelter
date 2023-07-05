@@ -30,16 +30,6 @@ function highlightAndShowHTMLCode(event: Event) {
         modal.style.top = modalTop + 'px';
         modal.style.left = modalLeft + 'px';
     }
-    // const spanTags = document.querySelectorAll('.hljs-tag');
-    // if (
-    //     target instanceof HTMLElement &&
-    //     !target.classList.contains('table-container') &&
-    //     target.classList.contains('dance')
-    // ) {
-    //     spanTags[1].classList.add('highlight');
-    //     console.log('YPAAA');
-    //     console.log(spanTags[1]);
-    // }
 }
 
 const table = document.querySelector('body > main > section > div.table-container');

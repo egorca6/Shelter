@@ -5,9 +5,6 @@ export function buildHtml() {
     const container = document.createElement('main');
     container.classList.add('container');
 
-    // const footer = document.createElement('footer');
-    // footer.classList.add('footer');
-
     const section = document.createElement('section');
     section.classList.add('section');
 
@@ -87,7 +84,6 @@ export function buildHtml() {
 
     const input = document.createElement('input');
     input.setAttribute('placeholder', 'Type in a CSS selector');
-    // input.classList.add('hljs', 'language-css');
     input.autofocus = true;
 
     const inputText = document.createElement('div');
@@ -189,13 +185,6 @@ export function buildHtml() {
     inputWrapper.append(inputHeaderMain);
     inputHeaderMain.append(lineNumbers);
 
-    // const preElement2 = document.createElement('pre');
-    // const codeElement2 = document.createElement('code');
-    // codeElement2.classList.add('hljs', 'language-css');
-    // codeElement2.textContent = `#div + .div`;
-    // inputHeaderMain.append(preElement2);
-    // preElement2.append(codeElement2);
-
     inputHeaderMain.append(input);
     inputHeaderMain.append(input);
     inputHeaderMain.append(enter);
@@ -239,6 +228,27 @@ export function buildHtml() {
     levelContainer.append(listLvl);
 
     document.body.append(container);
-    // document.body.append(footer);
+
+    const copyrightElement = document.createElement('div');
+    copyrightElement.innerHTML = '&copy; 2023';
+    const footerWrapper = document.createElement('div');
+    footerWrapper.classList.add('footerWrapper');
+    section.append(footerWrapper);
+    const image1 = document.createElement('div');
+    image1.classList.add('image1');
+    image1.addEventListener('click', () => {
+        window.location.href = 'https://github.com/egorca6';
+    });
+    footerWrapper.append(image1);
+    footerWrapper.append(copyrightElement);
+
+    const image2 = document.createElement('img');
+    image2.classList.add('image2');
+    image2.src = 'https://rs.school/images/rs_school_js.svg';
+    image2.addEventListener('click', () => {
+        window.location.href = 'https://rs.school/js/';
+    });
+    footerWrapper.append(image2);
+
     hljs.highlightElement(codeElement);
 }

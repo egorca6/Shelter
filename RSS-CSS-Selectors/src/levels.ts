@@ -476,10 +476,6 @@ are inside of any &lt;p&gt;`;
         }
     }
     sessionStorage.setItem('currentLevel', level.toString());
-
-    // const listLvl = document.querySelector('.close');
-
-    // listLvl?.classList.add('open');
 }
 
 export function doNextLvl() {
