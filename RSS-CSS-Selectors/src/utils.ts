@@ -13,6 +13,10 @@ function createEl(elementName: string, className?: string, content?: string): HT
     return element;
 }
 
+export function addClassToDance([...args]: Element[]): void {
+    [...args].map((e) => e.classList.add('dance'));
+}
+
 export function buildHtml() {
     const container = createEl('main', 'container');
     const section = createEl('section', 'section');

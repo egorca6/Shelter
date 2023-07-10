@@ -1,6 +1,7 @@
 import hljs from 'highlight.js';
 import { highlightLvl } from './highlight';
 import { levelDescriptions } from './consts';
+import { addClassToDance } from './utils';
 
 export function updateLevel(level: number) {
     const input = document.querySelector('input');
@@ -55,9 +56,7 @@ export function updateLevel(level: number) {
                     tableContainer.append(plate1, apple1, plate2, plate3, coconut2);
                     plate1.append(coconut1);
                     plate2.append(potato1);
-                    coconut1.classList.add('dance');
-                    coconut2.classList.add('dance');
-                    apple1.classList.add('dance');
+                    addClassToDance([coconut1, coconut2, apple1]);
                 }
                 if (heading) {
                     heading.textContent = 'Select the coconut and apple';
@@ -84,7 +83,7 @@ export function updateLevel(level: number) {
                     tableContainer.innerHTML = '';
                     tableContainer.append(plate1, coconut1, plate2);
                     plate2.append(coconut2);
-                    coconut2.classList.add('dance');
+                    addClassToDance([coconut2]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -118,8 +117,7 @@ export function updateLevel(level: number) {
                     tableContainer.append(apple1, plate1, apple2, plate2, plate3);
                     plate2.append(coconut1);
                     plate3.append(potato1);
-                    plate1.classList.add('dance');
-                    plate2.classList.add('dance');
+                    addClassToDance([plate1, plate2]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -148,9 +146,7 @@ export function updateLevel(level: number) {
                     tableContainer.innerHTML = '';
                     tableContainer.append(potato1, plate1, plate2, apple2);
                     plate1.append(apple1);
-                    plate1.classList.add('dance');
-                    plate2.classList.add('dance');
-                    apple2.classList.add('dance');
+                    addClassToDance([plate1, plate2, apple2]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -183,8 +179,7 @@ export function updateLevel(level: number) {
                     tableContainer.append(plate1, tomato1, plate2, apple1, plate3);
                     plate1.append(potato1);
                     plate2.append(apple2);
-                    potato1.classList.add('dance');
-                    apple2.classList.add('dance');
+                    addClassToDance([potato1, apple2]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -219,11 +214,7 @@ export function updateLevel(level: number) {
                     tableContainer.append(tomato1, plate1, apple1, potato1, plate2, plate3);
                     plate1.append(tomato2);
                     plate3.append(apple2);
-                    tomato1.classList.add('dance');
-                    apple2.classList.add('dance');
-                    tomato2.classList.add('dance');
-                    apple1.classList.add('dance');
-                    potato1.classList.add('dance');
+                    addClassToDance([tomato1, apple2, tomato2, apple1, potato1]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -253,7 +244,7 @@ export function updateLevel(level: number) {
                     tableContainer.innerHTML = '';
                     tableContainer.append(tomato1, potato1, plate1, tomato2, potato2);
                     plate1.append(potato3);
-                    potato1.classList.add('dance');
+                    addClassToDance([potato1]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -286,8 +277,7 @@ export function updateLevel(level: number) {
                     tableContainer.append(plate1, plate2, plate3, plate4, apple1);
                     plate2.append(potato1);
                     plate4.append(tomato1);
-                    plate1.classList.add('dance');
-                    plate3.classList.add('dance');
+                    addClassToDance([plate1, plate3]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -322,8 +312,7 @@ export function updateLevel(level: number) {
                     plate2.append(potato1);
                     plate2.append(potato2);
                     plate4.append(potato3);
-                    potato1.classList.add('dance');
-                    potato3.classList.add('dance');
+                    addClassToDance([potato1, potato3]);
                 }
                 if (heading) {
                     heading.textContent = '';
@@ -360,8 +349,7 @@ export function updateLevel(level: number) {
                     plate2.append(potato1);
                     plate2.append(potato2);
                     plate3.append(potato3);
-                    coconut1.classList.add('dance');
-                    potato3.classList.add('dance');
+                    addClassToDance([coconut1, potato3]);
                 }
                 if (heading) {
                     heading.textContent = '';
