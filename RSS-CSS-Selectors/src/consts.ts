@@ -1,4 +1,6 @@
-const levelDescriptions: { [key: string]: string } = {
+export const defaultLvl = 1;
+export const DEFAULT_ANSWER_INDEX = 0;
+export const levelDescriptions: { [key: string]: string } = {
     1: `Comma Combinator<br>
       Combine, selectors, with... commas!<br><br>
       A, B<br><br>
@@ -72,17 +74,15 @@ const levelDescriptions: { [key: string]: string } = {
       other element.`,
 };
 
-const levelAnswer: { [key: string]: { text: string } } = {
-    '1': { text: 'coconut, apple' },
-    '2': { text: 'plate coconut' },
-    '3': { text: 'apple + plate' },
-    '4': { text: 'potato ~ *' },
-    '5': { text: 'plate > *' },
-    '6': { text: ':not(plate)' },
-    '7': { text: 'potato:first-of-type' },
-    '8': { text: 'plate:empty' },
-    '9': { text: 'potato:first-child' },
-    '10': { text: 'plate:only-child' },
+export const levelAnswer: { [key: string]: string } = {
+    1: 'coconut, apple',
+    2: 'plate coconut',
+    3: 'apple + plate',
+    4: 'potato ~ *',
+    5: 'plate > *',
+    6: ':not(plate)',
+    7: 'potato:first-of-type',
+    8: 'plate:empty',
+    9: 'potato:first-child',
+    10: 'plate:only-child',
 };
-
-export { levelDescriptions, levelAnswer };

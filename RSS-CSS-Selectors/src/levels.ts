@@ -1,6 +1,6 @@
 import hljs from 'highlight.js';
 import { highlightLvl } from './highlight';
-import { levelDescriptions } from './consts';
+import { defaultLvl, levelDescriptions } from './consts';
 import { addClassToDance } from './utils';
 
 export function updateLevel(level: number) {
@@ -369,7 +369,7 @@ export function updateLevel(level: number) {
 }
 
 export function doNextLvl() {
-    const currentLevel = parseInt(sessionStorage.getItem('currentLevel') ?? '1');
+    const currentLevel = Number(sessionStorage.getItem('currentLevel') ?? defaultLvl);
     if (currentLevel < 10) {
         const nextLevel = currentLevel + 1;
         updateLevel(nextLevel);
@@ -379,14 +379,14 @@ export function doNextLvl() {
 
 export function initLevel() {
     const savedLevel = sessionStorage.getItem('currentLevel');
-    const level = savedLevel ? parseInt(savedLevel) : 1;
+    const level = savedLevel ? Number(savedLevel) : defaultLvl;
     const divLvl = document.querySelectorAll('.div-lvl');
     divLvl[level - 1].classList.add('highlight');
     updateLevel(level);
 }
 
 export function doPrevLvl() {
-    const currentLevel = parseInt(sessionStorage.getItem('currentLevel') ?? '1');
+    const currentLevel = Number(sessionStorage.getItem('currentLevel') ?? defaultLvl);
     if (currentLevel > 1) {
         const prevLevel = currentLevel - 1;
         updateLevel(prevLevel);

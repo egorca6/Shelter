@@ -1,4 +1,5 @@
 import { loseAnimation, winAnimation } from './animation';
+import { defaultLvl } from './consts';
 import { doNextLvl } from './levels';
 
 function winLvl(level: number) {
@@ -11,13 +12,16 @@ function winLvl(level: number) {
 
 export function win(event: KeyboardEvent) {
     const table = document.querySelector('body > main > section > div.table-container');
-    const level = parseInt(sessionStorage.getItem('currentLevel') ?? '1');
+    const level = Number(sessionStorage.getItem('currentLevel') ?? defaultLvl);
     const input = document.querySelector('input');
     const result = input?.value !== undefined ? input.value.toLowerCase().trim() : '';
+    if (event.key !== 'Enter') {
+        return;
+    }
 
     switch (level) {
         case 1:
-            if (input && (result === 'coconut, apple' || result === 'apple, coconut') && event.key === 'Enter') {
+            if (result === 'coconut, apple' || result === 'apple, coconut') {
                 winLvl(level);
             } else {
                 loseAnimation(event);
@@ -25,63 +29,63 @@ export function win(event: KeyboardEvent) {
             break;
 
         case 2:
-            if (input && result === 'plate coconut' && event.key === 'Enter') {
+            if (result === 'plate coconut') {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 3:
-            if (input && /apple\s*\+\s*plate/i.test(result) && event.key === 'Enter') {
+            if (/apple\s*\+\s*plate/i.test(result)) {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 4:
-            if (input && /potato\s*~\s*\*/i.test(result) && event.key === 'Enter') {
+            if (/potato\s*~\s*\*/i.test(result)) {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 5:
-            if (input && /plate\s*>\s*\*/i.test(result) && event.key === 'Enter') {
+            if (/plate\s*>\s*\*/i.test(result)) {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 6:
-            if (input && result === ':not(plate)' && event.key === 'Enter') {
+            if (result === ':not(plate)') {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 7:
-            if (input && /potato\s*:\s*first-of-type/i.test(result) && event.key === 'Enter') {
+            if (/potato\s*:\s*first-of-type/i.test(result)) {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 8:
-            if (input && /plate\s*:\s*empty/i.test(result) && event.key === 'Enter') {
+            if (/plate\s*:\s*empty/i.test(result)) {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 9:
-            if (input && result === 'potato:first-child' && event.key === 'Enter') {
+            if (result === 'potato:first-child') {
                 winLvl(level);
             } else {
                 loseAnimation(event);
             }
             break;
         case 10:
-            if (input && result === 'plate:only-child' && event.key === 'Enter') {
+            if (result === 'plate:only-child') {
                 winLvl(level);
                 setTimeout(() => {
                     if (table) {
@@ -100,7 +104,7 @@ export function winClick(event: Event) {
     const input = document.querySelector('input');
     const table = document.querySelector('body > main > section > div.table-container');
     const result = input?.value !== undefined ? input.value.toLowerCase().trim() : '';
-    const level = parseInt(sessionStorage.getItem('currentLevel') ?? '1');
+    const level = Number(sessionStorage.getItem('currentLevel') ?? defaultLvl);
     const mouseEvent = <MouseEvent>event;
     switch (level) {
         case 1:

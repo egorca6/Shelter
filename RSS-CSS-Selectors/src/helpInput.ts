@@ -1,18 +1,18 @@
-import { levelAnswer } from './consts';
+import { DEFAULT_ANSWER_INDEX, defaultLvl, levelAnswer } from './consts';
 
 export function typeAnswer() {
     const divLvl = document.querySelectorAll('.div-lvl');
     const input = document.querySelector('input');
-    const level = parseInt(sessionStorage.getItem('currentLevel') ?? '1');
+    const level = Number(sessionStorage.getItem('currentLevel') ?? defaultLvl);
     const config = level ? levelAnswer[level] : undefined;
 
     if (config && input) {
         input.value = '';
 
-        let indexInAnswer = 0;
+        let indexInAnswer = DEFAULT_ANSWER_INDEX;
         const intervalId = setInterval(() => {
-            if (input && indexInAnswer < config.text.length) {
-                input.value += config.text.charAt(indexInAnswer);
+            if (input && indexInAnswer < config.length) {
+                input.value += config.charAt(indexInAnswer);
                 indexInAnswer++;
             } else {
                 clearInterval(intervalId);
