@@ -23,15 +23,10 @@ const baseConfig = {
                         options: {
                             name: '[name].[ext]',
                             outputPath: 'img',
-                            publicPath: 'img',
                         },
                     },
                 ],
             },
-            // {
-            //     test: /\.(gif|svg|jpg|png)$/,
-            //     loader: 'file-loader',
-            // },
         ],
     },
     resolve: {
