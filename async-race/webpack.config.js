@@ -16,16 +16,7 @@ const baseConfig = {
             },
             {
                 test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'img',
-                        },
-                    },
-                ],
+                type: 'asset/resource',
             },
         ],
     },
@@ -35,6 +26,7 @@ const baseConfig = {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, '../dist'),
+        assetModuleFilename: 'asset/[name][ext]',
     },
     plugins: [
         new HtmlWebpackPlugin({

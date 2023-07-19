@@ -2,31 +2,57 @@
 
 const baseUrl = 'http://127.0.0.1:3000';
 
-export const getTest = async () => {
+const getGarage = async () => {
     const response = await fetch(`${baseUrl}/garage`);
     const data = await response.json();
-    // console.log(response);
-    // console.log('data', data.length);
-    // console.log(response.headers);
 
-    return data.length;
+    return data;
+};
+export const updateCarColor = async (i: number) => {
+    const date = await getGarage();
+
+    return date[i]?.color;
 };
 
-export const getTest2 = async () => {
-    const response = await fetch(`${baseUrl}/winners`);
-    const data = await response.json();
-    // console.log(response);
-    // console.log('winners', data);
-    // console.log('winners Длина', data.length);
+export const updateCarName = async (i: number) => {
+    const date = await getGarage();
+
+    return date[i]?.name;
 };
 
-export const getGarageCarCount = async () => {
+const getGarageCarCount = async () => {
     const response = await fetch(`${baseUrl}/garage?_page=1&_limit=2`);
     return response.headers.get('X-Total-Count');
 };
 
-// export function build() {
-//     const main = document.querySelector('.main');
-//     const test = createEl('button', 'test1', 'test');
-//     main?.append(test);
-// }
+export const updateGarageData = async () => {
+    const count = await getGarageCarCount();
+    const fullGarage = document.querySelector('.full-garage');
+    if (fullGarage) {
+        fullGarage.textContent = `Garage (${count})`;
+    }
+};
+type CarParam = {
+    name: string;
+    color: string;
+};
+const createCar = async (body: CarParam) => {
+    const response = await fetch(`${baseUrl}/garage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+    const data = await response.json();
+    return data;
+};
+
+export const DrawCar = async (carModel: string, color: string) => {
+    const car = await createCar({
+        name: `#${carModel}`,
+        color: `${color}`,
+    });
+    console.log(car);
+    return car;
+};
