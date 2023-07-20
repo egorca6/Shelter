@@ -1,6 +1,12 @@
 import { buildGarage } from './garage';
 
-export function createEl(elementName: string, className?: string, content?: string): HTMLElement {
+export function createEl(
+    elementName: string,
+    className?: string,
+    content?: string,
+    callback?: (id: number) => void,
+    id?: number
+): HTMLElement {
     const element = document.createElement(elementName);
     if (className) {
         element.classList.add(className);
@@ -8,7 +14,9 @@ export function createEl(elementName: string, className?: string, content?: stri
     if (content) {
         element.textContent = content;
     }
-
+    if (callback && id !== undefined) {
+        element.addEventListener('click', () => callback(id));
+    }
     return element;
 }
 export function buildHtml() {

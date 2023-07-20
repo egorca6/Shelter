@@ -1,5 +1,7 @@
 // import { createEl } from './utils';
 
+import { CarParam } from './type';
+
 const baseUrl = 'http://127.0.0.1:3000';
 
 const getGarage = async () => {
@@ -20,6 +22,13 @@ export const updateCarName = async (i: number) => {
     return date[i]?.name;
 };
 
+export const getID = async (i: number) => {
+    const date = await getGarage();
+    // console.log('ID = ', date[i]?.id);
+
+    return date[i]?.id;
+};
+
 const getGarageCarCount = async () => {
     const response = await fetch(`${baseUrl}/garage?_page=1&_limit=2`);
     return response.headers.get('X-Total-Count');
@@ -32,10 +41,7 @@ export const updateGarageData = async () => {
         fullGarage.textContent = `Garage (${count})`;
     }
 };
-type CarParam = {
-    name: string;
-    color: string;
-};
+
 const createCar = async (body: CarParam) => {
     const response = await fetch(`${baseUrl}/garage`, {
         method: 'POST',
@@ -53,6 +59,6 @@ export const DrawCar = async (carModel: string, color: string) => {
         name: `#${carModel}`,
         color: `${color}`,
     });
-    console.log(car);
+    // console.log(car);
     return car;
 };

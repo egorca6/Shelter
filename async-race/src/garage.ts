@@ -2,8 +2,9 @@ import { DrawCar, updateCarColor, updateCarName, updateGarageData } from './cons
 import { createEl } from './utils';
 import carImage from './assets/car1.png';
 import flagImage from './assets/flag.png';
+import { SelectCarFromHtml, removeCarFromHtml } from './deleteSelect';
 
-async function updateGarage() {
+export async function updateGarage() {
     for (let i = 0; i < 7; i++) {
         const carColor = await updateCarColor(i);
         const carName = await updateCarName(i);
@@ -16,10 +17,11 @@ async function updateGarage() {
             const car1WrapperSelect = createEl('div', 'car1WrapperSelect');
             car1Wrapper.append(car1WrapperSelect);
 
-            const car1SelectButton = createEl('button', 'default-button', 'Select');
+            const car1SelectButton = createEl('button', 'default-button', 'Select', SelectCarFromHtml, i);
+            car1SelectButton.classList.add('select');
             car1WrapperSelect.append(car1SelectButton);
 
-            const car1RemoveButton = createEl('button', 'default-button', 'Remove');
+            const car1RemoveButton = createEl('button', 'default-button', 'Remove', removeCarFromHtml, i);
             car1WrapperSelect.append(car1RemoveButton);
 
             const carText = createEl('span', '', `${carName}`);
@@ -122,6 +124,14 @@ export function buildGarage() {
 export function garageView() {
     const garage = document.querySelector('.garage');
     garage?.addEventListener('click', buildGarage);
+
+    const appWrapper = document.querySelector('.app-wrapper');
+    appWrapper?.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+        if (target.classList.contains('update')) {
+            // console.log('ghbdtn!');
+        }
+    });
 }
 
 export function createCar() {
@@ -132,9 +142,18 @@ export function createCar() {
         const colorValue = inputColorCreate.value;
         DrawCar(inputValue, colorValue);
     }
-    console.log('hi');
-
+    // console.log('hi');
     buildGarage();
 }
-const createClick = document.querySelector('.Create');
-createClick?.addEventListener('click', createCar);
+
+export function createClick() {
+    const appWrapper = document.querySelector('.app-wrapper');
+    appWrapper?.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+        if (target.classList.contains('Create')) {
+            // console.log('create');
+            createCar();
+            updateGarageData();
+        }
+    });
+}
