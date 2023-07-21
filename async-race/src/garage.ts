@@ -1,9 +1,9 @@
-import { DrawCar, updateCarColor, updateCarName, updateGarageData } from './constants';
+import { DrawCar, getID, updateCarColor, updateCarName, updateGarageData } from './constants';
 import { createEl } from './utils';
 import carImage from './assets/car1.png';
 import flagImage from './assets/flag.png';
-import { SelectCarFromHtml, removeCarFromHtml } from './deleteSelect';
-
+import { SelectCarFromHtml, removeCarFromHtml, updateCar } from './deleteSelect';
+//
 export async function updateGarage() {
     for (let i = 0; i < 7; i++) {
         const carColor = await updateCarColor(i);
@@ -84,11 +84,13 @@ export function buildGarage() {
     app?.append(inputWrapper2);
 
     const input2 = document.createElement('input');
+    input2.classList.add('input-update');
     input2.type = 'text';
     input2.placeholder = 'Input';
     inputWrapper2.append(input2);
 
     const colorPicker2 = document.createElement('input');
+    colorPicker2.classList.add('color-update');
     colorPicker2.type = 'color';
     colorPicker2.value = '#ffffff';
     inputWrapper2.append(colorPicker2);
@@ -106,7 +108,7 @@ export function buildGarage() {
     const resetButton = createEl('button', '', 'Reset');
     buttonWrapper.append(resetButton);
 
-    const generateCarsButton = createEl('button', '', 'Generate cars');
+    const generateCarsButton = createEl('button', 'generate-cars', 'Generate cars');
     buttonWrapper.append(generateCarsButton);
 
     const fullGarage = createEl('div', 'full-garage');
@@ -157,3 +159,43 @@ export function createClick() {
         }
     });
 }
+
+export async function updateClick(id: number) {
+    const appWrapper = document.querySelector('.app-wrapper');
+    appWrapper?.addEventListener('click', async (event) => {
+        const target = event.target as HTMLElement;
+        if (target.classList.contains('update')) {
+            const inputUpdate: HTMLInputElement | null = document.querySelector('.input-update');
+            const inputColorUpdate = document.querySelector('.color-update');
+
+            if (inputUpdate instanceof HTMLInputElement && inputColorUpdate instanceof HTMLInputElement) {
+                const inputValue = inputUpdate.value;
+                const colorValue = inputColorUpdate.value;
+                // console.log('value  = ', inputValue);
+                // console.log('color  = ', colorValue);
+                const carWrapper = target.closest('.car-wrapper');
+
+                if (id) {
+                    console.log('ID Существует');
+
+                    SelectCarFromHtml(id);
+                    const selectedCarID = await getID(id);
+                    console.log('selectedCarID = ', selectedCarID);
+                    // const selectedCarID = await SelectCarFromHtml(carIndex);
+                    updateCar(id, inputValue, colorValue);
+                }
+            }
+            console.log('update');
+        }
+    });
+}
+// export async function removeCarFromHtml(id: number) {
+//     const car1Wrapper = document.querySelectorAll('.car-wrapper');
+//     // SelectCarFromHtml(id);
+//     const selectedCarID = await getID(id);
+//     console.log('обвертка/ selectedCarID= ', car1Wrapper[selectedCarID], selectedCarID);
+
+//     // car1Wrapper[id].remove();
+//     deleteCar(selectedCarID);
+//     buildGarage();
+// }

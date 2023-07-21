@@ -1,12 +1,11 @@
-// import { createEl } from './utils';
-
 import { CarParam } from './type';
 
 const baseUrl = 'http://127.0.0.1:3000';
 
-const getGarage = async () => {
+export const getGarage = async () => {
     const response = await fetch(`${baseUrl}/garage`);
     const data = await response.json();
+    // console.log(data); 15 раз появляется в консоли
 
     return data;
 };
@@ -62,3 +61,29 @@ export const DrawCar = async (carModel: string, color: string) => {
     // console.log(car);
     return car;
 };
+
+export const carBrands: string[] = [
+    'Tesla',
+    'Ford',
+    'Bentley',
+    'Toyota',
+    'Honda',
+    'BMW',
+    'Audi',
+    'Mercedes',
+    'Bugatti',
+    'Lexus',
+];
+export const carModels: string[] = ['Model S', 'Mustang', 'A3', 'Corolla', 'Civic', 'X5', 'A4', 'X3', 'Altima', 'Golf'];
+export const carColors: string[] = [
+    'Red',
+    'Blue',
+    'Green',
+    'Black',
+    'White',
+    'Silver',
+    'Gray',
+    'Yellow',
+    'Orange',
+    'Purple',
+];
