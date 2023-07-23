@@ -6,7 +6,7 @@ import { PostNewCar, getPageCars, updateGarageData } from './api';
 import { dataType } from './type';
 import { currentPage } from './constants';
 import { NextPrevClick } from './prevNextClick';
-import { CarStop, raceOneCar } from './animation';
+import { CarStop, RaceCars, StopCars, raceOneCar } from './animation';
 
 export async function updateGarage() {
     const data: dataType[] = await getPageCars(currentPage);
@@ -107,10 +107,10 @@ export function buildGarage() {
     const buttonWrapper = createEl('div', 'button-wrapper');
     app?.append(buttonWrapper);
 
-    const raceButton = createEl('button', 'race', 'Race');
+    const raceButton = createEl('button', 'race', 'Race', RaceCars);
     buttonWrapper.append(raceButton);
 
-    const resetButton = createEl('button', 'reset', 'Reset');
+    const resetButton = createEl('button', 'reset', 'Reset', StopCars);
     buttonWrapper.append(resetButton);
 
     const generateCarsButton = createEl('button', 'generate-cars', 'Generate cars');

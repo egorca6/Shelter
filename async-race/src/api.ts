@@ -78,8 +78,16 @@ export const putCar = async (id: number, body: CarParam) => {
     return data;
 };
 
-export const patchCar = async (id: number) => {
+export const StartCar = async (id: number) => {
     const response = await fetch(`${baseUrl}/engine?id=${id}&status=started`, {
+        method: 'PATCH',
+    });
+    const data = await response.json();
+    return data;
+};
+
+export const SwitchesEngine = async (id: number) => {
+    const response = await fetch(`${baseUrl}/engine?id=${id}&status=drive`, {
         method: 'PATCH',
     });
     const data = await response.json();
