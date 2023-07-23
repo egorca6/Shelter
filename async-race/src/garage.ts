@@ -5,6 +5,8 @@ import { SelectCarFromHtml, removeCarFromHtml } from './deleteSelect';
 import { PostNewCar, getPageCars, updateGarageData } from './api';
 import { dataType } from './type';
 import { currentPage } from './constants';
+import { NextPrevClick } from './prevNextClick';
+import { CarStop, raceOneCar } from './animation';
 
 export async function updateGarage() {
     const data: dataType[] = await getPageCars(currentPage);
@@ -33,17 +35,20 @@ export async function updateGarage() {
         const car1WrapperImg1 = createEl('div', 'car1WrapperImg1');
         car1WrapperImg.append(car1WrapperImg1);
 
-        const aButton = createEl('button', 'AB-buttons', 'A');
+        const aButton = createEl('button', 'a-buttons', 'A', raceOneCar);
         car1WrapperImg1.append(aButton);
 
-        const bButton = createEl('button', 'AB-buttons', 'B');
+        const bButton = createEl('button', 'b-buttons', 'B', CarStop);
         car1WrapperImg1.append(bButton);
+
+        const wrapperImg = createEl('div', 'wrapperImg1');
+        car1WrapperImg1.append(wrapperImg);
 
         const car1Image = document.createElement('img');
         car1Image.classList.add('car1Image');
         car1Image.src = `${carImage}`;
         car1Image.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${car.color})`;
-        car1WrapperImg1.append(car1Image);
+        wrapperImg.append(car1Image);
 
         const flag = document.createElement('img');
         flag.classList.add('flag');
@@ -56,9 +61,10 @@ export async function updateGarage() {
 }
 
 export function buildGarage() {
-    const app = document.querySelector('.app-wrapper');
+    const app = document.querySelector<HTMLElement>('.app-wrapper');
     if (app) {
         app.innerHTML = '';
+        app.style.display = 'flex';
     }
     const inputWrapper1 = createEl('div', 'input-wrapper');
     app?.append(inputWrapper1);
@@ -101,10 +107,10 @@ export function buildGarage() {
     const buttonWrapper = createEl('div', 'button-wrapper');
     app?.append(buttonWrapper);
 
-    const raceButton = createEl('button', '', 'Race');
+    const raceButton = createEl('button', 'race', 'Race');
     buttonWrapper.append(raceButton);
 
-    const resetButton = createEl('button', '', 'Reset');
+    const resetButton = createEl('button', 'reset', 'Reset');
     buttonWrapper.append(resetButton);
 
     const generateCarsButton = createEl('button', 'generate-cars', 'Generate cars');
@@ -126,19 +132,20 @@ export function buildGarage() {
     const generateCarsSection = createEl('div', 'generate-cars-section');
     app?.append(generateCarsSection);
     updateGarage();
+    NextPrevClick();
 }
 
 export function garageView() {
     const garage = document.querySelector('.garage');
     garage?.addEventListener('click', buildGarage);
 
-    const appWrapper = document.querySelector('.app-wrapper');
-    appWrapper?.addEventListener('click', (event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains('update')) {
-            // console.log('ghbdtn!');
-        }
-    });
+    // const appWrapper = document.querySelector('.app-wrapper');
+    // appWrapper?.addEventListener('click', (event) => {
+    //     const target = event.target as HTMLElement;
+    //     if (target.classList.contains('update')) {
+    //         // console.log('ghbdtn!');
+    //     }
+    // });
 }
 
 async function createCar() {

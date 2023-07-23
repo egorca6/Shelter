@@ -3,6 +3,11 @@ export type CarParam = {
     color: string;
 };
 
+// export type CarPatch = {
+//     velocity: string;
+//     distance: string;
+// };
+
 export type Car = {
     name: string;
     color: string;

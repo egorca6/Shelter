@@ -80,12 +80,21 @@ img {
     /* margin-left: 20px; */
     cursor: pointer;
 }
+
+@keyframes start {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(75vw);
+    }
+}
 .car1Image {
     width: 70px;
     height: 70px;
-    /* filter: opacity(0.5) drop-shadow(0 0 0 rgb(255, 0, 0)); */
-    /* filter: invert(48%) sepia(53%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(500%); */
-    /* filter: drop-shadow(0 0 0 rgb(255, 0, 0)); */
+}
+.go {
+    animation: start linear forwards;
 }
 
 .flag {
@@ -107,7 +116,8 @@ img {
     gap: 10px;
 }
 
-.AB-buttons {
+.a-buttons,
+.b-buttons {
     width: 30px;
     height: 30px;
 }

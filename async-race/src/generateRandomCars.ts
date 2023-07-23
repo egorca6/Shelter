@@ -1,4 +1,4 @@
-import { PostNewCar } from './api';
+import { PostNewCar, updateGarageData } from './api';
 import { carBrands, carColors, carModels } from './constants';
 import { updateGarage } from './garage';
 import { Car } from './type';
@@ -33,6 +33,7 @@ export function getRandomCars() {
         randomCars.forEach((car) => {
             PostNewCar(car.name, car.color);
             updateGarage();
+            updateGarageData();
         });
     });
 }

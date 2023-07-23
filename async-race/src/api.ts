@@ -66,7 +66,7 @@ export const deleteCarOnServer = async (id: number) => {
     return car;
 };
 
-const putCar = async (id: number, body: CarParam) => {
+export const putCar = async (id: number, body: CarParam) => {
     const response = await fetch(`${baseUrl}/garage/${id}`, {
         method: 'PUT',
         headers: {
@@ -78,23 +78,28 @@ const putCar = async (id: number, body: CarParam) => {
     return data;
 };
 
-// export const updateCar = async (i: number, newName: string, newColor: string) => {
-//     const data = await getGarage();
-//     const selectedCarID = data[i].id;
-//     const updatedCarData = {
-//         name: newName,
-//         color: newColor,
-//     };
-//     const updatedCar = await putCar(selectedCarID, updatedCarData);
-//     // console.log('updateCar hi ');
+export const patchCar = async (id: number) => {
+    const response = await fetch(`${baseUrl}/engine?id=${id}&status=started`, {
+        method: 'PATCH',
+    });
+    const data = await response.json();
+    return data;
+};
 
-//     const carNameElement = document.querySelector(
-//         `.car-wrapper:nth-child(${i + 1}) .car1WrapperSelect span`
-//     ) as HTMLElement;
-//     const carImageElement = document.querySelector(`.car-wrapper:nth-child(${i + 1}) .car1Image`) as HTMLElement;
+export const updateCar = async (i: number, newName: string, newColor: string) => {
+    const updatedCarData = {
+        name: newName,
+        color: newColor,
+    };
+    const updatedCar = await putCar(i, updatedCarData);
 
-//     if (carNameElement && carImageElement) {
-//         carNameElement.textContent = updatedCar.name;
-//         carImageElement.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${updatedCar.color})`;
-//     }
-// };
+    const carNameElement = document.querySelector(
+        `.car-wrapper:nth-child(${i}) .car1WrapperSelect span`
+    ) as HTMLElement;
+    const carImageElement = document.querySelector(`.car-wrapper:nth-child(${i}) .car1Image`) as HTMLElement;
+
+    if (carNameElement && carImageElement) {
+        carNameElement.textContent = updatedCar.name;
+        carImageElement.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${updatedCar.color})`;
+    }
+};
