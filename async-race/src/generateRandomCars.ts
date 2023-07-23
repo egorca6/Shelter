@@ -1,4 +1,6 @@
-import { DrawCar, carBrands, carColors, carModels, updateGarageData } from './constants';
+import { PostNewCar } from './api';
+import { carBrands, carColors, carModels } from './constants';
+import { updateGarage } from './garage';
 import { Car } from './type';
 
 function generateRandomCars(count: number): Car[] {
@@ -26,13 +28,11 @@ function generateRandomCars(count: number): Car[] {
 export function getRandomCars() {
     const numberOfCarsToGenerate = 100;
     const randomCars = generateRandomCars(numberOfCarsToGenerate);
-    console.log(randomCars);
     const generateCarsButton = document.querySelector('.generate-cars');
     generateCarsButton?.addEventListener('click', () => {
         randomCars.forEach((car) => {
-            DrawCar(car.name, car.color);
-            updateGarageData();
-            // buildGarage();
+            PostNewCar(car.name, car.color);
+            updateGarage();
         });
     });
 }

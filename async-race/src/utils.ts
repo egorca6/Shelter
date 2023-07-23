@@ -4,8 +4,7 @@ export function createEl(
     elementName: string,
     className?: string,
     content?: string,
-    callback?: (id: number) => void,
-    id?: number
+    callback?: (event: MouseEvent) => void
 ): HTMLElement {
     const element = document.createElement(elementName);
     if (className) {
@@ -14,8 +13,8 @@ export function createEl(
     if (content) {
         element.textContent = content;
     }
-    if (callback && id !== undefined) {
-        element.addEventListener('click', () => callback(id));
+    if (callback) {
+        element.addEventListener('click', callback);
     }
     return element;
 }
