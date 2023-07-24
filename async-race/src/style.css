@@ -6,8 +6,12 @@
     font: inherit;
     vertical-align: baseline;
 }
+.main {
+    /* width: 100vw; */
+}
 
 body {
+    /* width: 100vw; */
     background-color: rgb(47, 50, 49);
 }
 
@@ -81,20 +85,9 @@ img {
     cursor: pointer;
 }
 
-@keyframes start {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(75vw);
-    }
-}
 .car1Image {
     width: 70px;
     height: 70px;
-}
-.go {
-    animation: start linear forwards;
 }
 
 .flag {
@@ -114,6 +107,9 @@ img {
     display: flex;
     margin-top: 10px;
     gap: 10px;
+}
+.wrapperImg1 {
+    position: relative;
 }
 
 .a-buttons,
