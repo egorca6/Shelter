@@ -66,27 +66,28 @@ export async function CarStop(event: Event) {
     console.log('stop');
 }
 
-export function RaceCars() {
+export async function RaceCars() {
     const carsWrapper = document.querySelectorAll('.car-wrapper');
     const vw78 = (78 * window.innerWidth) / 100;
+    let resolved = false;
     carsWrapper.forEach(async (wrapper) => {
         const id = Number(wrapper.getAttribute('dataid'));
         const currentCar = wrapper.querySelector('.wrapperImg1') as HTMLDivElement;
         const carName = wrapper.querySelector('.carName');
         const patchCar1 = await StartCar(id);
+
         const duration = patchCar1.distance / patchCar1.velocity;
-
-        console.log(patchCar1);
         createAnimationTest(vw78, duration, currentCar);
-
         try {
             const statusEngine = await SwitchesEngine(id);
-            // console.log('КТо быстрее =', carName?.textContent, time);
-            console.log('statusEngine', statusEngine);
-            // const minTime = Math.min(...times);
-            // console.log('Мин время = ', minTime);
+            console.log('КТо быстрее =', carName?.textContent, duration);
+            if (!resolved) {
+                resolved = true;
+                console.log('First successful patchCar1:', statusEngine, carName?.textContent, duration);
+                alert(` win ${carName?.textContent} за ${(duration / 1000).toFixed(2)}s`);
+            }
         } catch (error) {
-            console.error('Ошибка = ', error);
+            console.error('carName Не доехал', carName?.textContent);
             PauseAnimation();
         }
     });

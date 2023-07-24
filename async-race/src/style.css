@@ -6,9 +6,6 @@
     font: inherit;
     vertical-align: baseline;
 }
-.main {
-    /* width: 100vw; */
-}
 
 body {
     /* width: 100vw; */
@@ -25,7 +22,12 @@ body {
     border: none;
     cursor: pointer;
 }
-
+.winnersView {
+    /* display: none; */
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
 .app-wrapper {
     width: 100vw;
     height: 1000px;
@@ -125,10 +127,34 @@ img {
 .prev,
 .next {
     width: 50px;
+    margin: 0 5px;
+    border: none;
+    cursor: pointer;
 }
 .nextPrevwrapper {
     margin-left: 200px;
     width: 120px;
     display: flex;
     justify-content: space-between;
+}
+h1 {
+    margin-top: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+}
+
+.buttons {
+    margin-top: 20px;
+    text-align: center;
 }

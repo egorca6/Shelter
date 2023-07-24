@@ -27,3 +27,6 @@ export const carColors: string[] = [
     'Orange',
     'Purple',
 ];
+
+export const myScoreTask =
+    'Score 155(190) \n 1) Basic structure 25(25) \n 2) "Garage" view 50(50) \n 3) Car animation 50(50) \n 4) Race animation 30(30) \n 5) "Winners" view: 0 (35)';

@@ -16,9 +16,11 @@ export const updateUI = async (page: number) => {
     const data: dataType[] = await getPageCars(page);
 
     data.forEach((car: dataType, index: number) => {
-        car1Wrapper[index].setAttribute('dataID', `${car.id}`);
-        carsText[index].textContent = car.name;
-        car1Image[index].style.filter = `opacity(0.5) drop-shadow(0 0 0 ${car.color})`;
+        if (index < car1Wrapper.length) {
+            car1Wrapper[index].setAttribute('dataID', `${car.id}`);
+            carsText[index].textContent = car.name;
+            car1Image[index].style.filter = `opacity(0.5) drop-shadow(0 0 0 ${car.color})`;
+        }
     });
 
     const count = await getGarageCarCount();
@@ -28,19 +30,21 @@ export const updateUI = async (page: number) => {
 };
 
 export function NextPrevClick() {
-    let currentPage = 1;
-
+    let currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
+    updateUI(currentPage);
     const next = document.querySelector('.next');
     const prev = document.querySelector('.prev');
 
     next?.addEventListener('click', async () => {
         currentPage += 1;
+        sessionStorage.setItem('pageNumber', String(currentPage));
         await updateUI(currentPage);
     });
 
     prev?.addEventListener('click', async () => {
         if (currentPage > 1) {
             currentPage -= 1;
+            sessionStorage.setItem('pageNumber', String(currentPage));
             await updateUI(currentPage);
         }
     });

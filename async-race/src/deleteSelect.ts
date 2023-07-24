@@ -33,17 +33,5 @@ export async function testUpdate() {
         };
         await putCar(id, updatedCarData);
         updateGarage();
-        // const carWrapper = document.querySelectorAll('.car-wrapper');
-        // const carNameHtml = carWrapper[id - 1].querySelector('.carName');
-        // const carColorHtml: HTMLInputElement | null = carWrapper[id - 1].querySelector('.car1Image');
-        // if (carNameHtml) {
-        //     carNameHtml.textContent = inputValue;
-        // }
-        // if (carColorHtml) {
-        //     carColorHtml.value = colorValue;
-        //     console.log(carColorHtml.value);
-        //     console.log(colorValue);
-        //     console.log('ghbdtn');
-        // }
     }
 }

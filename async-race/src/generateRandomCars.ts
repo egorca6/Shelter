@@ -1,10 +1,10 @@
 import { PostNewCar, updateGarageData } from './api';
 import { carBrands, carColors, carModels } from './constants';
 import { updateGarage } from './garage';
-import { Car } from './type';
+import { CarParam } from './type';
 
-function generateRandomCars(count: number): Car[] {
-    const randomCars: Car[] = [];
+function generateRandomCars(count: number): CarParam[] {
+    const randomCars: CarParam[] = [];
 
     for (let i = 0; i < count; i++) {
         const brandIndex = Math.floor(Math.random() * carBrands.length);
