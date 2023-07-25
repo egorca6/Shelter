@@ -1,6 +1,7 @@
 import { PostNewCar, updateGarageData } from './api';
 import { carBrands, carColors, carModels } from './constants';
 import { updateGarage } from './garage';
+import { updateUI } from './prevNextClick';
 import { CarParam } from './type';
 
 function generateRandomCars(count: number): CarParam[] {
@@ -28,12 +29,13 @@ function generateRandomCars(count: number): CarParam[] {
 export function getRandomCars() {
     const numberOfCarsToGenerate = 100;
     const randomCars = generateRandomCars(numberOfCarsToGenerate);
-    const generateCarsButton = document.querySelector('.generate-cars');
-    generateCarsButton?.addEventListener('click', () => {
-        randomCars.forEach((car) => {
-            PostNewCar(car.name, car.color);
-            updateGarage();
-            updateGarageData();
-        });
+    const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
+
+    randomCars.forEach((car) => {
+        PostNewCar(car.name, car.color);
+        updateGarageData();
     });
+    updateGarage();
+    updateUI(currentPage);
+    // console.log('asdas= ', updateUI(currentPage));
 }

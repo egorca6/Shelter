@@ -4,8 +4,9 @@ import flagImage from './assets/flag.png';
 import { SelectCarFromHtml, removeCarFromHtml, testUpdate } from './deleteSelect';
 import { PostNewCar, getPageCars, updateGarageData } from './api';
 import { dataType } from './type';
-import { NextPrevClick } from './prevNextClick';
+import { NextClick, PrevClick, updateUI } from './prevNextClick';
 import { CarStop, RaceCars, StopCars, raceOneCar } from './animation';
+import { getRandomCars } from './generateRandomCars';
 
 export async function updateGarage() {
     const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
@@ -60,9 +61,11 @@ export async function updateGarage() {
     });
 }
 
-export function buildGarage() {
+export async function buildGarage() {
     const app = document.querySelector<HTMLElement>('.app-wrapper');
     const winnersView = document.querySelector<HTMLElement>('.winnersView');
+    const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
+
     if (app && winnersView) {
         app.innerHTML = '';
         app.style.display = 'flex';
@@ -115,13 +118,13 @@ export function buildGarage() {
     const resetButton = createEl('button', 'reset', 'Reset', StopCars);
     buttonWrapper.append(resetButton);
 
-    const generateCarsButton = createEl('button', 'generate-cars', 'Generate cars');
+    const generateCarsButton = createEl('button', 'generate-cars', 'Generate cars', getRandomCars);
     buttonWrapper.append(generateCarsButton);
 
     const fullGarage = createEl('div', 'full-garage');
     app?.append(fullGarage);
-    const prevButton = createEl('button', 'prev', 'Prev');
-    const nextButton = createEl('button', 'next', 'Next');
+    const prevButton = createEl('button', 'prev', 'Prev', PrevClick);
+    const nextButton = createEl('button', 'next', 'Next', NextClick);
     const nextPrevwrapper = createEl('div', 'nextPrevwrapper');
     app?.append(nextPrevwrapper);
     nextPrevwrapper?.append(prevButton);
@@ -134,7 +137,7 @@ export function buildGarage() {
     const generateCarsSection = createEl('div', 'generate-cars-section');
     app?.append(generateCarsSection);
     updateGarage();
-    NextPrevClick();
+    updateUI(currentPage);
     createClick();
 }
 

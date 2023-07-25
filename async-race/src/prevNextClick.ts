@@ -5,7 +5,7 @@ import { dataType } from './type';
 export const updateUI = async (page: number) => {
     const carsText = document.querySelectorAll('.carName');
     const car1Wrapper = document.querySelectorAll('.car-wrapper');
-    const car1Image = document.querySelectorAll('.car1Image') as NodeListOf<HTMLImageElement>;
+    const car1Image = document.querySelectorAll<HTMLImageElement>('.car1Image');
     const pageNumber = document.querySelector('.page');
     const nextButton = document.querySelector('.next') as HTMLButtonElement;
     const prevButton = document.querySelector('.prev') as HTMLButtonElement;
@@ -25,27 +25,26 @@ export const updateUI = async (page: number) => {
 
     const count = await getGarageCarCount();
     nextButton.disabled = page === Math.ceil(count / carsPerPage);
-
     prevButton.disabled = page === 1;
 };
 
-export function NextPrevClick() {
+export async function PrevClick() {
     let currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
-    updateUI(currentPage);
-    const next = document.querySelector('.next');
-    const prev = document.querySelector('.prev');
-
-    next?.addEventListener('click', async () => {
-        currentPage += 1;
+    // const count13 = await updateUI(currentPage);
+    // console.log(' xnj эчто = ', count13);
+    if (currentPage > 1) {
+        currentPage -= 1;
         sessionStorage.setItem('pageNumber', String(currentPage));
         await updateUI(currentPage);
-    });
+    }
+}
 
-    prev?.addEventListener('click', async () => {
-        if (currentPage > 1) {
-            currentPage -= 1;
-            sessionStorage.setItem('pageNumber', String(currentPage));
-            await updateUI(currentPage);
-        }
-    });
+export async function NextClick() {
+    let currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
+    // const count13 = await updateUI(currentPage);
+    // console.log(' xnj эчто = ', count13);
+
+    currentPage += 1;
+    sessionStorage.setItem('pageNumber', String(currentPage));
+    await updateUI(currentPage);
 }
