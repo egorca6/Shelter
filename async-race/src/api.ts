@@ -1,5 +1,5 @@
 import { baseUrl } from './constants';
-import { CarParam } from './type';
+import { CarParam, winsOnPage } from './type';
 
 export const getGarage = async () => {
     const response = await fetch(`${baseUrl}/garage`);
@@ -40,6 +40,18 @@ export const DrawPageCars = async (page: number) => {
 
 const createCar = async (body: CarParam) => {
     const response = await fetch(`${baseUrl}/garage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+    const data = await response.json();
+    return data;
+};
+
+export const createWinner = async (body: winsOnPage) => {
+    const response = await fetch(`${baseUrl}/winners`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

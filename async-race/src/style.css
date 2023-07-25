@@ -148,9 +148,9 @@ h1 {
 }
 .wrapperCarInfo {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     column-gap: 90px;
 }
-.carBestTime {
-    margin-left: 80px;
+.default-position {
+    margin-left: 120px;
 }

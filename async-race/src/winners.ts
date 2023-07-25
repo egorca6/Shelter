@@ -1,7 +1,7 @@
-import { getCar, getWinners } from './api';
 import { winsOnPage } from './type';
 import { createEl } from './utils';
 import carImage from './assets/car1.png';
+import { getCar, getWinners } from './api';
 
 export async function winnerView() {
     const app = document.querySelector<HTMLElement>('.app-wrapper');
@@ -16,10 +16,11 @@ export async function winnerView() {
     const h1 = createEl('h1', '', 'Winners (1)');
     const p = createEl('p', '', 'Page #1');
     const wrapperHeaders = createEl('div', 'wrapperHeaders');
-    const wrapperCarInfo = createEl('div', 'wrapperCarInfo');
+    const wrapperForCars = createEl('div', 'wrapperForCars');
+
     const divNumber = createEl('div', '', ' Number');
     const divCar = createEl('div', '', 'Car');
-    const divName = createEl('div', '', 'Name');
+    const divName = createEl('div', 'default-position', 'Name');
     const divWins = createEl('div', '', 'Wins');
     const divBest = createEl('div', '', 'Best time(seconds) ');
     const buttonsDiv = createEl('div', 'buttons');
@@ -29,7 +30,8 @@ export async function winnerView() {
     winnersView?.append(h1);
     winnersView?.append(p);
     winnersView?.append(wrapperHeaders);
-    winnersView?.append(wrapperCarInfo);
+    winnersView?.append(wrapperForCars);
+
     wrapperHeaders.append(divNumber);
     wrapperHeaders.append(divCar);
     wrapperHeaders.append(divName);
@@ -38,11 +40,15 @@ export async function winnerView() {
     buttonsDiv.append(prevButton);
     buttonsDiv.append(nextButton);
     winnersView?.append(buttonsDiv);
-
     myWinners.forEach(async (car: winsOnPage, index) => {
+        const wrapperCarInfo = createEl('div', 'wrapperCarInfo');
+        wrapperForCars.append(wrapperCarInfo);
         const carID = myWinners[index].id;
+
         const carNameID = await getCar(carID);
+
         const carText = carNameID.name;
+
         const carColor = carNameID.color;
         const carNumber = createEl('div', '', `${index + 1}`);
         wrapperCarInfo.append(carNumber);

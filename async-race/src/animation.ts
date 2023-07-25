@@ -1,4 +1,4 @@
-import { StartCar, StoptCar, SwitchesEngine } from './api';
+import { StartCar, StoptCar, SwitchesEngine, createWinner } from './api';
 
 let animationId: number | null = null;
 
@@ -83,14 +83,20 @@ export async function RaceCars() {
         createAnimationTest(vw78, duration, currentCar);
         try {
             const statusEngine = await SwitchesEngine(id);
-            console.log('КТо быстрее =', id, carName?.textContent, duration);
+            // console.log('КТо быстрее =', id, carName?.textContent, duration);
             if (!resolved) {
                 resolved = true;
                 console.log('First successful patchCar1:', statusEngine, carName?.textContent, duration);
+
                 alert(` win ${carName?.textContent} за ${(duration / 1000).toFixed(2)}s`);
+                await createWinner({
+                    id: id,
+                    wins: 1,
+                    time: +(duration / 1000).toFixed(2),
+                });
             }
         } catch (error) {
-            console.error('carName Не доехал', carName?.textContent);
+            // console.error('carName Не доехал', carName?.textContent);
             PauseAnimation();
         }
     });
