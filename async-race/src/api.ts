@@ -12,6 +12,11 @@ export const getGarageCarCount = async () => {
     return Number(response.headers.get('X-Total-Count'));
 };
 
+export const getWinners = async () => {
+    const response = await fetch(`${baseUrl}/winners?_page=1&_limit=10`);
+    const data = await response.json();
+    return data;
+};
 export const updateGarageData = async () => {
     const count = await getGarageCarCount();
     const fullGarage = document.querySelector('.full-garage');
@@ -60,6 +65,13 @@ const delCar = async (id: number) => {
     const data = await response.json();
     return data;
 };
+export const getCar = async (id: number) => {
+    const response = await fetch(`${baseUrl}/garage/${id}`, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    return data;
+};
 
 export const deleteCarOnServer = async (id: number) => {
     const car = await delCar(id);
@@ -80,6 +92,14 @@ export const putCar = async (id: number, body: CarParam) => {
 
 export const StartCar = async (id: number) => {
     const response = await fetch(`${baseUrl}/engine?id=${id}&status=started`, {
+        method: 'PATCH',
+    });
+    const data = await response.json();
+    return data;
+};
+
+export const StoptCar = async (id: number) => {
+    const response = await fetch(`${baseUrl}/engine?id=${id}&status=stopped`, {
         method: 'PATCH',
     });
     const data = await response.json();

@@ -1,56 +1,64 @@
+import { getCar, getWinners } from './api';
+import { winsOnPage } from './type';
 import { createEl } from './utils';
+import carImage from './assets/car1.png';
 
-export function winnerView() {
+export async function winnerView() {
     const app = document.querySelector<HTMLElement>('.app-wrapper');
     const winnersView = document.querySelector<HTMLElement>('.winnersView');
-    // const winners = document.querySelector('.winners');
     if (app && winnersView) {
         app.innerHTML = '';
         winnersView.innerHTML = '';
         winnersView.style.display = 'block';
     }
+    const myWinners: winsOnPage[] = await getWinners();
 
     const h1 = createEl('h1', '', 'Winners (1)');
     const p = createEl('p', '', 'Page #1');
-
-    const table = createEl('table');
-    const thead = createEl('thead');
-    const headerRow = createEl('tr');
-    const headers = ['Number', 'Car', 'Name', 'Wins', 'Best time(Seconds)'];
-    const headerElements = [];
-
-    for (const header of headers) {
-        const th = createEl('th', '', header);
-        headerElements.push(th);
-    }
-
-    for (const th of headerElements) {
-        headerRow.append(th);
-    }
-
-    const tbody = createEl('tbody');
-    const dataRows = [['1', '', 'Tesla', '1', '10']];
-
-    for (const data of dataRows) {
-        const row = createEl('tr');
-        for (const item of data) {
-            const td = createEl('td', '', item);
-            row.append(td);
-        }
-        tbody.append(row);
-    }
-
+    const wrapperHeaders = createEl('div', 'wrapperHeaders');
+    const wrapperCarInfo = createEl('div', 'wrapperCarInfo');
+    const divNumber = createEl('div', '', ' Number');
+    const divCar = createEl('div', '', 'Car');
+    const divName = createEl('div', '', 'Name');
+    const divWins = createEl('div', '', 'Wins');
+    const divBest = createEl('div', '', 'Best time(seconds) ');
     const buttonsDiv = createEl('div', 'buttons');
     const prevButton = createEl('button', 'prev', 'Prev');
     const nextButton = createEl('button', 'next', 'Next');
 
-    table.append(thead);
-    thead.append(headerRow);
-    table.append(tbody);
-    buttonsDiv.append(prevButton);
-    buttonsDiv.append(nextButton);
     winnersView?.append(h1);
     winnersView?.append(p);
-    winnersView?.append(table);
+    winnersView?.append(wrapperHeaders);
+    winnersView?.append(wrapperCarInfo);
+    wrapperHeaders.append(divNumber);
+    wrapperHeaders.append(divCar);
+    wrapperHeaders.append(divName);
+    wrapperHeaders.append(divBest);
+    wrapperHeaders.append(divWins);
+    buttonsDiv.append(prevButton);
+    buttonsDiv.append(nextButton);
     winnersView?.append(buttonsDiv);
+
+    myWinners.forEach(async (car: winsOnPage, index) => {
+        const carID = myWinners[index].id;
+        const carNameID = await getCar(carID);
+        const carText = carNameID.name;
+        const carColor = carNameID.color;
+        const carNumber = createEl('div', '', `${index + 1}`);
+        wrapperCarInfo.append(carNumber);
+
+        const car1Image = createEl('img', 'car1Image') as HTMLImageElement;
+        car1Image.src = `${carImage}`;
+        car1Image.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${carColor})`;
+        wrapperCarInfo.append(car1Image);
+
+        const carName = createEl('div', '', `${carText}`);
+        wrapperCarInfo.append(carName);
+
+        const carWins = createEl('div', '', `${myWinners[index].wins}`);
+        wrapperCarInfo.append(carWins);
+
+        const carBestTime = createEl('div', 'carBestTime', `${myWinners[index].time}`);
+        wrapperCarInfo.append(carBestTime);
+    });
 }

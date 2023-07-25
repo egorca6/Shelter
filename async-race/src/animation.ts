@@ -1,4 +1,4 @@
-import { StartCar, SwitchesEngine } from './api';
+import { StartCar, StoptCar, SwitchesEngine } from './api';
 
 let animationId: number | null = null;
 
@@ -60,10 +60,13 @@ export async function CarStop(event: Event) {
     const currentCar = carImage.querySelector('.wrapperImg1') as HTMLDivElement;
     const startButton = carImage.querySelector('.a-buttons') as HTMLButtonElement;
     const stopButton = carImage.querySelector('.b-buttons') as HTMLButtonElement;
+    const carWrapper = (event.target as Element)?.closest('.car-wrapper') as HTMLElement;
+    const id = Number(carWrapper.getAttribute('dataid'));
     startButton.disabled = false;
     stopButton.disabled = true;
     stopAnimationTest(currentCar);
-    console.log('stop');
+    const patchCar1 = await StoptCar(id);
+    console.log('stop', patchCar1);
 }
 
 export async function RaceCars() {
@@ -80,7 +83,7 @@ export async function RaceCars() {
         createAnimationTest(vw78, duration, currentCar);
         try {
             const statusEngine = await SwitchesEngine(id);
-            console.log('КТо быстрее =', carName?.textContent, duration);
+            console.log('КТо быстрее =', id, carName?.textContent, duration);
             if (!resolved) {
                 resolved = true;
                 console.log('First successful patchCar1:', statusEngine, carName?.textContent, duration);

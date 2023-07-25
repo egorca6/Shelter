@@ -8,3 +8,9 @@ export type dataType = {
     color: string;
     id: number;
 };
+
+export type winsOnPage = {
+    id: number;
+    wins: number;
+    time: number;
+};
