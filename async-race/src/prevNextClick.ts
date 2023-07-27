@@ -13,7 +13,10 @@ export const updateUI = async (page: number) => {
         pageNumber.textContent = `Page #${page}`;
     }
 
-    const data: dataType[] = await getPageCars(page);
+    const data: dataType[] | null = await getPageCars(page);
+    if (!data) {
+        return null;
+    }
 
     data.forEach((car: dataType, index: number) => {
         if (index < car1Wrapper.length) {
@@ -23,7 +26,10 @@ export const updateUI = async (page: number) => {
         }
     });
 
-    const count = await getGarageCarCount();
+    const count: number | null = await getGarageCarCount();
+    if (!count) {
+        return null;
+    }
     nextButton.disabled = page === Math.ceil(count / carsPerPage);
     prevButton.disabled = page === 1;
 };

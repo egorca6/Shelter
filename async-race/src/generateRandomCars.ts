@@ -37,5 +37,4 @@ export function getRandomCars() {
     });
     updateGarage();
     updateUI(currentPage);
-    // console.log('asdas= ', updateUI(currentPage));
 }

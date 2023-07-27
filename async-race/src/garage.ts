@@ -10,10 +10,13 @@ import { getRandomCars } from './generateRandomCars';
 
 export async function updateGarage() {
     const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
-    const data: dataType[] = await getPageCars(currentPage);
+    const data: dataType[] | null = await getPageCars(currentPage);
     const generateCarsSection = document.querySelector('.generate-cars-section');
     if (generateCarsSection) {
         generateCarsSection.innerHTML = '';
+    }
+    if (!data) {
+        return null;
     }
     data.forEach((car: dataType) => {
         const car1Wrapper = createEl('div', 'car-wrapper');

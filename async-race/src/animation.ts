@@ -16,6 +16,7 @@ function createAnimationTest(endX: number, duration: number, car: HTMLDivElement
     };
     tick();
 }
+
 function PauseAnimation() {
     if (animationId !== null) {
         cancelAnimationFrame(animationId);
@@ -31,7 +32,13 @@ function stopAnimationTest(car: HTMLDivElement) {
 }
 
 export async function raceOneCar(event: Event) {
-    const vw78 = (78 * window.innerWidth) / 100;
+    let vw78 = (78 * window.innerWidth) / 100;
+    if (window.innerWidth < 800) {
+        vw78 = (70 * window.innerWidth) / 100;
+    }
+    if (window.innerWidth < 600) {
+        vw78 = (65 * window.innerWidth) / 100;
+    }
     const carWrapper = (event.target as Element)?.closest('.car-wrapper') as HTMLElement;
     const id = Number(carWrapper.getAttribute('dataid'));
     const patchCar1 = await StartCar(id);
@@ -41,7 +48,6 @@ export async function raceOneCar(event: Event) {
     const stopButton = carImage.querySelector('.b-buttons') as HTMLButtonElement;
     const currentCar = carImage.querySelector('.wrapperImg1') as HTMLDivElement;
     const duration = patchCar1.distance / patchCar1.velocity;
-    console.log(duration, currentCar);
 
     startButton.disabled = true;
     stopButton.disabled = false;
@@ -50,7 +56,6 @@ export async function raceOneCar(event: Event) {
         const statusEngine = await SwitchesEngine(id);
         console.log('Движок =', id, statusEngine, patchCar1.velocity);
     } catch (error) {
-        console.error('Ошибка = ', error);
         PauseAnimation();
     }
 }
@@ -64,9 +69,18 @@ export async function CarStop(event: Event) {
     const id = Number(carWrapper.getAttribute('dataid'));
     startButton.disabled = false;
     stopButton.disabled = true;
+    await StoptCar(id);
     stopAnimationTest(currentCar);
-    const patchCar1 = await StoptCar(id);
-    console.log('stop', patchCar1);
+}
+function showStyledAlert(message: string) {
+    const alertContainer = document.createElement('div');
+    alertContainer.textContent = message;
+    alertContainer.classList.add('styled-alert');
+
+    document.body.appendChild(alertContainer);
+    setTimeout(() => {
+        document.body.removeChild(alertContainer);
+    }, 3000);
 }
 
 export async function RaceCars() {
@@ -83,12 +97,11 @@ export async function RaceCars() {
         createAnimationTest(vw78, duration, currentCar);
         try {
             const statusEngine = await SwitchesEngine(id);
-            // console.log('КТо быстрее =', id, carName?.textContent, duration);
             if (!resolved) {
                 resolved = true;
                 console.log('First successful patchCar1:', statusEngine, carName?.textContent, duration);
-
-                alert(` win ${carName?.textContent} за ${(duration / 1000).toFixed(2)}s`);
+                const message = `Win ${carName?.textContent} за ${(duration / 1000).toFixed(2)}s`;
+                showStyledAlert(message);
                 await createWinner({
                     id: id,
                     wins: 1,
@@ -96,7 +109,6 @@ export async function RaceCars() {
                 });
             }
         } catch (error) {
-            // console.error('carName Не доехал', carName?.textContent);
             PauseAnimation();
         }
     });
@@ -104,8 +116,12 @@ export async function RaceCars() {
 
 export function StopCars() {
     const carsWrapper = document.querySelectorAll('.car-wrapper');
-    carsWrapper.forEach((wrapper) => {
-        const currentCar = wrapper.querySelector('.wrapperImg1') as HTMLDivElement;
-        currentCar.style.transform = `translateX(0px)`;
+    carsWrapper.forEach(async (wrapper) => {
+        const id = Number(wrapper.getAttribute('dataid'));
+        await StoptCar(id);
+        const currentCar: HTMLDivElement | null = wrapper.querySelector('.wrapperImg1');
+        if (currentCar) {
+            currentCar.style.transform = `translateX(0px)`;
+        }
     });
 }

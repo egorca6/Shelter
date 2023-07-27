@@ -40,6 +40,9 @@ export async function winnerView() {
     buttonsDiv.append(prevButton);
     buttonsDiv.append(nextButton);
     winnersView?.append(buttonsDiv);
+    if (myWinners == null) {
+        return;
+    }
     myWinners.forEach(async (car: winsOnPage, index) => {
         const wrapperCarInfo = createEl('div', 'wrapperCarInfo');
         wrapperForCars.append(wrapperCarInfo);

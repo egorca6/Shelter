@@ -1,10 +1,20 @@
-import { deleteCarOnServer, putCar, updateGarageData } from './api';
+import { delWinnerCarOnServer, deleteCarOnServer, getCar, putCar, updateGarageData } from './api';
 import { updateGarage } from './garage';
 
 export async function SelectCarFromHtml(event: Event) {
-    const carWrapper = (event.target as Element)?.closest('.car-wrapper') as HTMLElement;
+    const carWrapper: HTMLElement | null = (event.target as Element)?.closest('.car-wrapper');
+    if (!carWrapper) {
+        return;
+    }
     const id = Number(carWrapper.getAttribute('dataid'));
     sessionStorage.setItem('selectedCarID', String(id));
+    const select = await getCar(id);
+    const colorInputUpdate: HTMLInputElement | null = document.querySelector('.color-update');
+    const TextinputUpdate: HTMLInputElement | null = document.querySelector('.input-update');
+    if (TextinputUpdate && colorInputUpdate) {
+        TextinputUpdate.value = select.name;
+        colorInputUpdate.value = select.color;
+    }
     return id;
 }
 
@@ -14,6 +24,7 @@ export async function removeCarFromHtml(event: Event) {
     if (carWrapper && carWrapper.parentNode) {
         carWrapper.parentNode.removeChild(carWrapper);
         deleteCarOnServer(id);
+        delWinnerCarOnServer(id);
         await updateGarageData();
         await updateGarage();
     }
