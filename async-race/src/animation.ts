@@ -1,4 +1,5 @@
 import { StartCar, StoptCar, SwitchesEngine, createWinner } from './api';
+import { percent100, percent65, percent70, percent78 } from './constants';
 
 let animationId: number | null = null;
 
@@ -30,46 +31,57 @@ function stopAnimationTest(car: HTMLDivElement) {
         car.style.transform = `translateX(0px)`;
     }
 }
-
-export async function raceOneCar(event: Event) {
-    let vw78 = (78 * window.innerWidth) / 100;
+function calculatePercentage() {
+    let vw78 = (percent78 * window.innerWidth) / percent100;
     if (window.innerWidth < 800) {
-        vw78 = (70 * window.innerWidth) / 100;
+        vw78 = (percent70 * window.innerWidth) / percent100;
     }
     if (window.innerWidth < 600) {
-        vw78 = (65 * window.innerWidth) / 100;
+        vw78 = (percent65 * window.innerWidth) / percent100;
     }
-    const carWrapper = (event.target as Element)?.closest('.car-wrapper') as HTMLElement;
-    const id = Number(carWrapper.getAttribute('dataid'));
+    return vw78;
+}
+
+export async function raceOneCar(event: Event) {
+    const carWrapper = event.target instanceof Element ? event.target.closest('.car-wrapper') : null;
+    const id = Number(carWrapper?.getAttribute('dataid'));
     const patchCar1 = await StartCar(id);
-
-    const carImage = (event.target as Element)?.closest('.car1WrapperImg1') as HTMLElement;
-    const startButton = carImage.querySelector('.a-buttons') as HTMLButtonElement;
-    const stopButton = carImage.querySelector('.b-buttons') as HTMLButtonElement;
-    const currentCar = carImage.querySelector('.wrapperImg1') as HTMLDivElement;
+    const carImage = event.target instanceof Element ? event.target.closest('.car1WrapperImg1') : null;
+    const startButton = carImage?.querySelector('.a-buttons');
+    const stopButton = carImage?.querySelector('.b-buttons');
+    const currentCar = carImage?.querySelector('.wrapperImg1');
+    if (!patchCar1) {
+        return;
+    }
     const duration = patchCar1.distance / patchCar1.velocity;
+    startButton instanceof HTMLButtonElement ? (startButton.disabled = true) : null;
+    stopButton instanceof HTMLButtonElement ? (stopButton.disabled = false) : null;
 
-    startButton.disabled = true;
-    stopButton.disabled = false;
-    createAnimationTest(vw78, duration, currentCar);
+    if (!currentCar || !(currentCar instanceof HTMLDivElement)) {
+        return;
+    }
+
+    createAnimationTest(calculatePercentage(), duration, currentCar);
     try {
-        const statusEngine = await SwitchesEngine(id);
-        console.log('Движок =', id, statusEngine, patchCar1.velocity);
+        await SwitchesEngine(id);
     } catch (error) {
         PauseAnimation();
     }
 }
 
 export async function CarStop(event: Event) {
-    const carImage = (event.target as Element)?.closest('.car1WrapperImg1') as HTMLElement;
-    const currentCar = carImage.querySelector('.wrapperImg1') as HTMLDivElement;
-    const startButton = carImage.querySelector('.a-buttons') as HTMLButtonElement;
-    const stopButton = carImage.querySelector('.b-buttons') as HTMLButtonElement;
-    const carWrapper = (event.target as Element)?.closest('.car-wrapper') as HTMLElement;
-    const id = Number(carWrapper.getAttribute('dataid'));
-    startButton.disabled = false;
-    stopButton.disabled = true;
+    const carImage = event.target instanceof Element ? event.target.closest('.car1WrapperImg1') : null;
+    const carWrapper = event.target instanceof Element ? event.target.closest('.car-wrapper') : null;
+    const currentCar = carImage?.querySelector('.wrapperImg1');
+    const startButton = carImage?.querySelector('.a-buttons');
+    const stopButton = carImage?.querySelector('.b-buttons');
+    const id = Number(carWrapper?.getAttribute('dataid'));
+    startButton instanceof HTMLButtonElement ? (startButton.disabled = false) : null;
+    stopButton instanceof HTMLButtonElement ? (stopButton.disabled = true) : null;
     await StoptCar(id);
+    if (!currentCar || !(currentCar instanceof HTMLDivElement)) {
+        return;
+    }
     stopAnimationTest(currentCar);
 }
 function showStyledAlert(message: string) {
@@ -85,22 +97,20 @@ function showStyledAlert(message: string) {
 
 export async function RaceCars() {
     const carsWrapper = document.querySelectorAll('.car-wrapper');
-    let vw78 = (78 * window.innerWidth) / 100;
-    if (window.innerWidth < 800) {
-        vw78 = (70 * window.innerWidth) / 100;
-    }
-    if (window.innerWidth < 600) {
-        vw78 = (65 * window.innerWidth) / 100;
-    }
     let resolved = false;
     carsWrapper.forEach(async (wrapper) => {
         const id = Number(wrapper.getAttribute('dataid'));
-        const currentCar = wrapper.querySelector('.wrapperImg1') as HTMLDivElement;
+        const currentCar = wrapper.querySelector('.wrapperImg1');
         const carName = wrapper.querySelector('.carName');
         const patchCar1 = await StartCar(id);
-
+        if (!patchCar1) {
+            return;
+        }
         const duration = patchCar1.distance / patchCar1.velocity;
-        createAnimationTest(vw78, duration, currentCar);
+        if (!currentCar || !(currentCar instanceof HTMLDivElement)) {
+            return;
+        }
+        createAnimationTest(calculatePercentage(), duration, currentCar);
         try {
             const statusEngine = await SwitchesEngine(id);
             if (!resolved) {

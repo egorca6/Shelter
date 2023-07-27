@@ -7,8 +7,8 @@ export const updateUI = async (page: number) => {
     const car1Wrapper = document.querySelectorAll('.car-wrapper');
     const car1Image = document.querySelectorAll<HTMLImageElement>('.car1Image');
     const pageNumber = document.querySelector('.page');
-    const nextButton = document.querySelector('.next') as HTMLButtonElement;
-    const prevButton = document.querySelector('.prev') as HTMLButtonElement;
+    const nextButton = document.querySelector('.next');
+    const prevButton = document.querySelector('.prev');
     if (pageNumber) {
         pageNumber.textContent = `Page #${page}`;
     }
@@ -30,14 +30,14 @@ export const updateUI = async (page: number) => {
     if (!count) {
         return null;
     }
-    nextButton.disabled = page === Math.ceil(count / carsPerPage);
-    prevButton.disabled = page === 1;
+    if (nextButton instanceof HTMLButtonElement && prevButton instanceof HTMLButtonElement) {
+        nextButton.disabled = page === Math.ceil(count / carsPerPage);
+        prevButton.disabled = page === 1;
+    }
 };
 
 export async function PrevClick() {
     let currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
-    // const count13 = await updateUI(currentPage);
-    // console.log(' xnj эчто = ', count13);
     if (currentPage > 1) {
         currentPage -= 1;
         sessionStorage.setItem('pageNumber', String(currentPage));
@@ -47,9 +47,6 @@ export async function PrevClick() {
 
 export async function NextClick() {
     let currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
-    // const count13 = await updateUI(currentPage);
-    // console.log(' xnj эчто = ', count13);
-
     currentPage += 1;
     sessionStorage.setItem('pageNumber', String(currentPage));
     await updateUI(currentPage);

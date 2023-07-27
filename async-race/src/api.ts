@@ -1,5 +1,5 @@
 import { baseUrl } from './constants';
-import { CarParam, dataType, winsOnPage } from './type';
+import { CarParam, SwitchEngine, dataType, engine, winsOnPage } from './type';
 
 export const getGarage = async () => {
     const response = await fetch(`${baseUrl}/garage`);
@@ -22,7 +22,7 @@ export const getGarageCarCount = async (): Promise<number | null> => {
 export const getWinners = async () => {
     try {
         const response = await fetch(`${baseUrl}/winners?_page=1&_limit=10`);
-        const data = await response.json();
+        const data: winsOnPage[] = await response.json();
         return data;
     } catch (err) {
         console.warn('Error Message GET:', String(err));
@@ -92,7 +92,7 @@ export const createWinner = async (body: winsOnPage) => {
             },
             body: JSON.stringify(body),
         });
-        const data = await response.json();
+        const data: winsOnPage = await response.json();
         return data;
     } catch (err) {
         console.warn('Error Message POST: ', String(err));
@@ -119,12 +119,13 @@ export const deleteCarOnServer = async (id: number) => {
         return null;
     }
 };
+
 export const getCar = async (id: number) => {
     try {
         const response = await fetch(`${baseUrl}/garage/${id}`, {
             method: 'GET',
         });
-        const data = await response.json();
+        const data: dataType = await response.json();
         return data;
     } catch (err) {
         console.warn('Error Message GET:', String(err));
@@ -142,7 +143,7 @@ export const putCar = async (id: number, body: CarParam) => {
             },
             body: JSON.stringify(body),
         });
-        const data = await response.json();
+        const data: CarParam = await response.json();
         return data;
     } catch (err) {
         console.warn('Error PUT:', String(err));
@@ -155,7 +156,7 @@ export const StartCar = async (id: number) => {
         const response = await fetch(`${baseUrl}/engine?id=${id}&status=started`, {
             method: 'PATCH',
         });
-        const data = await response.json();
+        const data: engine = await response.json();
         return data;
     } catch (err) {
         console.warn('Error PATCH:', String(err));
@@ -168,7 +169,7 @@ export const StoptCar = async (id: number) => {
         const response = await fetch(`${baseUrl}/engine?id=${id}&status=stopped`, {
             method: 'PATCH',
         });
-        const data = await response.json();
+        const data: engine = await response.json();
         return data;
     } catch (err) {
         console.warn('Error PATCH:', String(err));
@@ -181,7 +182,7 @@ export const SwitchesEngine = async (id: number) => {
         const response = await fetch(`${baseUrl}/engine?id=${id}&status=drive`, {
             method: 'PATCH',
         });
-        const data = await response.json();
+        const data: SwitchEngine = await response.json();
         return data;
     } catch (err) {
         console.warn('Error PATCH:', String(err));
@@ -196,12 +197,10 @@ export const updateCar = async (i: number, newName: string, newColor: string) =>
     };
     const updatedCar = await putCar(i, updatedCarData);
 
-    const carNameElement = document.querySelector(
-        `.car-wrapper:nth-child(${i}) .car1WrapperSelect span`
-    ) as HTMLElement;
-    const carImageElement = document.querySelector(`.car-wrapper:nth-child(${i}) .car1Image`) as HTMLElement;
+    const carNameElement = document.querySelector(`.car-wrapper:nth-child(${i}) .car1WrapperSelect span`);
+    const carImageElement = document.querySelector(`.car-wrapper:nth-child(${i}) .car1Image`);
 
-    if (carNameElement && carImageElement) {
+    if (updatedCar && carNameElement && carImageElement instanceof HTMLElement) {
         carNameElement.textContent = updatedCar.name;
         carImageElement.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${updatedCar.color})`;
     }

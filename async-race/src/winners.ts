@@ -9,9 +9,8 @@ export async function winnerView() {
     if (app && winnersView) {
         app.innerHTML = '';
         winnersView.innerHTML = '';
-        winnersView.style.display = 'block';
     }
-    const myWinners: winsOnPage[] = await getWinners();
+    const myWinners: winsOnPage[] | null = await getWinners();
 
     const h1 = createEl('h1', '', 'Winners (1)');
     const p = createEl('p', '', 'Page #1');
@@ -50,14 +49,16 @@ export async function winnerView() {
 
         const carNameID = await getCar(carID);
 
-        const carText = carNameID.name;
+        const carText = carNameID?.name;
 
-        const carColor = carNameID.color;
+        const carColor = carNameID?.color;
         const carNumber = createEl('div', '', `${index + 1}`);
         wrapperCarInfo.append(carNumber);
 
-        const car1Image = createEl('img', 'car1Image') as HTMLImageElement;
-        car1Image.src = `${carImage}`;
+        const car1Image = createEl('img', 'car1Image');
+        if (car1Image instanceof HTMLImageElement) {
+            car1Image.src = `${carImage}`;
+        }
         car1Image.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${carColor})`;
         wrapperCarInfo.append(car1Image);
 

@@ -2,7 +2,7 @@ import { delWinnerCarOnServer, deleteCarOnServer, getCar, putCar, updateGarageDa
 import { updateGarage } from './garage';
 
 export async function SelectCarFromHtml(event: Event) {
-    const carWrapper: HTMLElement | null = (event.target as Element)?.closest('.car-wrapper');
+    const carWrapper = event.target instanceof Element ? event.target.closest('.car-wrapper') : null;
     if (!carWrapper) {
         return;
     }
@@ -11,7 +11,7 @@ export async function SelectCarFromHtml(event: Event) {
     const select = await getCar(id);
     const colorInputUpdate: HTMLInputElement | null = document.querySelector('.color-update');
     const TextinputUpdate: HTMLInputElement | null = document.querySelector('.input-update');
-    if (TextinputUpdate && colorInputUpdate) {
+    if (TextinputUpdate && colorInputUpdate && select) {
         TextinputUpdate.value = select.name;
         colorInputUpdate.value = select.color;
     }
@@ -19,8 +19,8 @@ export async function SelectCarFromHtml(event: Event) {
 }
 
 export async function removeCarFromHtml(event: Event) {
-    const carWrapper = (event.target as Element)?.closest('.car-wrapper') as HTMLElement;
-    const id = Number(carWrapper.getAttribute('dataid'));
+    const carWrapper = event.target instanceof Element ? event.target.closest('.car-wrapper') : null;
+    const id = Number(carWrapper?.getAttribute('dataid'));
     if (carWrapper && carWrapper.parentNode) {
         carWrapper.parentNode.removeChild(carWrapper);
         deleteCarOnServer(id);
@@ -35,7 +35,7 @@ export async function testUpdate() {
     const inputUpdate: HTMLInputElement | null = document.querySelector('.input-update');
     const inputColorUpdate: HTMLInputElement | null = document.querySelector('.color-update');
 
-    if (inputUpdate instanceof HTMLInputElement && inputColorUpdate instanceof HTMLInputElement) {
+    if (inputUpdate && inputColorUpdate) {
         const inputValue = inputUpdate.value;
         const colorValue = inputColorUpdate.value;
         const updatedCarData = {

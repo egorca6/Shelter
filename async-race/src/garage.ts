@@ -1,4 +1,4 @@
-import { createEl } from './utils';
+import { createEl, createImageEl, createInputEl } from './utils';
 import carImage from './assets/car1.png';
 import flagImage from './assets/flag.png';
 import { SelectCarFromHtml, removeCarFromHtml, testUpdate } from './deleteSelect';
@@ -8,16 +8,8 @@ import { NextClick, PrevClick, updateUI } from './prevNextClick';
 import { CarStop, RaceCars, StopCars, raceOneCar } from './animation';
 import { getRandomCars } from './generateRandomCars';
 
-export async function updateGarage() {
-    const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
-    const data: dataType[] | null = await getPageCars(currentPage);
+function renderCar(data: dataType[]) {
     const generateCarsSection = document.querySelector('.generate-cars-section');
-    if (generateCarsSection) {
-        generateCarsSection.innerHTML = '';
-    }
-    if (!data) {
-        return null;
-    }
     data.forEach((car: dataType) => {
         const car1Wrapper = createEl('div', 'car-wrapper');
         car1Wrapper.setAttribute('dataID', `${car.id}`);
@@ -29,39 +21,45 @@ export async function updateGarage() {
         car1WrapperSelect.append(car1SelectButton);
         const car1RemoveButton = createEl('button', 'default-button', 'Remove', removeCarFromHtml);
         car1WrapperSelect.append(car1RemoveButton);
-
         const carText = createEl('span', 'carName', `${car.name}`);
         car1WrapperSelect.append(carText);
-
         const car1WrapperImg = createEl('div', 'car1WrapperImage');
         car1Wrapper.append(car1WrapperImg);
-
         const car1WrapperImg1 = createEl('div', 'car1WrapperImg1');
         car1WrapperImg.append(car1WrapperImg1);
-
         const aButton = createEl('button', 'a-buttons', 'A', raceOneCar);
         car1WrapperImg1.append(aButton);
-
         const bButton = createEl('button', 'b-buttons', 'B', CarStop);
         car1WrapperImg1.append(bButton);
-
         const wrapperImg = createEl('div', 'wrapperImg1');
         car1WrapperImg1.append(wrapperImg);
 
-        const car1Image = document.createElement('img');
-        car1Image.classList.add('car1Image');
-        car1Image.src = `${carImage}`;
-        car1Image.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${car.color})`;
+        const car1Image = createImageEl(
+            `${carImage}`,
+            'car1Image',
+            `filter: opacity(0.5) drop-shadow(0 0 0 ${car.color});`
+        );
         wrapperImg.append(car1Image);
 
-        const flag = document.createElement('img');
-        flag.classList.add('flag');
-        flag.src = `${flagImage}`;
+        const flag = createImageEl(`${flagImage}`, 'flag');
         car1WrapperImg.append(flag);
 
         const road = createEl('div', 'road');
         car1Wrapper.append(road);
     });
+}
+
+export async function updateGarage() {
+    const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
+    const data: dataType[] | null = await getPageCars(currentPage);
+    const generateCarsSection = document.querySelector('.generate-cars-section');
+    if (generateCarsSection) {
+        generateCarsSection.innerHTML = '';
+    }
+    if (!data) {
+        return null;
+    }
+    renderCar(data);
 }
 
 export async function buildGarage() {
@@ -71,42 +69,29 @@ export async function buildGarage() {
 
     if (app && winnersView) {
         app.innerHTML = '';
-        app.style.display = 'flex';
         winnersView.innerHTML = '';
     }
     const inputWrapper1 = createEl('div', 'input-wrapper');
     app?.append(inputWrapper1);
 
-    const input1 = document.createElement('input');
-    input1.classList.add('input-create');
-    input1.type = 'text';
-    input1.placeholder = 'Input';
-    inputWrapper1.append(input1);
+    const inputCreateName = createInputEl('text', 'input-create', 'Input');
+    inputWrapper1.append(inputCreateName);
 
-    const colorPicker1 = document.createElement('input');
-    colorPicker1.classList.add('color-picker1');
-    colorPicker1.type = 'color';
-    colorPicker1.value = '#ffffff';
-    inputWrapper1.append(colorPicker1);
+    const inputCreateColor = createInputEl('color', 'color-picker1', '', '#ffffff');
+    inputWrapper1.append(inputCreateColor);
 
-    const createButton = createEl('button', 'default-button', 'Create');
+    const createButton = createEl('button', 'default-button', 'Create', createCar);
     createButton.classList.add('Create');
     inputWrapper1.append(createButton);
 
     const inputWrapper2 = createEl('div', 'input-wrapper');
     app?.append(inputWrapper2);
 
-    const input2 = document.createElement('input');
-    input2.classList.add('input-update');
-    input2.type = 'text';
-    input2.placeholder = 'Input';
-    inputWrapper2.append(input2);
+    const inputUpdateName = createInputEl('text', 'input-update', 'Input');
+    inputWrapper2.append(inputUpdateName);
 
-    const colorPicker2 = document.createElement('input');
-    colorPicker2.classList.add('color-update');
-    colorPicker2.type = 'color';
-    colorPicker2.value = '#ffffff';
-    inputWrapper2.append(colorPicker2);
+    const inputUpdateColor = createInputEl('color', 'color-update', '', '#ffffff');
+    inputWrapper2.append(inputUpdateColor);
 
     const updateButton = createEl('button', 'default-button', 'Update', testUpdate);
     updateButton.classList.add('update');
@@ -141,7 +126,6 @@ export async function buildGarage() {
     app?.append(generateCarsSection);
     updateGarage();
     updateUI(currentPage);
-    createClick();
 }
 
 async function createCar() {
@@ -154,14 +138,4 @@ async function createCar() {
     }
     updateGarage();
     updateGarageData();
-}
-
-export function createClick() {
-    const appWrapper = document.querySelector('.app-wrapper');
-    appWrapper?.addEventListener('click', (event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains('Create')) {
-            createCar();
-        }
-    });
 }

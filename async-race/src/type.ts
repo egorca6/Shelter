@@ -14,3 +14,12 @@ export type winsOnPage = {
     wins: number;
     time: number;
 };
+
+export type engine = {
+    velocity: number;
+    distance: number;
+};
+
+export type SwitchEngine = {
+    success: boolean;
+};

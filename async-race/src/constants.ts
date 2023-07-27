@@ -1,7 +1,11 @@
 export const currentPage = 1;
 export const baseUrl = 'http://127.0.0.1:3000';
 export const carsPerPage = 7;
-export const vw78 = (78 * window.innerWidth) / 100;
+export const percent78 = 78;
+export const percent70 = 70;
+export const percent65 = 65;
+export const percent100 = 100;
+export const numberOfCarsToGenerate = 100;
 export const carBrands: string[] = [
     'Tesla',
     'Ford',
