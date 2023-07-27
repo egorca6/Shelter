@@ -85,7 +85,13 @@ function showStyledAlert(message: string) {
 
 export async function RaceCars() {
     const carsWrapper = document.querySelectorAll('.car-wrapper');
-    const vw78 = (78 * window.innerWidth) / 100;
+    let vw78 = (78 * window.innerWidth) / 100;
+    if (window.innerWidth < 800) {
+        vw78 = (70 * window.innerWidth) / 100;
+    }
+    if (window.innerWidth < 600) {
+        vw78 = (65 * window.innerWidth) / 100;
+    }
     let resolved = false;
     carsWrapper.forEach(async (wrapper) => {
         const id = Number(wrapper.getAttribute('dataid'));
