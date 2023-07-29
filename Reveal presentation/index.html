@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="./assets/react.jpg" alt="" />
+        </section>
+        <section>What is React?</section>
+        <section>
+          <section>Key Features of React</section>
+          <section style="text-align: left">
+            <p>
+              1)<strong> Virtual DOM</strong> <br />
+              2)<strong> Component-Based Architecture</strong> <br />
+              3)<strong> JSX (JavaScript XML)</strong> <br />
+              4)<strong> Unidirectional Data Flow</strong>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <p>4 React's Component Lifecycle</p>
+          <section
+            data-background="./assets/cycle.png"
+            data-background-size="500px"
+            data-background-repeat="no-repeat"
+            data-background-color="#111"
+          ></section>
+          <section style="text-align: left">
+            <p>
+              <strong>Mounting:</strong> This phase occurs when a component is
+              being created and inserted into the DOM.
+            </p>
+            <p>
+              <strong> Updating:</strong> When a component's state or props
+              change, it goes through the updating phase, triggering a
+              re-render.
+            </p>
+            <p>
+              <strong> Unmounting: </strong>In this phase, a component is
+              removed from the DOM.
+            </p>
+          </section>
+        </section>
+
+        <!-- <section data-auto-animate>
+          <h2 data-id="code-title">Pretty Code</h2>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs javascript" data-trim data-line-numbers>
+						import React, { useState } from 'react';
+
+						function Example() {
+						  const [count, setCount] = useState(0);
+
+						  return (
+						    ...
+						  );
+						}
+					</code></pre>
+          <p>
+            Code syntax highlighting courtesy of
+            <a href="https://highlightjs.org/usage/">highlight.js</a>.
+          </p>
+        </section> -->
+        <section>
+          <section>Slide 5: State and Props in React</section>
+          <section>
+            <p>
+              State: can be modified using this.serState, <br />
+              can be asynchronous
+            </p>
+            <p>Props (Properties): read - only, can not be modified</p>
+          </section>
+          <section>
+            Here is an example of how data can be passed by using props:
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers>
+					class ParentComponent extends Component {    
+						render() {    
+								return (        
+										<ChildComponent name="First Child" />    
+								);  
+						  }
+						}
+						
+						const ChildComponent = (props) => {    
+								return <p>{props.name}</p>; 
+						};
+					</code></pre>
+          </section>
+          <section>
+            Here is an example showing how to use state:
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers>
+							class Test extends React.Component {    
+								constructor() {    
+										this.state = {      
+												id: 1,      
+												name: "test"    
+										};  
+								}    						
+								render() {    
+										return (      
+												<div>        
+													<p>{this.state.id}</p>        
+													<p>{this.state.name}</p>      
+												</div>    
+										);  }}
+							
+					</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <p>Slide 6: React Hooks</p>
+          <section
+            data-background="./assets/hook.png"
+            data-background-size="500px"
+            data-background-repeat="no-repeat"
+            data-background-color="#111"
+          ></section>
+          <section>
+            Syntax for React useState.
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers>
+							const [name, setName] = useState('Edupala');
+							setName('Edupala 2022'); //Change to new value
+							
+					</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>Slide 7: Pros and Cons of React</section>
+          <section>
+            Advantage of ReactJS
+            <p>1. Easy to Learn and USe</p>
+            <p>2. Creating Dynamic Web Applications Becomes Easier</p>
+            <p>3. Reusable Components</p>
+            <p>4. Performance Enhancement</p>
+            <p>4. Performance Enhancement</p>
+            <p>5. The Support of Handy Tools</p>
+            <p>6. Known to be SEO Friendly</p>
+            <p>7. The Benefit of Having JavaScript Library</p>
+          </section>
+          <section>
+            Disadvantage of ReactJS
+            <p>1. The high pace of development</p>
+            <p>2. Poor Documentation</p>
+            <p>3. View Part</p>
+            <p>4. JSX as a barrier</p>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
