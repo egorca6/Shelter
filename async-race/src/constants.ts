@@ -1,11 +1,17 @@
 export const currentPage = 1;
+export const LevelOne = 1;
 export const baseUrl = 'http://127.0.0.1:3000';
+export const delay = 3000;
 export const carsPerPage = 7;
 export const percent78 = 78;
 export const percent70 = 70;
 export const percent65 = 65;
 export const percent100 = 100;
 export const numberOfCarsToGenerate = 100;
+export const millisecondsInSecond = 1000;
+export const width800px = 800;
+export const width600px = 600;
+export const framesPerSecond = 60;
 export const carBrands: string[] = [
     'Tesla',
     'Ford',

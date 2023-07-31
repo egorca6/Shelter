@@ -56,9 +56,8 @@ export async function winnerView() {
         wrapperCarInfo.append(carNumber);
 
         const car1Image = createEl('img', 'car1Image');
-        if (car1Image instanceof HTMLImageElement) {
-            car1Image.src = `${carImage}`;
-        }
+        car1Image.src = `${carImage}`;
+
         car1Image.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${carColor})`;
         wrapperCarInfo.append(car1Image);
 

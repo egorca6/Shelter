@@ -1,12 +1,12 @@
 import { carBrands, carColors, carModels } from './constants';
 import { CarParam } from './type';
 
-export function createEl(
-    elementName: string,
+export function createEl<K extends keyof HTMLElementTagNameMap>(
+    elementName: K,
     className?: string,
     content?: string,
-    callback?: (event: MouseEvent) => void
-): HTMLElement {
+    callback?: (event: Event) => void
+): HTMLElementTagNameMap[K] {
     const element = document.createElement(elementName);
     if (className) {
         element.classList.add(className);

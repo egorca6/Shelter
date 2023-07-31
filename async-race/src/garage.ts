@@ -7,6 +7,7 @@ import { dataType } from './type';
 import { NextClick, PrevClick, updateUI } from './prevNextClick';
 import { CarStop, RaceCars, StopCars, raceOneCar } from './animation';
 import { getRandomCars } from './generateRandomCars';
+import { LevelOne } from './constants';
 
 function renderCar(data: dataType[]) {
     const generateCarsSection = document.querySelector('.generate-cars-section');
@@ -50,7 +51,7 @@ function renderCar(data: dataType[]) {
 }
 
 export async function updateGarage() {
-    const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
+    const currentPage = Number(sessionStorage.getItem('pageNumber')) || LevelOne;
     const data: dataType[] | null = await getPageCars(currentPage);
     const generateCarsSection = document.querySelector('.generate-cars-section');
     if (generateCarsSection) {
@@ -65,7 +66,7 @@ export async function updateGarage() {
 export async function buildGarage() {
     const app = document.querySelector<HTMLElement>('.app-wrapper');
     const winnersView = document.querySelector<HTMLElement>('.winnersView');
-    const currentPage = Number(sessionStorage.getItem('pageNumber')) || 1;
+    const currentPage = Number(sessionStorage.getItem('pageNumber')) || LevelOne;
 
     if (app && winnersView) {
         app.innerHTML = '';

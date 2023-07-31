@@ -1,17 +1,16 @@
+import { PauseAnimation } from './animation';
 import { baseUrl } from './constants';
 import { CarParam, SwitchEngine, dataType, engine, winsOnPage } from './type';
 
-export const getGarage = async () => {
+export const getGarage = async (): Promise<dataType> => {
     const response = await fetch(`${baseUrl}/garage`);
-    const data: dataType = await response.json();
-    return data;
+    return await response.json();
 };
 
 export const getGarageCarCount = async (): Promise<number | null> => {
     try {
         const response = await fetch(`${baseUrl}/garage?_page=1&_limit=2`);
-        const data = Number(response.headers.get('X-Total-Count'));
-        return data;
+        return Number(response.headers.get('X-Total-Count'));
     } catch (err) {
         console.warn('Error Message:', String(err));
 
@@ -19,11 +18,10 @@ export const getGarageCarCount = async (): Promise<number | null> => {
     }
 };
 
-export const getWinners = async () => {
+export const getWinners = async (): Promise<winsOnPage[] | null> => {
     try {
         const response = await fetch(`${baseUrl}/winners?_page=1&_limit=10`);
-        const data: winsOnPage[] = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error Message GET:', String(err));
         return null;
@@ -53,20 +51,18 @@ export const updateGarageData = async () => {
 export const getPageCars = async (page: number): Promise<dataType[] | null> => {
     try {
         const response = await fetch(`${baseUrl}/garage?_page=${page}&_limit=7`);
-        const data: dataType[] = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error Message:', String(err));
         return null;
     }
 };
 
-export const DrawPageCars = async (page: number) => {
-    const car = await getPageCars(page);
-    return car;
+export const DrawPageCars = async (page: number): Promise<dataType[] | null> => {
+    return await getPageCars(page);
 };
 
-const createCar = async (body: CarParam) => {
+const createCar = async (body: CarParam): Promise<CarParam | null> => {
     try {
         const response = await fetch(`${baseUrl}/garage`, {
             method: 'POST',
@@ -75,15 +71,14 @@ const createCar = async (body: CarParam) => {
             },
             body: JSON.stringify(body),
         });
-        const data: CarParam = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error Message POST:', String(err));
         return null;
     }
 };
 
-export const createWinner = async (body: winsOnPage) => {
+export const createWinner = async (body: winsOnPage): Promise<winsOnPage | null> => {
     try {
         const response = await fetch(`${baseUrl}/winners`, {
             method: 'POST',
@@ -92,8 +87,7 @@ export const createWinner = async (body: winsOnPage) => {
             },
             body: JSON.stringify(body),
         });
-        const data: winsOnPage = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error Message POST: ', String(err));
 
@@ -120,13 +114,12 @@ export const deleteCarOnServer = async (id: number) => {
     }
 };
 
-export const getCar = async (id: number) => {
+export const getCar = async (id: number): Promise<dataType | null> => {
     try {
         const response = await fetch(`${baseUrl}/garage/${id}`, {
             method: 'GET',
         });
-        const data: dataType = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error Message GET:', String(err));
 
@@ -134,7 +127,7 @@ export const getCar = async (id: number) => {
     }
 };
 
-export const putCar = async (id: number, body: CarParam) => {
+export const putCar = async (id: number, body: CarParam): Promise<CarParam | null> => {
     try {
         const response = await fetch(`${baseUrl}/garage/${id}`, {
             method: 'PUT',
@@ -143,49 +136,46 @@ export const putCar = async (id: number, body: CarParam) => {
             },
             body: JSON.stringify(body),
         });
-        const data: CarParam = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error PUT:', String(err));
         return null;
     }
 };
 
-export const StartCar = async (id: number) => {
+export const StartCar = async (id: number): Promise<engine | null> => {
     try {
         const response = await fetch(`${baseUrl}/engine?id=${id}&status=started`, {
             method: 'PATCH',
         });
-        const data: engine = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error PATCH:', String(err));
         return null;
     }
 };
 
-export const StoptCar = async (id: number) => {
+export const StoptCar = async (id: number): Promise<engine | null> => {
     try {
         const response = await fetch(`${baseUrl}/engine?id=${id}&status=stopped`, {
             method: 'PATCH',
         });
-        const data: engine = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error PATCH:', String(err));
         return null;
     }
 };
 
-export const SwitchesEngine = async (id: number) => {
+export const SwitchesEngine = async (id: number): Promise<SwitchEngine | null> => {
     try {
         const response = await fetch(`${baseUrl}/engine?id=${id}&status=drive`, {
             method: 'PATCH',
         });
-        const data: SwitchEngine = await response.json();
-        return data;
+        return await response.json();
     } catch (err) {
         console.warn('Error PATCH:', String(err));
+        PauseAnimation();
         return null;
     }
 };
@@ -198,9 +188,9 @@ export const updateCar = async (i: number, newName: string, newColor: string) =>
     const updatedCar = await putCar(i, updatedCarData);
 
     const carNameElement = document.querySelector(`.car-wrapper:nth-child(${i}) .car1WrapperSelect span`);
-    const carImageElement = document.querySelector(`.car-wrapper:nth-child(${i}) .car1Image`);
+    const carImageElement: HTMLElement | null = document.querySelector(`.car-wrapper:nth-child(${i}) .car1Image`);
 
-    if (updatedCar && carNameElement && carImageElement instanceof HTMLElement) {
+    if (updatedCar && carNameElement && carImageElement) {
         carNameElement.textContent = updatedCar.name;
         carImageElement.style.filter = `opacity(0.5) drop-shadow(0 0 0 ${updatedCar.color})`;
     }

@@ -1,11 +1,22 @@
 import { StartCar, StoptCar, SwitchesEngine, createWinner } from './api';
-import { percent100, percent65, percent70, percent78 } from './constants';
+import {
+    delay,
+    framesPerSecond,
+    millisecondsInSecond,
+    percent100,
+    percent65,
+    percent70,
+    percent78,
+    width600px,
+    width800px,
+} from './constants';
+import { createEl } from './utils';
 
 let animationId: number | null = null;
 
 function createAnimationTest(endX: number, duration: number, car: HTMLDivElement) {
     let currentX = car.offsetLeft;
-    const framesCount = (duration / 1000) * 60;
+    const framesCount = (duration / millisecondsInSecond) * framesPerSecond;
     const dx = (endX - car.offsetLeft) / framesCount;
     const tick = () => {
         currentX += dx;
@@ -18,7 +29,7 @@ function createAnimationTest(endX: number, duration: number, car: HTMLDivElement
     tick();
 }
 
-function PauseAnimation() {
+export function PauseAnimation() {
     if (animationId !== null) {
         cancelAnimationFrame(animationId);
         animationId = null;
@@ -32,67 +43,61 @@ function stopAnimationTest(car: HTMLDivElement) {
     }
 }
 function calculatePercentage() {
-    let vw78 = (percent78 * window.innerWidth) / percent100;
-    if (window.innerWidth < 800) {
-        vw78 = (percent70 * window.innerWidth) / percent100;
+    let PercentOfWindowWidth78 = (percent78 * window.innerWidth) / percent100;
+    if (window.innerWidth < width800px) {
+        PercentOfWindowWidth78 = (percent70 * window.innerWidth) / percent100;
     }
-    if (window.innerWidth < 600) {
-        vw78 = (percent65 * window.innerWidth) / percent100;
+    if (window.innerWidth < width600px) {
+        PercentOfWindowWidth78 = (percent65 * window.innerWidth) / percent100;
     }
-    return vw78;
+    return PercentOfWindowWidth78;
 }
 
 export async function raceOneCar(event: Event) {
     const carWrapper = event.target instanceof Element ? event.target.closest('.car-wrapper') : null;
     const id = Number(carWrapper?.getAttribute('dataid'));
     const patchCar1 = await StartCar(id);
-    const carImage = event.target instanceof Element ? event.target.closest('.car1WrapperImg1') : null;
-    const startButton = carImage?.querySelector('.a-buttons');
-    const stopButton = carImage?.querySelector('.b-buttons');
+    const carImage = carWrapper?.querySelector('.car1WrapperImg1');
+    const startButton: HTMLButtonElement | null | undefined = carImage?.querySelector('.a-buttons');
+    const stopButton: HTMLButtonElement | null | undefined = carImage?.querySelector('.b-buttons');
     const currentCar = carImage?.querySelector('.wrapperImg1');
     if (!patchCar1) {
         return;
     }
     const duration = patchCar1.distance / patchCar1.velocity;
-    startButton instanceof HTMLButtonElement ? (startButton.disabled = true) : null;
-    stopButton instanceof HTMLButtonElement ? (stopButton.disabled = false) : null;
+    startButton ? (startButton.disabled = true) : null;
+    stopButton ? (stopButton.disabled = false) : null;
 
     if (!currentCar || !(currentCar instanceof HTMLDivElement)) {
         return;
     }
 
     createAnimationTest(calculatePercentage(), duration, currentCar);
-    try {
-        await SwitchesEngine(id);
-    } catch (error) {
-        PauseAnimation();
-    }
+    await SwitchesEngine(id);
 }
 
 export async function CarStop(event: Event) {
-    const carImage = event.target instanceof Element ? event.target.closest('.car1WrapperImg1') : null;
     const carWrapper = event.target instanceof Element ? event.target.closest('.car-wrapper') : null;
-    const currentCar = carImage?.querySelector('.wrapperImg1');
-    const startButton = carImage?.querySelector('.a-buttons');
-    const stopButton = carImage?.querySelector('.b-buttons');
+    const carImage = carWrapper?.querySelector('.car1WrapperImg1');
+    const currentCar: HTMLDivElement | null | undefined = carImage?.querySelector('.wrapperImg1');
+    const startButton: HTMLButtonElement | null | undefined = carImage?.querySelector('.a-buttons');
+    const stopButton: HTMLButtonElement | null | undefined = carImage?.querySelector('.b-buttons');
     const id = Number(carWrapper?.getAttribute('dataid'));
-    startButton instanceof HTMLButtonElement ? (startButton.disabled = false) : null;
-    stopButton instanceof HTMLButtonElement ? (stopButton.disabled = true) : null;
+    startButton ? (startButton.disabled = false) : null;
+    stopButton ? (stopButton.disabled = true) : null;
     await StoptCar(id);
-    if (!currentCar || !(currentCar instanceof HTMLDivElement)) {
-        return;
+
+    if (currentCar && currentCar !== null) {
+        stopAnimationTest(currentCar);
     }
-    stopAnimationTest(currentCar);
 }
 function showStyledAlert(message: string) {
-    const alertContainer = document.createElement('div');
-    alertContainer.textContent = message;
-    alertContainer.classList.add('styled-alert');
+    const alertContainer = createEl('div', 'styled-alert', message);
 
     document.body.appendChild(alertContainer);
     setTimeout(() => {
         document.body.removeChild(alertContainer);
-    }, 3000);
+    }, delay);
 }
 
 export async function RaceCars() {
@@ -100,28 +105,30 @@ export async function RaceCars() {
     let resolved = false;
     carsWrapper.forEach(async (wrapper) => {
         const id = Number(wrapper.getAttribute('dataid'));
-        const currentCar = wrapper.querySelector('.wrapperImg1');
+        const currentCar: HTMLDivElement | null = wrapper.querySelector('.wrapperImg1');
         const carName = wrapper.querySelector('.carName');
         const patchCar1 = await StartCar(id);
+
         if (!patchCar1) {
             return;
         }
         const duration = patchCar1.distance / patchCar1.velocity;
-        if (!currentCar || !(currentCar instanceof HTMLDivElement)) {
-            return;
+
+        if (currentCar !== null) {
+            createAnimationTest(calculatePercentage(), duration, currentCar);
         }
-        createAnimationTest(calculatePercentage(), duration, currentCar);
         try {
             const statusEngine = await SwitchesEngine(id);
             if (!resolved) {
                 resolved = true;
+                const time = (duration / millisecondsInSecond).toFixed(2);
                 console.log('First successful patchCar1:', statusEngine, carName?.textContent, duration);
-                const message = `Win ${carName?.textContent} за ${(duration / 1000).toFixed(2)}s`;
+                const message = `Win ${carName?.textContent} за ${time}s`;
                 showStyledAlert(message);
                 await createWinner({
                     id: id,
                     wins: 1,
-                    time: +(duration / 1000).toFixed(2),
+                    time: +time,
                 });
             }
         } catch (error) {
